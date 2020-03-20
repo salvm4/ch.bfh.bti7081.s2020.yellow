@@ -1,0 +1,30 @@
+Notizen Projekt
+
+-----------------------------
+Scoping
+-----------------------------
+Features für Applikation:
+1) Übersicht, was bereits gelaufen ist. (verganene Termine, verschriebene Medikamente)
+2) Verlauf der Krankheit verfolgen.
+   - Übersicht alle Phasen der Krankheit
+   - Pro Phase die Patienten in einer Spalte eingeteilt.
+   - Pro Phase können TODOs definiert werden und der Verlauf dokumentiert werden. 
+3) Register von Kliniken, die Burnout-Behandlung anbieten. Standort, freie Plätze etc...
+
+Out of scope:
+Sonstige Patientendaten.
+
+
+Mögliche Interviewfragen:
+- Gibt es Phasen bei Burnout.
+- Ist es praktisch, die Patienten in die Phasen zu unterteilen.
+- Welche Informationen zu einem Behandlungs-Standort muss man haben, um eine sinnvolle Einweisung zu machen?
+- Für jedes oben genannte Feature abklären:
+  - Ob überhaupt nützlich
+  - Mögliche Teilfeatures
+
+
+
+2. Research
+- Informieren über Krankheit
+- Welche Software gibt es schon?
