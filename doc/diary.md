@@ -1,9 +1,9 @@
-﻿# Besprechung 1
+# Besprechung 1
 Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00
 Ziel: Initiale Abstimmung & Aufgabenteilung erste Schritte
 Abwesenheiten: Keine
 
-**Protokoll**				
+**Protokoll**
 Bis Sonntag, 22.03.2020 informieren sich alle Gruppenmitglieder über Burnout, damit das Scoping sowie die Interviewfragen definiert werden können.
 
 
@@ -22,4 +22,4 @@ Aufgabe:
   - Je 5 Fragen für das Interview vorbereiten.
 
 # Besprechung 2
-Zeitpunkt:				Geplant am Sonntag, 22.03.2020; 17:00
+Zeitpunkt: Geplant am Sonntag, 22.03.2020; 17:00
