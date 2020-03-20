@@ -1,6 +1,6 @@
 # Besprechung 1
-Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00
-Ziel: Initiale Abstimmung & Aufgabenteilung erste Schritte
+Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00\
+Ziel: Initiale Abstimmung & Aufgabenteilung erste Schritte\
 Abwesenheiten: Keine
 
 **Protokoll**
@@ -8,9 +8,9 @@ Bis Sonntag, 22.03.2020 informieren sich alle Gruppenmitglieder über Burnout, d
 
 
 **Tasks**
-Bezeichnung: Task 1.1
-Status: Open
-Bis: Sonntag, 22.03.2020
+Bezeichnung: Task 1.1\
+Status: Open\
+Bis: Sonntag, 22.03.2020\
 Wer: Alle
 
 Aufgabe:
