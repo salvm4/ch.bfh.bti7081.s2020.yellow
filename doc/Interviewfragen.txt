@@ -1,0 +1,21 @@
+- Welche Symptone zeigen sich bei einem Burnout/Wie wird Burnout diagnostiziert (Tests? Abgrenzung zu anderen psychischen Problemen?) und welche Symptome müssen nachvollziehbar festgehalten werden?
+- Was kann ein 'normaler Artz' tun? Oder muss immer ein Psychologe begezogen werden?
+- Wie verläuft eine Behandlung ab? Kann der Krankheitsverlauf auf eine Weise aufgezeigt werden?
+- Wie unterscheidet sich die Behandlung/Betreuung eines Patienten in den verschiedenen Phasen eines Burnouts?
+- Welche  Informationen sind während der Behandlung eines Burnout-Patienten essentiell?
+- In welcher Phase des Burn-out wird meistens Hilfe gesucht?
+- Gibt es verschiedene Behandlungsmethoden gegen das Burnout Syndrom?
+- Falls ja, nach welchen Kriterien wird die Behandlungsmethode gewählt?
+- Welche Psychotherapieansätze werden bei einem Burnout angewandt?
+- Kann bei Burnout eine stationäre Behandlung notwendig sein?
+- In welcher Form werden Fortschritte erfasst und dokumentiert?
+- Gibt es zentrale Stellen für Medikamentennachweise?
+- Wie effektiv ist eine Burnout Therapie?
+- Welche Software wird von Dir heute eingesetzt? Was findest Du gut, was schlecht?
+- Welche Schlüssel-Features müsste  eine Applikation zur Verfügung stellen um  bei der Behandlung von Patienten zu Unterstützen?
+- Muss ein solches Tool gesammt Statistiken erfassen können? (anzahl Fälle, Gründe...)
+- Welche Infos zu vorherigen Behandlungsterminen/verschriebenen Medikamenten müssen vorhanden sein und gespeichert werden können?
+- Was für Aktionen/Massnahmen müssen für die Behandlung zur Verfügung stehen?
+  - Auswahl an Möglichkeiten (Dropdown)
+  - Ein freies TODO Feld
+- Welche Informationen zu einem Behandlungs-Standort muss man haben, um eine sinnvolle Einweisung zu machen?
