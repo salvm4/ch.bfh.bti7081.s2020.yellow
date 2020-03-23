@@ -76,20 +76,10 @@ DSM wird primär in den USA angewandt und wird von der amerikanischen psychatris
 * [Wikipedia-Artikel](https://de.wikipedia.org/wiki/Burn-out) [Burnout-Info.ch](https://www.burnout-info.ch/)
 * "Burnout" ist ein Sammelbegriff und steht für einen emotionalen, geistigen und körperlichen Erschöpfungszustand, der durch eine Antriebs- und Leistungsschwäche gekennzeichnet ist.
 * Klassifizierung nach ICD-10-GM: Z73 "Probleme mit Bezug auf Schwierigkeiten bei der Lebensbewältigung inkl. Ausgebranntsein"
-* Es gibt zurzeit keinen allgemein gültigen Behandlungsansatz --> in Software den Behandlungsweg/-ansatz offen gestalten
+* Diagnostik Burnout:
+	* [Maslach Burnout Inventory](https://de.wikipedia.org/wiki/Maslach_Burnout_Inventory "Maslach Burnout Inventory") – MBI
+	* [Trierer Inventar zum chronischen Stress](https://de.wikipedia.org/wiki/Trierer_Inventar_zum_chronischen_Stress) – TICS
+* Es gibt zurzeit keinen allgemein gültigen Behandlungsansatz, da die Krankheit selber nur wenig spezifiziert ist --> in Software den Behandlungsweg/-ansatz offen gestalten
 * Phasen/Zustände einer Burnout-Erkrankung siehe Wiki "Phasen des Burn-out"
 * Burnout wird durch stress, die moderne Arbeitswelt und Rollenerwartungen verursacht
 * Der Verlauf des Burnout Syndroms kann in verschiedenen Phasenmodellen aufgezeigt werden. Das Modell von Freudenberger und North unterteilt die Krankheit in 12 Phasen.
-
-
-
-## Fragen für Interview
-
-1. Welche Psychotherapieansätze werden bei einem Burnout angewandt?
-2. In welcher Phase des Burn-out wird meistens Hilfe gesucht?
-3. In welcher Form werden Fortschritte erfasst und dokumentiert?
-4. Welche Software wird von Dir heute eingesetzt? Was findest Du gut, was schlecht?
-5. Kann bei Burnout eine stationäre Behandlung notwendig sein?
-
-
-
