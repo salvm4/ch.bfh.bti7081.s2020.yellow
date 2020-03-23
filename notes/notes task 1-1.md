@@ -18,8 +18,14 @@ Die (medical) practice Management Software dient zur Abrechnung von medizinische
 
 Software, welche die Analyse von Gesundheitswerte von Patienten vornimmt und auch die weitere Behandlung regeln kann.
 
-
 [Wikipedia-Artikel PMS](https://en.wikipedia.org/wiki/Patient_management_software)
+
+
+### Klinik Informations System
+
+Software, welche alle Patientendaten und ärztlich erstellte berichte sammelt, sowie Termine und weitere Funktionen bietet.
+
+[Wikipedia-Artikel KIS](https://de.wikipedia.org/wiki/Krankenhausinformationssystem)
 
 ## Marktanalyse
 
@@ -67,10 +73,13 @@ DSM wird primär in den USA angewandt und wird von der amerikanischen psychatris
 
 ## Burnout
 
-* [Wikipedia-Artikel](https://de.wikipedia.org/wiki/Burn-out)
+* [Wikipedia-Artikel](https://de.wikipedia.org/wiki/Burn-out) [Burnout-Info.ch](https://www.burnout-info.ch/)
+* "Burnout" ist ein Sammelbegriff und steht für einen emotionalen, geistigen und körperlichen Erschöpfungszustand, der durch eine Antriebs- und Leistungsschwäche gekennzeichnet ist.
 * Klassifizierung nach ICD-10-GM: Z73 "Probleme mit Bezug auf Schwierigkeiten bei der Lebensbewältigung inkl. Ausgebranntsein"
 * Es gibt zurzeit keinen allgemein gültigen Behandlungsansatz --> in Software den Behandlungsweg/-ansatz offen gestalten
 * Phasen/Zustände einer Burnout-Erkrankung siehe Wiki "Phasen des Burn-out"
+* Burnout wird durch stress, die moderne Arbeitswelt und Rollenerwartungen verursacht
+* Der Verlauf des Burnout Syndroms kann in verschiedenen Phasenmodellen aufgezeigt werden. Das Modell von Freudenberger und North unterteilt die Krankheit in 12 Phasen.
 
 
 
