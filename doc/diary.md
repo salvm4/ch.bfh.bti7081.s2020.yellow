@@ -34,7 +34,7 @@ Am Dienstag werden die restlichen Aufgaben aufgeteilt.
 
 **Tasks**
 Bezeichnung: **Task 1.2**\
-Status: Open\
+Status: Done\
 Bis: Montag, 23.03.2020\
 Wer: Sascha
 
@@ -53,4 +53,32 @@ Aufgabe:
 
 
 # Besprechung 3
-Zeitpunkt: Geplant am: Montag, 23.03.2020 - 16:00
+Zeitpunkt: Montag, 23.03.2020; 16:00 - 16:30\
+Ziel: Besprechung Interview & Arbeit an Scoping/Synthesize\
+Abwesenheiten: Keine
+
+**Protokoll**
+Sascha hat das Interview durchgeführt. Leider konnte der befragte Arzt nicht genügend Auskunft zum Thema Burnout geben.
+Markus führt nun ein zweites Interview durch.
+Zusammen wurde an Scoping und Synthesize gearbeitet.
+
+Bezeichnung: **Task 1.4**\
+Status: Open\
+Bis: Freitag, 27.03.2020\
+Wer: Markus
+
+Aufgabe:
+- Zweites Interview durchführen (bestehende Interviewfragen).
+
+
+Bezeichnung: **Task 1.5**\
+Status: Open\
+Bis: Dienstag, 24.03.2020\
+Wer: Alle
+
+Aufgabe:
+- Alle bereiten zwei Storyboards für die Besprechung vom Dienstag, 24.03.2020 vor, damit sie in der Gruppe besprochen werden können.
+
+
+# Besprechung 4
+Zeitpunkt: Geplant am: Dienstag, 24.03.2020; 19:00
