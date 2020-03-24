@@ -67,9 +67,47 @@ Folgend sind die zwei gänigen Regelwerke zur Diagnose und Klassifizierung von p
 DSM wird primär in den USA angewandt und wird von der amerikanischen psychatrischen Gesellschaft herausgegeben. Die ICD hingegen wird von der WHO geplegt und ist das wichtigste weltweit anerkannte Klassifikationssystem.
 
 
+### Ursachen
+Quelle: [Burnout-Info.ch](https://www.burnout-info.ch/)
+- Stress (Hohe Arbeitsmenge, hoher Termindruck)
+- Fehlendes oder wenig positives Feedback
+- hoher Leistungsanspruch an sich selbst, Idealismus und Perfektionswillen
+- mangelnde Distanzierungsfähigkeit von bzw. Über-Identifizierung mit der Arbeit
+- ein Misstrauen gegenüber anderen Menschen und Selbstüberschätzung der eigenen Fähigkeiten
+
+### Symptome
+Quelle: [Burnout-Info.ch](https://www.burnout-info.ch/)
+- Chronische Müdigkeit und seelische Erschöpfung
+- Distanzierung von der Arbeit (z.B. verliert Beziehung zur Arbeit)
+- Körperliche Beschwerden (Schlafstörungen, Verdauungsbeschwerden)
+- Psychische Veränderungen (erhöhte Gereiztheit, nach Arbeit nicht fähig abzuschalten)
+- Kognitive Leistungseinschränkungen (Konzentrationsstörungen, Entscheidungsunfähigkeit, Selbstzweifel)
+- Änderungen im Verhalten (sozialer Rückzug, Konsum suchtfördernder Substanzen)
+
+Es gibt verschiedene Modelle für den Verlauf der Krankheit:
+[Modelle Verlauf - Burnout-Info.ch](https://www.burnout-info.ch/burnout_verlauf_phasenmodelle.htm)
+
 ### Behandlung (Psychotherapie)
 
 [Wikipedia-Artikel](https://de.wikipedia.org/wiki/Psychotherapie)
+
+Quelle: [Burnout-Info.ch](https://www.burnout-info.ch/)
+
+Stressabbau
+- Soziale Konflikte lösen
+- Arbeitsüberlastung verhindern
+- Rückmeldung einfordern
+- Unklare Aufgaben und Ziele klären
+- Zu enge Deadlines verhindern.
+  
+Stressbewältigung
+- Abreagieren
+- Ablenken
+- Aufbau körperlicher und psychischer Ressourcen
+- Überprüfen der eigenen Erwartungen und privaten / beruflichen Ziele
+- Zeitmanagement verbessern  
+
+Häufig ist das Problem, dass die Betroffenen das Problem gar nicht sehen.
 
 ## Burnout
 
