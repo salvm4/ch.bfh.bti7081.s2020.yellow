@@ -1,4 +1,5 @@
-# Besprechung 1
+# Diary
+## Besprechung 1
 Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00\
 Ziel: Initiale Abstimmung & Aufgabenteilung erste Schritte\
 Abwesenheiten: Keine
@@ -21,7 +22,7 @@ Aufgabe:
     - Was für Software gibt es schon?
   - Je 5 Fragen für das Interview vorbereiten.
 
-# Besprechung 2
+## Besprechung 2
 Zeitpunkt: Sonntag, 22.03.2020; 17:00 - 18:00\
 Ziel: Vorbereitung Interview\
 Abwesenheiten: Keine
@@ -52,7 +53,7 @@ Aufgabe:
 - Alle individuellen Research Ergebnisse in "notes/notes task 1-1.md" sammeln und einpflegen.
 
 
-# Besprechung 3
+## Besprechung 3
 Zeitpunkt: Montag, 23.03.2020; 16:00 - 16:30\
 Ziel: Besprechung Interview & Arbeit an Scoping/Synthesize\
 Abwesenheiten: Keine
@@ -80,5 +81,5 @@ Aufgabe:
 - Alle bereiten zwei Storyboards für die Besprechung vom Dienstag, 24.03.2020 vor, damit sie in der Gruppe besprochen werden können.
 
 
-# Besprechung 4
+## Besprechung 4
 Zeitpunkt: Geplant am: Dienstag, 24.03.2020; 19:00
