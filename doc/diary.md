@@ -63,6 +63,7 @@ Sascha hat das Interview durchgeführt. Leider konnte der befragte Arzt nicht ge
 Markus führt nun ein zweites Interview durch.
 Zusammen wurde an Scoping und Synthesize gearbeitet.
 
+
 Bezeichnung: **Task 1.4**\
 Status: Open\
 Bis: Freitag, 27.03.2020\
@@ -87,8 +88,20 @@ Ziel: Besprechung Storyboards und Aufgabenteilung restliche Tasks\
 Abwesenheiten: Keine
 
 **Protokoll**
+Gemeinsam wurden aus den verschiedenen Storyboards die vier besten ausgewählt und die beiden Personas besprochen.
+Bis Freitag erarbeiten alle je einen Prototypen für zwei unterschiedliche Storyboards.
+
+
+Bezeichnung: **Task 1.6**\
+Status: Open\
+Bis: Freitag, 27.03.2020\
+Wer: Alle
+
+Aufgabe:
+- Alle bereiten je einen Prototypen für zwei unterschiedliche Storyboards vor.
+- Alle bereiten je zwei "Evaluation questions" pro eigenen Prototyp vor.
 
 
 ## Besprechung 5
-Zeitpunkt: Geplant am: Sonntag, 29.03.2020; 19:00
+Zeitpunkt: Geplant am: Freitag, 27.03.2020; 12:00\
 
