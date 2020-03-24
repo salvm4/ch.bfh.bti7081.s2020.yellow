@@ -45,7 +45,7 @@ Aufgabe:
 
 
 Bezeichnung: **Task 1.3**\
-Status: Open\
+Status: Done\
 Bis: Dienstag, 24.03.2020\
 Wer: Alle
 
@@ -73,7 +73,7 @@ Aufgabe:
 
 
 Bezeichnung: **Task 1.5**\
-Status: Open\
+Status: Done\
 Bis: Dienstag, 24.03.2020\
 Wer: Alle
 
@@ -82,4 +82,13 @@ Aufgabe:
 
 
 ## Besprechung 4
-Zeitpunkt: Geplant am: Dienstag, 24.03.2020; 19:00
+Zeitpunkt: Dienstag, 24.03.2020; 19:00-20:00\
+Ziel: Besprechung Storyboards und Aufgabenteilung restliche Tasks\
+Abwesenheiten: Keine
+
+**Protokoll**
+
+
+## Besprechung 5
+Zeitpunkt: Geplant am: Sonntag, 29.03.2020; 19:00
+
