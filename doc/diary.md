@@ -93,7 +93,7 @@ Bis Freitag erarbeiten alle je einen Prototypen für zwei unterschiedliche Story
 
 
 Bezeichnung: **Task 1.6**\
-Status: Open\
+Status: Done\
 Bis: Freitag, 27.03.2020\
 Wer: Alle
 
@@ -103,5 +103,46 @@ Aufgabe:
 
 
 ## Besprechung 5
-Zeitpunkt: Geplant am: Freitag, 27.03.2020; 12:00\
+Zeitpunkt: Freitag, 27.03.2020; 12:00-13:30\
+Ziel: Besprechung der Prototypen und durchführung der Validierung\
+Abwesenheiten: Keine
 
+**Protokoll**
+Alle erläutern die erstellten Prototypen und diskutieren diese im Plenum.
+Wichtige Punkte aus der Besprechung der Prototypen:
+- Hierarchischer Aufbau
+- Wichtige Informationen auf allen Ansichten
+- Ansichten für Patienten und Termine
+
+
+Bezeichnung: **Task 1.7**\
+Status: Open\
+Bis: Sonntag, 29.03.2020\
+Wer: Markus Salvisberg
+
+Aufgabe:
+- Erstellung eines finalen Prototypen für die Patientendetails.
+- Formulierung von dazugehörigen Validierungsfragen und Antworten.
+
+
+Bezeichnung: **Task 1.8**\
+Status: Open\
+Bis: Sonntag, 29.03.2020\
+Wer: Sascha Ledermann
+
+Aufgabe:
+- Erarbeitete Unterlagen in ein allgemeines Dokument zusammenfassen, welches als Abgabedokument für den Task 1 gilt.
+
+
+Bezeichnung: **Task 1.9**\
+Status: Open\
+Bis: Sonntag, 29.03.2020\
+Wer: Simon Barben
+
+Aufgabe:
+- Bereinigung Git.
+
+
+## Besprechung 6
+Zeitpunkt: Sonntag, 29.03.2020; 17:00-17:30\
+Ziel: Besprechung des Dokumentes und Diskussion für die Präsentation.
