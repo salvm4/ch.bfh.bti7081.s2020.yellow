@@ -1,0 +1,40 @@
+- Welche Symptone zeigen sich bei einem Burnout/Wie wird Burnout diagnostiziert (Tests? Abgrenzung zu anderen psychischen Problemen?) und welche Symptome müssen nachvollziehbar festgehalten werden?
+
+Für die Diagnose von Burnout gibt es verschiedene Phasenmodelle um den Fortschritt der Krankheit aufzuzeigen.
+https://www.burnout-info.ch/burnout_verlauf_phasenmodelle.htm
+
+- Was kann ein 'normaler Arzt' tun? Oder muss immer ein Psychologe beigezogen werden?
+
+Die Behandlung beginnt normalerweise beim Hausarzt und wir anschliessend an einen Facharzt (Neurologen/Psychologen) weitergegeben. Ein Psychologe wird nicht in jedem Fall einbezogen.
+
+- Wie verläuft eine Behandlung ab? Kann der Krankheitsverlauf auf eine Weise aufgezeigt werden?
+
+Für Krankheitsverlauf siehe Frage 1. Einen Allgemeinen Behandlungsverlauf gibt es nicht. Viele Patienten werden in ein Rehabilitationszentrum verlegt. Generell ist es wichtig den betroffenen aus dem bestehenden Umfeld zu entfernen und Stressoren zu beseitigen sowie im Anschluss den Umgang mit diesen Stressoren zu ändern.
+
+- Wie unterscheidet sich die Behandlung/Betreuung eines Patienten in den verschiedenen Phasen eines Burnouts?
+- Welche Informationen sind während der Behandlung eines Burnout-Patienten essentiell?
+- In welcher Phase des Burn-out wird meistens Hilfe gesucht?
+- Gibt es verschiedene Behandlungsmethoden gegen das Burnout Syndrom?
+
+Siehe Frage 3.
+
+- Falls ja, nach welchen Kriterien wird die Behandlungsmethode gewählt?
+
+Sehr individuell und je nach person, Umfeld und Umstände anders.
+
+- Welche Psychotherapieansätze werden bei einem Burnout angewandt?
+- Kann bei Burnout eine stationäre Behandlung notwendig sein?
+
+Siehe Frage 3.
+
+- In welcher Form werden Fortschritte erfasst und dokumentiert?
+- Gibt es zentrale Stellen für Medikamentennachweise?
+- Wie effektiv ist eine Burnout Therapie?
+- Welche Software wird von Dir heute eingesetzt? Was findest Du gut, was schlecht?
+- Welche Schlüssel-Features müsste  eine Applikation zur Verfügung stellen um  bei der Behandlung von Patienten zu Unterstützen?
+- Muss ein solches Tool gesammt Statistiken erfassen können? (anzahl Fälle, Gründe...)
+- Welche Infos zu vorherigen Behandlungsterminen/verschriebenen Medikamenten müssen vorhanden sein und gespeichert werden können?
+- Was für Aktionen/Massnahmen müssen für die Behandlung zur Verfügung stehen?
+  - Auswahl an Möglichkeiten (Dropdown)
+  - Ein freies TODO Feld
+- Welche Informationen zu einem Behandlungs-Standort muss man haben, um eine sinnvolle Einweisung zu machen?

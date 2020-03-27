@@ -28,3 +28,22 @@ Mögliche Interviewfragen:
 2. Research
 - Informieren über Krankheit
 - Welche Software gibt es schon?
+
+
+
+
+-----------------------------
+Auflistung Ansichten:
+-----------------------------
+- Startseite
+  - Liste Termine
+  - Liste Patienten
+- Neuer Patient erfassen
+  - Out of scope: Patient editieren
+- Agenda: Wird aufgerufen von: Patient erfassen, Patient Detail, Neuer Termin
+- Patientendetail: Links Personaldaten, rechts Krankheitsverlauf/Infos, Actions: Termin planen, einweisen
+- Termindetail
+  - Wenn vergangener Termin aufgerufen wird, sind die Felder vorausgefüllt.
+  - Bei aktuellem Termin sind nur Aktuelle Diagnose/Medikamente vom letzten Termin eingefüllt.
+- Überweisen: Eigene Ansicht
+  - Wird aufgerufen von Patientendetail & Termindetail
