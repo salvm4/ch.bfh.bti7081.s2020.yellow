@@ -146,7 +146,8 @@ Aufgabe:
 
 ## Besprechung 6
 Zeitpunkt: Sonntag, 29.03.2020; 17:00-17:30\
-Ziel: Besprechung des Dokumentes und Diskussion für die Präsentation.
+Ziel: Besprechung des Dokumentes und Diskussion für die Präsentation.  
+Abwesenheiten: Keine
 
 **Protokoll**
 Die finalen Änderungen an den Prototypen besprochen und die letzten Feinheiten an der finale Dokumentation vorgenommen. Die Aufteilung für die Präsentation am Montag gemacht:
