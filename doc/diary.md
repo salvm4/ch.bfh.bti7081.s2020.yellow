@@ -1,3 +1,4 @@
+
 # Diary
 ## Besprechung 1
 Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00\
@@ -104,7 +105,7 @@ Aufgabe:
 
 ## Besprechung 5
 Zeitpunkt: Freitag, 27.03.2020; 12:00-13:30\
-Ziel: Besprechung der Prototypen und durchführung der Validierung\
+Ziel: Besprechung der Prototypen und Durchführung der Validierung\
 Abwesenheiten: Keine
 
 **Protokoll**
@@ -146,3 +147,12 @@ Aufgabe:
 ## Besprechung 6
 Zeitpunkt: Sonntag, 29.03.2020; 17:00-17:30\
 Ziel: Besprechung des Dokumentes und Diskussion für die Präsentation.
+
+**Protokoll**
+Die finalen Änderungen an den Prototypen besprochen und die letzten Feinheiten an der finale Dokumentation vorgenommen. Die Aufteilung für die Präsentation am Montag gemacht:
+
+Scoping: Simon Barben  
+Research: Sascha Ledermann & Markus Salvisberg  
+Synthesize: Simon Barben  
+Design: Alain Peytrignet  
+Prototype & Validate: Jonas Burkhalter  
