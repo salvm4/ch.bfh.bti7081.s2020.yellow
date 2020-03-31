@@ -161,18 +161,18 @@ Prototype & Validate: Jonas Burkhalter
 
 ## Besprechung 7
 Zeitpunkt: Dienstag, 31.03.2020; 18:00-18:30\
-Ziel: Besprechung und Aufgabenteilung CS2 Task2
+Ziel: Besprechung und Aufgabenteilung CS2 Task2\
 Abwesenheiten: Keine
 
 **Protokoll**
-Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet und weitere Tasks erstellt sowie verteilt.
+Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet, weitere Tasks erstellt und diese verteilt.
 
 Bezeichnung: **Task 2.1**\
 Status: Pending\
 Bis: Sonntag, 13.04.2020\
 Wer: Markus Salvisberg
 
-Aufgabe: Erstellung Grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen Teile 
+Aufgabe: Erstellung grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen erarbeiteten Teile.
 
 Bezeichnung: **Task 2.2**\
 Status: Pending\
