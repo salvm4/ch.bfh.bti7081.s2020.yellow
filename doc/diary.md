@@ -1,4 +1,5 @@
 
+
 # Diary
 ## Besprechung 1
 Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00\
@@ -117,7 +118,7 @@ Wichtige Punkte aus der Besprechung der Prototypen:
 
 
 Bezeichnung: **Task 1.7**\
-Status: Open\
+Status: Done\
 Bis: Sonntag, 29.03.2020\
 Wer: Markus Salvisberg
 
@@ -127,7 +128,7 @@ Aufgabe:
 
 
 Bezeichnung: **Task 1.8**\
-Status: Open\
+Status: Done\
 Bis: Sonntag, 29.03.2020\
 Wer: Sascha Ledermann
 
@@ -136,7 +137,7 @@ Aufgabe:
 
 
 Bezeichnung: **Task 1.9**\
-Status: Open\
+Status: Done\
 Bis: Sonntag, 29.03.2020\
 Wer: Simon Barben
 
@@ -157,3 +158,51 @@ Research: Sascha Ledermann & Markus Salvisberg
 Synthesize: Simon Barben  
 Design: Alain Peytrignet  
 Prototype & Validate: Jonas Burkhalter  
+
+## Besprechung 7
+Zeitpunkt: Dienstag, 31.03.2020; 18:00-18:30\
+Ziel: Besprechung und Aufgabenteilung CS2 Task2
+Abwesenheiten: Keine
+
+**Protokoll**
+Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet und weitere Tasks erstellt sowie verteilt.
+
+Bezeichnung: **Task 2.1**\
+Status: Pending\
+Bis: Sonntag, 13.04.2020\
+Wer: Markus Salvisberg
+
+Aufgabe: Erstellung Grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen Teile 
+
+Bezeichnung: **Task 2.2**\
+Status: Pending\
+Bis: Sonntag, 05.04.2020\
+Wer: Sascha Ledermann
+
+Aufgabe: Detaillierung Use Case Termin-View und Erstellung des Kapitel System Models
+
+Bezeichnung: **Task 2.3**\
+Status: Pending\
+Bis: Sonntag, 05.04.2020\
+Wer: Simon Barben
+
+Aufgabe: Detaillierung Use Case Patienten-View und Erstellung des Kapitel System Architecture
+
+Bezeichnung: **Task 2.4**\
+Status: Pending\
+Bis: Freitag, 10.04.2020\
+Wer: Jonas Burkhalter
+
+Aufgabe: Functional system requirements zu Patienten-View und Erstellung des Kapitel System Evolution
+
+Bezeichnung: **Task 2.5**\
+Status: Pending\
+Bis: Freitag, 10.04.2020\
+Wer: Alain Peytrignet
+
+Aufgabe: Functional system requirements zu Termin-View und Erstellung des Kapitel Testing
+
+## Besprechung 8
+Zeitpunkt: Sonntag, 05.04.2020; 18:00-18:30\
+Ziel: Besprechung Detaillierung Use-Cases
+Abwesenheiten:
