@@ -160,7 +160,7 @@ Design: Alain Peytrignet
 Prototype & Validate: Jonas Burkhalter  
 
 ## Besprechung 7
-Zeitpunkt: Dienstag, 31.03.2020; 18:00-18:30\
+Zeitpunkt: Dienstag, 31.03.2020; 18:00-19:30\
 Ziel: Besprechung und Aufgabenteilung CS2 Task2\
 Abwesenheiten: Keine
 
