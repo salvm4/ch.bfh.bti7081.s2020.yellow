@@ -167,12 +167,14 @@ Abwesenheiten: Keine
 **Protokoll**
 Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet, weitere Tasks erstellt und diese verteilt.
 
+
 Bezeichnung: **Task 2.1**\
 Status: Pending\
 Bis: Sonntag, 13.04.2020\
 Wer: Markus Salvisberg
 
 Aufgabe: Erstellung grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen erarbeiteten Teile.
+
 
 Bezeichnung: **Task 2.2**\
 Status: Done\
@@ -181,6 +183,7 @@ Wer: Sascha Ledermann
 
 Aufgabe: Detaillierung Use Case Termin dokumtentieren und Erstellung des Kapitel System Models
 
+
 Bezeichnung: **Task 2.3**\
 Status: Done\
 Bis: Sonntag, 05.04.2020\
@@ -188,19 +191,22 @@ Wer: Simon Barben
 
 Aufgabe: Detaillierung Use Case Patientendetail anzeigen und Erstellung des Kapitel System Architecture
 
+
 Bezeichnung: **Task 2.4**\
-Status: Pending\
+Status: Done\
 Bis: Freitag, 10.04.2020\
 Wer: Jonas Burkhalter
 
 Aufgabe: Functional system requirements zu Patientendetail anzeigen und Erstellung des Kapitel System Evolution
 
+
 Bezeichnung: **Task 2.5**\
-Status: Pending\
+Status: Done\
 Bis: Freitag, 10.04.2020\
 Wer: Alain Peytrignet
 
 Aufgabe: Functional system requirements zu Termin dokumtentieren und Erstellung des Kapitel Testing
+
 
 ## Besprechung 8
 Zeitpunkt: Sonntag, 05.04.2020; 18:00-18:30\
@@ -212,4 +218,9 @@ Use cases Termin dokumtentieren und Patientendetail anzeigen besprochen und verb
 
 
 ## Besprechung 9
-Nächste Besprechung: Geplant am: Freitag, 10.04.2020; 13:00
+Zeitpunkt: Freitag, 10.04.2020; 13:00-14:00\
+Ziel: Besprechung Task 02\
+Abwesenheiten: Sascha Ledermann
+
+**Protokoll**
+Kapitel für das Dokument Anforderungsspezifikation besprochen und verbessert.
