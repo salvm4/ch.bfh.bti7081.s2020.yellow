@@ -66,6 +66,7 @@ Markus führt nun ein zweites Interview durch.
 Zusammen wurde an Scoping und Synthesize gearbeitet.
 
 
+**Tasks**
 Bezeichnung: **Task 1.4**\
 Status: Open\
 Bis: Freitag, 27.03.2020\
@@ -94,6 +95,7 @@ Gemeinsam wurden aus den verschiedenen Storyboards die vier besten ausgewählt u
 Bis Freitag erarbeiten alle je einen Prototypen für zwei unterschiedliche Storyboards.
 
 
+**Tasks**
 Bezeichnung: **Task 1.6**\
 Status: Done\
 Bis: Freitag, 27.03.2020\
@@ -117,6 +119,7 @@ Wichtige Punkte aus der Besprechung der Prototypen:
 - Ansichten für Patienten und Termine
 
 
+**Tasks**
 Bezeichnung: **Task 1.7**\
 Status: Done\
 Bis: Sonntag, 29.03.2020\
@@ -168,8 +171,9 @@ Abwesenheiten: Keine
 Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet, weitere Tasks erstellt und diese verteilt.
 
 
+**Tasks**
 Bezeichnung: **Task 2.1**\
-Status: Pending\
+Status: Done\
 Bis: Sonntag, 13.04.2020\
 Wer: Markus Salvisberg
 
@@ -218,9 +222,27 @@ Use cases Termin dokumtentieren und Patientendetail anzeigen besprochen und verb
 
 
 ## Besprechung 9
-Zeitpunkt: Freitag, 10.04.2020; 13:00-14:00\
-Ziel: Besprechung Task 02\
-Abwesenheiten: Sascha Ledermann
+Zeitpunkt: Freitag, 10.04.2020; 13:00-13:30\
+Ziel: Aufteilung Task 3\
+Abwesenheiten: Jonas
 
 **Protokoll**
-Kapitel für das Dokument Anforderungsspezifikation besprochen und verbessert.
+Task 3 Aufgabenteilung gemacht (vgl. Task 3.1)
+
+
+**Tasks**
+Bezeichnung: **Task 3.1**\
+Status: Open\
+Bis: Sonntag, 19.04.2020\
+Wer: Alle
+
+Review Requirementdokument von Team Black in Excel Liste im Teams ergänzen. Aufteilung:\
+Simon: 4.2 Use Case 1, 5 Function Requirements\
+Sascha: 4.1 System Boundary, 4.3 Use Case 2, 9 Testing\
+Markus: 4.4 Use Case 3, 8 System Evolution\
+Alain: 4.5 Use Case 4, 4.6 Use Case 5, 6 Non-Functional Requirements\
+Jonas: 1 Preface, 2 Introduction, 7 System Architecture
+
+
+## Besprechung 10
+Zeitpunkt: Geplant am: Sonntag, 19.04.2020; 17:00\
