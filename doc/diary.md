@@ -6,11 +6,11 @@ Zeitpunkt: Freitag, 20.03.2020; 14:00 - 15:00\
 Ziel: Initiale Abstimmung & Aufgabenteilung erste Schritte\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Bis Sonntag, 22.03.2020 informieren sich alle Gruppenmitglieder über Burnout, damit das Scoping sowie die Interviewfragen definiert werden können.
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 1.1**\
 Status: Done\
 Bis: Sonntag, 22.03.2020\
@@ -29,13 +29,13 @@ Zeitpunkt: Sonntag, 22.03.2020; 17:00 - 18:00\
 Ziel: Vorbereitung Interview\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Sascha führt nach Möglichkeit am Montag das Interview durch. Am Abend werden die Resultate besprochen und das Scoping gemacht.
 Alle pflegen ihre Research-Ergebnisse bis am Dienstag in das gemeinsame File ein.
 Am Dienstag werden die restlichen Aufgaben aufgeteilt.
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 1.2**\
 Status: Done\
 Bis: Montag, 23.03.2020\
@@ -60,13 +60,13 @@ Zeitpunkt: Montag, 23.03.2020; 16:00 - 16:30\
 Ziel: Besprechung Interview & Arbeit an Scoping/Synthesize\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Sascha hat das Interview durchgeführt. Leider konnte der befragte Arzt nicht genügend Auskunft zum Thema Burnout geben.
 Markus führt nun ein zweites Interview durch.
 Zusammen wurde an Scoping und Synthesize gearbeitet.
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 1.4**\
 Status: Open\
 Bis: Freitag, 27.03.2020\
@@ -90,12 +90,12 @@ Zeitpunkt: Dienstag, 24.03.2020; 19:00-20:00\
 Ziel: Besprechung Storyboards und Aufgabenteilung restliche Tasks\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Gemeinsam wurden aus den verschiedenen Storyboards die vier besten ausgewählt und die beiden Personas besprochen.
 Bis Freitag erarbeiten alle je einen Prototypen für zwei unterschiedliche Storyboards.
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 1.6**\
 Status: Done\
 Bis: Freitag, 27.03.2020\
@@ -111,7 +111,7 @@ Zeitpunkt: Freitag, 27.03.2020; 12:00-13:30\
 Ziel: Besprechung der Prototypen und Durchführung der Validierung\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Alle erläutern die erstellten Prototypen und diskutieren diese im Plenum.
 Wichtige Punkte aus der Besprechung der Prototypen:
 - Hierarchischer Aufbau
@@ -119,7 +119,7 @@ Wichtige Punkte aus der Besprechung der Prototypen:
 - Ansichten für Patienten und Termine
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 1.7**\
 Status: Done\
 Bis: Sonntag, 29.03.2020\
@@ -153,7 +153,7 @@ Zeitpunkt: Sonntag, 29.03.2020; 17:00-17:30\
 Ziel: Besprechung des Dokumentes und Diskussion für die Präsentation.  
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Die finalen Änderungen an den Prototypen besprochen und die letzten Feinheiten an der finale Dokumentation vorgenommen. Die Aufteilung für die Präsentation am Montag gemacht:
 
 Scoping: Simon Barben  
@@ -167,17 +167,18 @@ Zeitpunkt: Dienstag, 31.03.2020; 18:00-19:30\
 Ziel: Besprechung und Aufgabenteilung CS2 Task2\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Basierend auf den erstellten Storyboards, das Use Case Diagramm zusammen erarbeitet, weitere Tasks erstellt und diese verteilt.
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 2.1**\
 Status: Done\
 Bis: Sonntag, 13.04.2020\
 Wer: Markus Salvisberg
 
-Aufgabe: Erstellung grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen erarbeiteten Teile.
+Aufgabe:\
+Erstellung grundlegende Struktur des Dokuments sowie das Zusammenfügen der verschiedenen erarbeiteten Teile.
 
 
 Bezeichnung: **Task 2.2**\
@@ -185,7 +186,8 @@ Status: Done\
 Bis: Sonntag, 05.04.2020\
 Wer: Sascha Ledermann
 
-Aufgabe: Detaillierung Use Case Termin dokumtentieren und Erstellung des Kapitel System Models
+Aufgabe:\
+Detaillierung Use Case Termin dokumtentieren und Erstellung des Kapitel System Models
 
 
 Bezeichnung: **Task 2.3**\
@@ -193,7 +195,8 @@ Status: Done\
 Bis: Sonntag, 05.04.2020\
 Wer: Simon Barben
 
-Aufgabe: Detaillierung Use Case Patientendetail anzeigen und Erstellung des Kapitel System Architecture
+Aufgabe:\
+Detaillierung Use Case Patientendetail anzeigen und Erstellung des Kapitel System Architecture
 
 
 Bezeichnung: **Task 2.4**\
@@ -201,7 +204,8 @@ Status: Done\
 Bis: Freitag, 10.04.2020\
 Wer: Jonas Burkhalter
 
-Aufgabe: Functional system requirements zu Patientendetail anzeigen und Erstellung des Kapitel System Evolution
+Aufgabe:\
+Functional system requirements zu Patientendetail anzeigen und Erstellung des Kapitel System Evolution
 
 
 Bezeichnung: **Task 2.5**\
@@ -209,7 +213,8 @@ Status: Done\
 Bis: Freitag, 10.04.2020\
 Wer: Alain Peytrignet
 
-Aufgabe: Functional system requirements zu Termin dokumtentieren und Erstellung des Kapitel Testing
+Aufgabe:\
+Functional system requirements zu Termin dokumtentieren und Erstellung des Kapitel Testing
 
 
 ## Besprechung 8
@@ -217,7 +222,7 @@ Zeitpunkt: Sonntag, 05.04.2020; 18:00-18:30\
 Ziel: Besprechung Detaillierung Use-Cases\
 Abwesenheiten: Keine
 
-**Protokoll**
+**Protokoll**\
 Use cases Termin dokumtentieren und Patientendetail anzeigen besprochen und verbessert.
 
 
@@ -226,17 +231,18 @@ Zeitpunkt: Freitag, 10.04.2020; 13:00-13:30\
 Ziel: Aufteilung Task 3\
 Abwesenheiten: Jonas
 
-**Protokoll**
+**Protokoll**\
 Task 3 Aufgabenteilung gemacht (vgl. Task 3.1)
 
 
-**Tasks**
+**Tasks**\
 Bezeichnung: **Task 3.1**\
 Status: Open\
 Bis: Sonntag, 19.04.2020\
 Wer: Alle
 
-Review Requirementdokument von Team Black in Excel Liste im Teams ergänzen. Aufteilung:\
+Aufgabe:\
+Review Requirementdokument von Team Black in Excel Liste im Teams ergänzen.\
 Simon: 4.2 Use Case 1, 5 Function Requirements\
 Sascha: 4.1 System Boundary, 4.3 Use Case 2, 9 Testing\
 Markus: 4.4 Use Case 3, 8 System Evolution\
