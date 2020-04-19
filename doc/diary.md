@@ -251,4 +251,13 @@ Jonas: 1 Preface, 2 Introduction, 7 System Architecture
 
 
 ## Besprechung 10
-Zeitpunkt: Geplant am: Sonntag, 19.04.2020; 17:00\
+Zeitpunkt: Sonntag, 19.04.2020; 15:30-16:15\
+Ziel: Besprechung Task 3.1
+Abwesenheiten: Keine
+
+**Protokoll**
+
+- Besprechung Kommentare zu Task 3.1
+- Gesamtbewertung festgelegt (8 von 10)
+
+
