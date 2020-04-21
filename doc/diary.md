@@ -260,4 +260,26 @@ Abwesenheiten: Keine
 - Besprechung Kommentare zu Task 3.1
 - Gesamtbewertung festgelegt (8 von 10)
 
+## Besprechung
+Zeitpunkt: Dienstag, 20.04.2020; 18:10-21:30\
+Ziel: Besprechung Task 4
+Abwesenheiten: Keine
 
+**Protokoll**
+
+- Domain Modell erstellt
+- weitere Tasks erstellt
+
+**Tasks**
+
+Jonas/Alain: 4.1 Sequenzdiagramm erstellen zu Use Case 4
+
+
+Sascha/Simon: 4.2 Klassendiagramm erstellen
+
+
+Markus: 4.3 Klassendiagramm mit Methoden/Properties aus Sequenzdiagramm ergänzen
+
+## Besprechung
+Zeitpunkt: geplant am Freitag, 24.04.2020; 18:00-19:00\
+Ziel: Besprechung Task 4
