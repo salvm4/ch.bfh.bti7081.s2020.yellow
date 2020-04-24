@@ -237,7 +237,7 @@ Task 3 Aufgabenteilung gemacht (vgl. Task 3.1)
 
 **Tasks**\
 Bezeichnung: **Task 3.1**\
-Status: Open\
+Status: Done\
 Bis: Sonntag, 19.04.2020\
 Wer: Alle
 
@@ -272,14 +272,18 @@ Abwesenheiten: Keine
 
 **Tasks**
 
-Jonas/Alain: 4.1 Sequenzdiagramm erstellen zu Use Case 4
+Jonas/Alain: 4.1 Sequenzdiagramm erstellen zu Use Case 4 / Status: Done
 
 
-Sascha/Simon: 4.2 Klassendiagramm erstellen
+Sascha/Simon: 4.2 Klassendiagramm erstellen / Status: Done
 
 
-Markus: 4.3 Klassendiagramm mit Methoden/Properties aus Sequenzdiagramm ergänzen
+Markus: 4.3 Klassendiagramm mit Methoden/Properties aus Sequenzdiagramm ergänzen / Status: Open
 
 ## Besprechung
-Zeitpunkt: geplant am Freitag, 24.04.2020; 18:00-19:00\
+Zeitpunkt: Freitag, 24.04.2020; 18:00-19:00\
 Ziel: Besprechung Task 4
+
+**Protokoll**
+-Besprechung und gemeinsame Überarbeitung Sequenzdiagramm / Klassendiagramm
+
