@@ -260,7 +260,7 @@ Abwesenheiten: Keine
 - Besprechung Kommentare zu Task 3.1
 - Gesamtbewertung festgelegt (8 von 10)
 
-## Besprechung
+## Besprechung 11
 Zeitpunkt: Dienstag, 20.04.2020; 18:10-21:30\
 Ziel: Besprechung Task 4
 Abwesenheiten: Keine
@@ -280,10 +280,29 @@ Sascha/Simon: 4.2 Klassendiagramm erstellen / Status: Done
 
 Markus: 4.3 Klassendiagramm mit Methoden/Properties aus Sequenzdiagramm ergänzen / Status: Open
 
-## Besprechung
+## Besprechung 12
 Zeitpunkt: Freitag, 24.04.2020; 18:00-19:00\
 Ziel: Besprechung Task 4
 
 **Protokoll**
--Besprechung und gemeinsame Überarbeitung Sequenzdiagramm / Klassendiagramm
+- Besprechung und gemeinsame Überarbeitung Sequenzdiagramm / Klassendiagramm
+
+## Besprechung 13
+Zeitpunkt: Freitag, 01.05.2020; 13:00-15:30\
+Ziel: Besprechung Task 5 und 6
+Abwesenheiten: Keine
+
+**Protokoll**
+
+- Aufteilung Task 5
+- Planung Sprint 1
+
+**Tasks**
+Bis: Sonntag, 03.05.2020
+
+Markus: Email an Dozente / Status: Open
+Jonas: UML Deployment Diagram / Status: Open
+Sascha: UML Class Diagram / Status: Open
+Alain: Scrum Stories / Status: Open
+
 
