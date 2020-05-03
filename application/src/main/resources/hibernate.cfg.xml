@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database credentials -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/burnout</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/burnout?serverTimezone=UTC</property>
         <property name="connection.username">newuser</property>
         <property name="connection.password">password</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -20,7 +20,7 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- Mappings -->
-        <mapping class="ch.bfh.bti7081.s2020.yellow.Model.Patient"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.Patient"/>
         <!-- Todo - add more mappings -->
 
     </session-factory>
