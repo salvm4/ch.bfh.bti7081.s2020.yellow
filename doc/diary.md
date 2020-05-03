@@ -1,4 +1,5 @@
 
+  
 
 # Diary
 ## Besprechung 1
@@ -305,4 +306,15 @@ Jonas: UML Deployment Diagram / Status: Open
 Sascha: UML Class Diagram / Status: Open
 Alain: Scrum Stories / Status: Open
 
+## Besprechung 14
+Zeitpunkt: Sonntag, 03.05.2020; 18:00-19:00\
+Ziel: Abschliessen Task 5 und 6
+Abwesenheiten: Keine
 
+**Protokoll**
+
+ - Besprechung des erstellten UML Class Diagram der Mainview
+ - Besprechung des erstellen Deployment Diagram
+ - Besprechung der formulierten Scrum Stories im Product Backlog
+ - Bestimmung Scrum Master -> Simon
+ - Fertigstellung des Component Diagrams anhand Antwort von Herr Vogel im Moodle
