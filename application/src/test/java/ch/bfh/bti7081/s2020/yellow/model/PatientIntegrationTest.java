@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.Model;
+package ch.bfh.bti7081.s2020.yellow.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,56 +13,56 @@ public class PatientIntegrationTest {
     private static String lastName = "last";
 
     @Before
-    public void PatientTest() {
+    public void patientTest() {
         patientRepository = new PatientRepository();
 
-        for (Patient patient : patientRepository.GetAll().list()) {
-            patientRepository.Delete(patient.getId());
+        for (Patient patient : patientRepository.getAll().list()) {
+            patientRepository.delete(patient.getId());
         }
     }
 
     @Test
-    public void CreatePatientTest() {
+    public void createPatientTest() {
         Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.Save(patient);
+        patientRepository.save(patient);
 
-        int numberOfPatientsAfter = patientRepository.GetAll().list().size();
+        int numberOfPatientsAfter = patientRepository.getAll().list().size();
 
         assertEquals(1, numberOfPatientsAfter);
     }
 
     @Test
-    public void EditPatientTest() {
+    public void editPatientTest() {
         // Create Patient
         Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.Save(patient);
+        patientRepository.save(patient);
 
         // Edit Patient
         patient.setEmail(email + " edited");
         patient.setFirstName(firstName + " edited");
         patient.setLastName(lastName + " edited");
-        patientRepository.Save(patient);
+        patientRepository.save(patient);
 
-        int numberOfPatientsAfter = patientRepository.GetAll().list().size();
+        int numberOfPatientsAfter = patientRepository.getAll().list().size();
         assertEquals(1, numberOfPatientsAfter);
 
         // Selected Patient equals created Patient
-        Patient editedPatient = patientRepository.GetById(patient.getId());
+        Patient editedPatient = patientRepository.getById(patient.getId());
         assertFalse(editedPatient.getEmail().equals(email));
         assertFalse(editedPatient.getFirstName().equals(firstName));
         assertFalse(editedPatient.getLastName().equals(lastName));
     }
 
     @Test
-    public void DeletePatientTest() {
+    public void deletePatientTest() {
         // Create Patient
         Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.Save(patient);
+        patientRepository.save(patient);
 
         // Delete Patient
-        patientRepository.Delete(patient.getId());
+        patientRepository.delete(patient.getId());
 
-        int numberOfPatientsAfter = patientRepository.GetAll().list().size();
+        int numberOfPatientsAfter = patientRepository.getAll().list().size();
         assertEquals(0, numberOfPatientsAfter);
     }
 }

@@ -1,10 +1,10 @@
-package ch.bfh.bti7081.s2020.yellow.Model;
+package ch.bfh.bti7081.s2020.yellow.model;
 
-import ch.bfh.bti7081.s2020.yellow.Model.Utils.HibernateUtil;
+import ch.bfh.bti7081.s2020.yellow.model.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-public class PatientRepository implements IRepository<Patient> {
+public class PatientRepository implements Repository<Patient> {
     Session session;
 
     public PatientRepository() {
@@ -12,24 +12,24 @@ public class PatientRepository implements IRepository<Patient> {
     }
 
     @Override
-    public void Delete(long id) {
+    public void delete(long id) {
         session.beginTransaction();
-        session.delete(GetById(id));
+        session.delete(getById(id));
         session.getTransaction().commit();
     }
 
     @Override
-    public Query<Patient> GetAll() {
+    public Query<Patient> getAll() {
         return session.createQuery("From Patient ");
     }
 
     @Override
-    public Patient GetById(long id) {
+    public Patient getById(long id) {
         return session.get(Patient.class, id);
     }
 
     @Override
-    public void Save(Patient entity) {
+    public void save(Patient entity) {
         session.beginTransaction();
         session.save(entity);
         session.getTransaction().commit();

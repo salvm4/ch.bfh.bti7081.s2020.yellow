@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.Model;
+package ch.bfh.bti7081.s2020.yellow.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

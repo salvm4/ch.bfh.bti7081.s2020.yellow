@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.Model.Utils;
+package ch.bfh.bti7081.s2020.yellow.model.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
