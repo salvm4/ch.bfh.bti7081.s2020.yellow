@@ -1,4 +1,5 @@
 
+  
 
 # Diary
 ## Besprechung 1
@@ -300,9 +301,20 @@ Abwesenheiten: Keine
 **Tasks**
 Bis: Sonntag, 03.05.2020
 
-Markus: Email an Dozente / Status: Open
-Jonas: UML Deployment Diagram / Status: Open
-Sascha: UML Class Diagram / Status: Open
-Alain: Scrum Stories / Status: Open
+Markus: Email an Dozente / Status: Done  
+Jonas: UML Deployment Diagram / Status: Done  
+Sascha: UML Class Diagram / Status: Done  
+Alain: Scrum Stories / Status: Done  
 
+## Besprechung 14
+Zeitpunkt: Sonntag, 03.05.2020; 18:00-19:00\
+Ziel: Abschliessen Task 5 und 6
+Abwesenheiten: Keine
 
+**Protokoll**
+
+ - Besprechung des erstellten UML Class Diagram der Mainview
+ - Besprechung des erstellen Deployment Diagram
+ - Besprechung der formulierten Scrum Stories im Product Backlog
+ - Bestimmung Scrum Master -> Simon
+ - Fertigstellung des Component Diagrams anhand Antwort von Herr Vogel im Moodle

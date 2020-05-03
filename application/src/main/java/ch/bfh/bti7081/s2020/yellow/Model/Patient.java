@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Patient {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -26,7 +26,7 @@ public class Patient {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,6 +52,39 @@ public class Patient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Patient or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Patient)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        Patient p = (Patient) o;
+
+        // Compare the data members and return accordingly
+        return p.id == id
+                && p.email.equals(email)
+                && p.firstName.equals(firstName)
+                && p.lastName.equals(lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        return result;
     }
 
     @Override
