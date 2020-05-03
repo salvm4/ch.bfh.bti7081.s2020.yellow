@@ -301,10 +301,10 @@ Abwesenheiten: Keine
 **Tasks**
 Bis: Sonntag, 03.05.2020
 
-Markus: Email an Dozente / Status: Open
-Jonas: UML Deployment Diagram / Status: Open
-Sascha: UML Class Diagram / Status: Open
-Alain: Scrum Stories / Status: Open
+Markus: Email an Dozente / Status: Done  
+Jonas: UML Deployment Diagram / Status: Done  
+Sascha: UML Class Diagram / Status: Done  
+Alain: Scrum Stories / Status: Done  
 
 ## Besprechung 14
 Zeitpunkt: Sonntag, 03.05.2020; 18:00-19:00\
