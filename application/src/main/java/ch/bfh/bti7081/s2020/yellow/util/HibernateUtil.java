@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.model.utils;
+package ch.bfh.bti7081.s2020.yellow.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,8 +23,7 @@ public class HibernateUtil {
                 .configure("hibernate.cfg.xml").buildSessionFactory();
 
         // factory = new Configuration().configure().buildSessionFactory();
-        final Session session = sf.openSession();
-        return session;
+        return sf.openSession();
     }
 
     public static void shutdown() {

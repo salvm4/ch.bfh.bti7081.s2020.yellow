@@ -1,17 +1,25 @@
-package ch.bfh.bti7081.s2020.yellow.model;
+package ch.bfh.bti7081.s2020.yellow.model.patient;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name="patient")
 public class Patient {
     @Id
     @GeneratedValue
+    @Column(name="id")
     private Long id;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
+    @Column(name="email")
     private String email;
+    @OneToMany(mappedBy="patient")
+    private List<Appointment> appointments;
 
     public Patient() {
     }
@@ -52,6 +60,14 @@ public class Patient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     @Override

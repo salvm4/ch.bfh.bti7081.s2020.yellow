@@ -1,6 +1,7 @@
-package ch.bfh.bti7081.s2020.yellow.model;
+package ch.bfh.bti7081.s2020.yellow.model.patient;
 
-import ch.bfh.bti7081.s2020.yellow.model.utils.HibernateUtil;
+import ch.bfh.bti7081.s2020.yellow.model.Repository;
+import ch.bfh.bti7081.s2020.yellow.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

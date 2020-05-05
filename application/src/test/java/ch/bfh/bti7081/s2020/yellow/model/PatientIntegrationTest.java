@@ -1,21 +1,29 @@
 package ch.bfh.bti7081.s2020.yellow.model;
 
+import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
+import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
+import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class PatientIntegrationTest {
-    private PatientRepository patientRepository;
+    private PatientRepository patientRepository = new PatientRepository();
+    private AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-    private static String email = "email";
-    private static String firstName = "first";
-    private static String lastName = "last";
+    private static final String email = "email";
+    private static final String firstName = "first";
+    private static final String lastName = "last";
 
     @Before
-    public void patientTest() {
-        patientRepository = new PatientRepository();
-
+    public void patientIntegrationTest() {
+        // Delete previously added appointments
+        for (Appointment appointment : appointmentRepository.getAll().list()) {
+            appointmentRepository.delete(appointment.getId());
+        }
+        // Delete previously added patients
         for (Patient patient : patientRepository.getAll().list()) {
             patientRepository.delete(patient.getId());
         }
@@ -23,8 +31,7 @@ public class PatientIntegrationTest {
 
     @Test
     public void createPatientTest() {
-        Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.save(patient);
+        saveNewPatient();
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
 
@@ -34,8 +41,7 @@ public class PatientIntegrationTest {
     @Test
     public void editPatientTest() {
         // Create Patient
-        Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.save(patient);
+        Patient patient = saveNewPatient();
 
         // Edit Patient
         patient.setEmail(email + " edited");
@@ -48,21 +54,26 @@ public class PatientIntegrationTest {
 
         // Selected Patient equals created Patient
         Patient editedPatient = patientRepository.getById(patient.getId());
-        assertFalse(editedPatient.getEmail().equals(email));
-        assertFalse(editedPatient.getFirstName().equals(firstName));
-        assertFalse(editedPatient.getLastName().equals(lastName));
+        assertNotEquals(editedPatient.getEmail(), email);
+        assertNotEquals(editedPatient.getFirstName(), firstName);
+        assertNotEquals(editedPatient.getLastName(), lastName);
     }
 
     @Test
     public void deletePatientTest() {
         // Create Patient
-        Patient patient = new Patient(firstName, lastName, email);
-        patientRepository.save(patient);
+        Patient patient = saveNewPatient();
 
         // Delete Patient
         patientRepository.delete(patient.getId());
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
         assertEquals(0, numberOfPatientsAfter);
+    }
+
+    private Patient saveNewPatient() {
+        Patient patient = new Patient(firstName, lastName, email);
+        patientRepository.save(patient);
+        return patient;
     }
 }
