@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.yellow.model.patient;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,8 @@ public class Patient {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @Column(name="birthday")
+    private Date birthday;
     @Column(name="email")
     private String email;
     @OneToMany(mappedBy="patient")
@@ -24,9 +27,10 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, String email) {
+    public Patient(String firstName, String lastName, Date birthday, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = birthday;
         this.email = email;
     }
 
@@ -52,6 +56,14 @@ public class Patient {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getBirthDay() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getEmail() {
@@ -90,6 +102,7 @@ public class Patient {
         return p.id == id
                 && p.email.equals(email)
                 && p.firstName.equals(firstName)
+                && p.birthday.equals(birthday)
                 && p.lastName.equals(lastName);
     }
 
@@ -100,11 +113,12 @@ public class Patient {
         result = 31 * result + email.hashCode();
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
+        result = 31 * result + birthday.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+        return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday + ", email=" + email + "]";
     }
 }
