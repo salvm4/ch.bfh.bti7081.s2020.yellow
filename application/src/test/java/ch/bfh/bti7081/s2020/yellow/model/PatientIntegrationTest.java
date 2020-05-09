@@ -7,6 +7,8 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class PatientIntegrationTest {
@@ -16,6 +18,7 @@ public class PatientIntegrationTest {
     private static final String email = "email";
     private static final String firstName = "first";
     private static final String lastName = "last";
+    private static final Date birthday = new Date(1986, 1, 1);
 
     @Before
     public void patientIntegrationTest() {
@@ -72,7 +75,7 @@ public class PatientIntegrationTest {
     }
 
     private Patient saveNewPatient() {
-        Patient patient = new Patient(firstName, lastName, email);
+        Patient patient = new Patient(firstName, lastName, birthday, email);
         patientRepository.save(patient);
         return patient;
     }

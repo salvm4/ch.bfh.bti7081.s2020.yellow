@@ -24,6 +24,7 @@ public class AppointmentIntegrationTest {
     private static final String email = "email";
     private static final String firstName = "first";
     private static final String lastName = "last";
+    private static final Date birthday = new Date(1986, 1, 1);
     private static final String dateFormat = "yyyy-MM-dd hh:mm";
 
     @Before
@@ -38,7 +39,7 @@ public class AppointmentIntegrationTest {
         }
 
         // Save new patient
-        patient = new Patient(firstName, lastName, email);
+        patient = new Patient(firstName, lastName, birthday, email);
         patientRepository.save(patient);
     }
 
@@ -65,7 +66,7 @@ public class AppointmentIntegrationTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
         // Create appointment
-        Patient secondPatient = new Patient("firstName2", "lastName2", "email2");
+        Patient secondPatient = new Patient("firstName2", "lastName2", birthday, "email2");
         patientRepository.save(secondPatient);
 
         Appointment appointment = saveNewAppointment("2020-05-13 09:00", patient);

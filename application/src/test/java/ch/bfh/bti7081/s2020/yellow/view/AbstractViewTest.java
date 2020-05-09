@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow;
+package ch.bfh.bti7081.s2020.yellow.view;
 
 import org.junit.Assert;
 import org.junit.Before;
