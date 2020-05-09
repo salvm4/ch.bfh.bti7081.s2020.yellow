@@ -1,8 +1,11 @@
 package ch.bfh.bti7081.s2020.yellow.presenter;
 
-import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
-import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.model.Repository;
+import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
+
+import java.util.List;
 
 /**
  * Presenter of MainView
@@ -13,8 +16,8 @@ import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
 public class MainPresenter implements MainViewInterface.MainViewListener {
 
     private final MainViewInterface view;
-    private final PatientRepository patientRepository;
-    private final AppointmentRepository appointmentRepository;
+    private final Repository<Patient> patientRepository;
+    private final Repository<Appointment> appointmentRepository;
 
     /**
      * Constructor of main presenter
@@ -22,7 +25,7 @@ public class MainPresenter implements MainViewInterface.MainViewListener {
      * @param patientRepository Patient model
      * @param appointmentRepository Appointment model
      */
-    public MainPresenter(MainViewInterface view, PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
+    public MainPresenter(MainViewInterface view, Repository<Patient> patientRepository, Repository<Appointment> appointmentRepository) {
         this.view = view;
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
