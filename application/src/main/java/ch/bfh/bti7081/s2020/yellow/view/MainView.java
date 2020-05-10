@@ -8,7 +8,10 @@ import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -26,6 +29,7 @@ import java.util.List;
  */
 @Route("")
 @PWA(name = "Project Base for Vaadin", shortName = "Project Base")
+@CssImport(value = "./styles/stylez.css")
 public class MainView extends VerticalLayout implements MainViewInterface {
 
     // Listener
@@ -56,18 +60,26 @@ public class MainView extends VerticalLayout implements MainViewInterface {
 
         // create and add appointment section
         VerticalLayout appointmentSection = new VerticalLayout();
+        Label labelAppointments = new Label("Termine");
+        labelAppointments.addClassName("styleTitle");
+        appointmentSection.add(labelAppointments);
         mainContent.add(appointmentSection);
 
         //create and add patient section
         VerticalLayout patientSection = new VerticalLayout();
+        Label labelPatients = new Label("Patienten");
+        labelPatients.addClassName("styleTitle");
+        patientSection.add(labelPatients);
         mainContent.add(patientSection);
         
         //create search area in patient section
         HorizontalLayout searchArea = new HorizontalLayout();
+        this.searchField.setPlaceholder("Enter name");
         Button searchButton = new Button("Search!", mainPresenter::search);
         searchArea.add(searchField, searchButton);
         patientSection.add(searchArea);
         
+        //create table for patients
         patientCollectionView = new Grid<>(Patient.class);
         patientCollectionView.removeAllColumns();
         patientCollectionView.addColumn("firstName").setHeader("First name");
@@ -110,7 +122,7 @@ public class MainView extends VerticalLayout implements MainViewInterface {
      * provide search Text for Presenter
      */
     
-    public String getSearchQuery() {			// Diese method in MainViewInterface rein?
+    public String getSearchQuery() {
     	return searchField.getValue();
     }
     
