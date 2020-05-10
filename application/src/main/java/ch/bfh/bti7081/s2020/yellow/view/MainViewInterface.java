@@ -31,5 +31,10 @@ public interface MainViewInterface {
      * @param patients patients which are shown in main view
      */
     void setPatientCollectionView(List<Patient> patients);
+    
+    /**
+     * provide search Text for Presenter
+     */
+    String getSearchQuery();
 
 }

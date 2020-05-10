@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
 import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -32,6 +33,9 @@ public class MainView extends VerticalLayout implements MainViewInterface {
 
     // Patient section
     private final Grid<Patient> patientCollectionView;
+    
+    // Seach Field
+    private TextField searchField = new TextField();
 
     /**
      * Constructor of main view
@@ -60,9 +64,8 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         
         //create search area in patient section
         HorizontalLayout searchArea = new HorizontalLayout();
-        TextField searchBox = new TextField();
-        Button searchButton = new Button("Search!");
-        searchArea.add(searchBox, searchButton);
+        Button searchButton = new Button("Search!", mainPresenter::search);
+        searchArea.add(searchField, searchButton);
         patientSection.add(searchArea);
         
         patientCollectionView = new Grid<>(Patient.class);
@@ -75,7 +78,6 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         patientSection.add(createPatientButton);
         
     }
-
 
     /**
      * add event listener
@@ -103,4 +105,13 @@ public class MainView extends VerticalLayout implements MainViewInterface {
     public void setPatientCollectionView(List<Patient> patients) {
         patientCollectionView.setItems(patients);
     }
+    
+    /**
+     * provide search Text for Presenter
+     */
+    
+    public String getSearchQuery() {			// Diese method in MainViewInterface rein?
+    	return searchField.getValue();
+    }
+    
 }

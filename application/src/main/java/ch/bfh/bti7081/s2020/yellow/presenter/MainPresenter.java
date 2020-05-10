@@ -5,7 +5,10 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.vaadin.flow.component.ClickEvent;
 
 /**
  * Presenter of MainView
@@ -36,5 +39,25 @@ public class MainPresenter implements MainViewInterface.MainViewListener {
      */
     public void onAttach() {
         view.setPatientCollectionView(patientRepository.getAll().getResultList());
+    }
+    
+    /**
+     * Method is called when search button is clicked
+     */
+    public void search(ClickEvent event) {
+    	String searchQuery = view.getSearchQuery().toLowerCase().trim();
+    	List<Patient> allPatients = patientRepository.getAll().getResultList();
+    	List<Patient> wantedPatients = new ArrayList<Patient>();
+    	
+    	for (Patient patient : allPatients) {
+    		
+    		if (patient.getFirstName().toLowerCase().trim().contains(searchQuery) ||
+    			patient.getLastName().toLowerCase().trim().contains(searchQuery)){ 	
+    			
+    			wantedPatients.add(patient);
+    			
+    			}
+    	}
+    	view.setPatientCollectionView(wantedPatients);
     }
 }
