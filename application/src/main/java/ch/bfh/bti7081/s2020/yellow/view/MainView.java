@@ -11,6 +11,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
@@ -44,11 +45,6 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         // add listeners
         this.addListener(mainPresenter);
 
-        Button button = new Button("Hi Guys!",
-                event -> Notification.show("Dicked!"));
-        add(button);
-
-
         // create and add the horizontal layout of main content
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.setSizeFull();
@@ -61,13 +57,23 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         //create and add patient section
         VerticalLayout patientSection = new VerticalLayout();
         mainContent.add(patientSection);
-
+        
+        //create search area in patient section
+        HorizontalLayout searchArea = new HorizontalLayout();
+        TextField searchBox = new TextField(); // good enough? optional -> https://vaadin.com/directory/component/searchbox
+        Button searchButton = new Button("Search!");
+        searchArea.add(searchBox, searchButton);
+        patientSection.add(searchArea);
+        
         patientCollectionView = new Grid<>(Patient.class);
         patientCollectionView.removeAllColumns();
         patientCollectionView.addColumn("firstName").setHeader("First name");
         patientCollectionView.addColumn("lastName").setHeader("Last name");
         patientSection.add(patientCollectionView);
-
+        
+        Button createPatientButton = new Button("New Patient");
+        patientSection.add(createPatientButton);
+        
     }
 
 
