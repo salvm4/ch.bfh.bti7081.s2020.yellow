@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
+import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import java.util.List;
 
@@ -36,5 +37,11 @@ public interface MainViewInterface {
      * provide search Text for Presenter
      */
     String getSearchQuery();
+
+    /**
+     * set appointments which are shown in appointment view
+     * @param appointments appointments
+     */
+    void setAppointmentCollectionView(List<Appointment> appointments);
 
 }

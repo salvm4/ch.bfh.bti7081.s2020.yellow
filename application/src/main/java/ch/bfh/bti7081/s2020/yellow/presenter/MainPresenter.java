@@ -37,8 +37,10 @@ public class MainPresenter implements MainViewInterface.MainViewListener {
     /**
      * Method is called on page load
      */
+    @Override
     public void onAttach() {
         view.setPatientCollectionView(patientRepository.getAll().getResultList());
+        view.setAppointmentCollectionView(appointmentRepository.getAll().getResultList());
     }
     
     /**

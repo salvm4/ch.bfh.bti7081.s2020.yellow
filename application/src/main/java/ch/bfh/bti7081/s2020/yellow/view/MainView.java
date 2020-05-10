@@ -1,25 +1,26 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
+import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
-import ch.bfh.bti7081.s2020.yellow.view.MainViewInterface;
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.LocalDateTimeRenderer;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,6 +41,9 @@ public class MainView extends VerticalLayout implements MainViewInterface {
     
     // Seach Field
     private TextField searchField = new TextField();
+
+    // appointment section
+    private final Grid<Appointment> appointmentCollectionView;
 
     /**
      * Constructor of main view
@@ -64,6 +68,22 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         labelAppointments.addClassName("styleTitle");
         appointmentSection.add(labelAppointments);
         mainContent.add(appointmentSection);
+        appointmentCollectionView = new Grid<>(Appointment.class);
+        appointmentCollectionView.removeAllColumns();
+        appointmentCollectionView.addColumn(new LocalDateTimeRenderer<>(Appointment::getDate,
+                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.MEDIUM)))
+                .setComparator(Comparator.comparing(Appointment::getDate))
+                .setHeader("Date")
+                .setSortable(true);
+        appointmentCollectionView.addColumn(appointment -> appointment.getPatient()
+                .getFirstName())
+                .setHeader("First name")
+                .setSortable(true);
+        appointmentCollectionView.addColumn(appointment -> appointment.getPatient()
+                .getLastName())
+                .setHeader("Last name")
+                .setSortable(true);
+        appointmentSection.add(appointmentCollectionView);
 
         //create and add patient section
         VerticalLayout patientSection = new VerticalLayout();
@@ -114,6 +134,7 @@ public class MainView extends VerticalLayout implements MainViewInterface {
      * set patients which are shown in patient view
      * @param patients patients
      */
+    @Override
     public void setPatientCollectionView(List<Patient> patients) {
         patientCollectionView.setItems(patients);
     }
@@ -121,9 +142,18 @@ public class MainView extends VerticalLayout implements MainViewInterface {
     /**
      * provide search Text for Presenter
      */
-    
+    @Override
     public String getSearchQuery() {
     	return searchField.getValue();
     }
     
+
+    /**
+     * set appointments which are shown in appointment view
+     * @param appointments appointments
+     */
+    @Override
+    public void setAppointmentCollectionView(List<Appointment> appointments) {
+        appointmentCollectionView.setItems((appointments));
+    }
 }
