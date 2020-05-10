@@ -60,7 +60,7 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         
         //create search area in patient section
         HorizontalLayout searchArea = new HorizontalLayout();
-        TextField searchBox = new TextField(); // good enough? optional https://vaadin.com/directory/component/searchbox
+        TextField searchBox = new TextField();
         Button searchButton = new Button("Search!");
         searchArea.add(searchBox, searchButton);
         patientSection.add(searchArea);
