@@ -22,6 +22,9 @@ public class MainPresenter implements MainView.MainViewListener {
     private final Repository<Patient> patientRepository;
     private final Repository<Appointment> appointmentRepository;
 
+    private List<Patient> patients = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>();
+
     /**
      * Constructor of main presenter
      * @param view MainView
@@ -39,19 +42,20 @@ public class MainPresenter implements MainView.MainViewListener {
      */
     @Override
     public void onAttach() {
-        view.setPatientCollectionView(patientRepository.getAll().getResultList());
-        view.setAppointmentCollectionView(appointmentRepository.getAll().getResultList());
+        loadAppointmentList();
+        loadPatientList();
+        view.setPatientCollectionView(patients);
+        view.setAppointmentCollectionView(appointments);
     }
     
     /**
      * Method is called when search button is clicked
      */
-    public void search(ClickEvent event) {
-    	String searchQuery = view.getSearchQuery().toLowerCase().trim();
-    	List<Patient> allPatients = patientRepository.getAll().getResultList();
+    public void filterPatientCollection(String query) {
+    	String searchQuery = query.toLowerCase().trim();
     	List<Patient> wantedPatients = new ArrayList<Patient>();
     	
-    	for (Patient patient : allPatients) {
+    	for (Patient patient : patients) {
     		
     		if (patient.getFirstName().toLowerCase().trim().contains(searchQuery) ||
     			patient.getLastName().toLowerCase().trim().contains(searchQuery)){ 	
@@ -61,5 +65,19 @@ public class MainPresenter implements MainView.MainViewListener {
     			}
     	}
     	view.setPatientCollectionView(wantedPatients);
+    }
+
+    /**
+     * Load patients from db
+     */
+    protected void loadPatientList() {
+        patients = patientRepository.getAll().getResultList();
+    }
+
+    /**
+     * load appointments form db
+     */
+    protected void loadAppointmentList() {
+        appointments = appointmentRepository.getAll().getResultList();
     }
 }

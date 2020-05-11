@@ -19,6 +19,11 @@ public interface MainView {
          * Method is called on page load
          */
         void onAttach();
+
+        /**
+         * Method is called when search button is clicked
+         */
+        void filterPatientCollection(String query);
     }
 
     /**
@@ -32,16 +37,17 @@ public interface MainView {
      * @param patients patients which are shown in main view
      */
     void setPatientCollectionView(List<Patient> patients);
-    
-    /**
-     * provide search Text for Presenter
-     */
-    String getSearchQuery();
 
     /**
      * set appointments which are shown in appointment view
      * @param appointments appointments
      */
     void setAppointmentCollectionView(List<Appointment> appointments);
+
+    /**
+     * show notification
+     * @param text text which is shown in notification
+     */
+    void showNotification(String text);
 
 }

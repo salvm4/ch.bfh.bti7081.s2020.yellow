@@ -6,10 +6,12 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.InputEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -38,9 +40,6 @@ public class MainViewImpl extends VerticalLayout implements MainView {
     // Patient section
     private final Grid<Patient> patientCollectionView;
     
-    // Seach Field
-    private final TextField searchField = new TextField();
-
     // appointment section
     private final Grid<Appointment> appointmentCollectionView;
 
@@ -94,9 +93,18 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         
         //create search area in patient section
         HorizontalLayout searchArea = new HorizontalLayout();
-        this.searchField.setPlaceholder("Name eingeben");
-        Button searchButton = new Button("Suchen!", mainPresenter::search);
-        searchArea.add(searchField, searchButton);
+        TextField patientSearchField = new TextField(InputEvent -> {
+            for (MainViewListener listener : listeners) {
+                listener.filterPatientCollection(InputEvent.getSource().getValue());
+            }
+        });
+        patientSearchField.setPlaceholder("Name eingeben");
+        Button patientSearchButton = new Button("Suchen!", event -> {
+            for (MainViewListener listener : listeners) {
+                listener.filterPatientCollection(patientSearchField.getValue());
+            }
+        });
+        searchArea.add(patientSearchField, patientSearchButton);
         patientSection.add(searchArea);
         
         //create table for patients
@@ -139,14 +147,6 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientCollectionView.setItems(patients);
     }
     
-    /**
-     * provide search Text for Presenter
-     */
-    @Override
-    public String getSearchQuery() {
-    	return searchField.getValue();
-    }
-    
 
     /**
      * set appointments which are shown in appointment view
@@ -155,5 +155,14 @@ public class MainViewImpl extends VerticalLayout implements MainView {
     @Override
     public void setAppointmentCollectionView(List<Appointment> appointments) {
         appointmentCollectionView.setItems((appointments));
+    }
+
+    /**
+     * show notification
+     * @param text text which is shown in notification
+     */
+    @Override
+    public void showNotification(String text) {
+        Notification.show(text);
     }
 }
