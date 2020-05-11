@@ -6,7 +6,6 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.InputEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
@@ -66,6 +65,24 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         labelAppointments.addClassName("styleTitle");
         appointmentSection.add(labelAppointments);
         mainContent.add(appointmentSection);
+
+        //create search area in appointment section
+        HorizontalLayout appointmentSearchArea = new HorizontalLayout();
+        TextField appointmentSearchField = new TextField(InputEvent -> {
+            for (MainViewListener listener : listeners) {
+                listener.filterAppointmentCollection(InputEvent.getSource().getValue());
+            }
+        });
+        appointmentSearchField.setPlaceholder("Name eingeben");
+        Button appointmentSearchButton = new Button("Suchen!", event -> {
+            for (MainViewListener listener : listeners) {
+                listener.filterAppointmentCollection(appointmentSearchField.getValue());
+            }
+        });
+        appointmentSearchArea.add(appointmentSearchField, appointmentSearchButton);
+        appointmentSection.add(appointmentSearchArea);
+
+        // create and add table for appointments
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->
@@ -92,7 +109,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         mainContent.add(patientSection);
         
         //create search area in patient section
-        HorizontalLayout searchArea = new HorizontalLayout();
+        HorizontalLayout patientSearchArea = new HorizontalLayout();
         TextField patientSearchField = new TextField(InputEvent -> {
             for (MainViewListener listener : listeners) {
                 listener.filterPatientCollection(InputEvent.getSource().getValue());
@@ -104,8 +121,8 @@ public class MainViewImpl extends VerticalLayout implements MainView {
                 listener.filterPatientCollection(patientSearchField.getValue());
             }
         });
-        searchArea.add(patientSearchField, patientSearchButton);
-        patientSection.add(searchArea);
+        patientSearchArea.add(patientSearchField, patientSearchButton);
+        patientSection.add(patientSearchArea);
         
         //create table for patients
         patientCollectionView = new Grid<>(Patient.class);

@@ -8,7 +8,6 @@ import ch.bfh.bti7081.s2020.yellow.view.MainView;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vaadin.flow.component.ClickEvent;
 
 /**
  * Presenter of MainView
@@ -49,22 +48,39 @@ public class MainPresenter implements MainView.MainViewListener {
     }
     
     /**
-     * Method is called when search button is clicked
+     * Method is called when search button in patient section is clicked
      */
     public void filterPatientCollection(String query) {
-    	String searchQuery = query.toLowerCase().trim();
-    	List<Patient> wantedPatients = new ArrayList<Patient>();
+    	List<Patient> wantedPatients = new ArrayList<>();
     	
     	for (Patient patient : patients) {
     		
-    		if (patient.getFirstName().toLowerCase().trim().contains(searchQuery) ||
-    			patient.getLastName().toLowerCase().trim().contains(searchQuery)){ 	
+    		if (patient.getFirstName().toLowerCase().trim().contains(query.toLowerCase().trim()) ||
+    			patient.getLastName().toLowerCase().trim().contains(query.toLowerCase().trim())){
     			
     			wantedPatients.add(patient);
     			
     			}
     	}
     	view.setPatientCollectionView(wantedPatients);
+    }
+
+    /**
+     * Method is called when search button in appointment section is clicked
+     */
+    public void filterAppointmentCollection(String query) {
+        List<Appointment> wantedAppointments = new ArrayList<>();
+
+        for (Appointment appointment : appointments) {
+
+            if (appointment.getPatient().getFirstName().toLowerCase().trim().contains(query.toLowerCase().trim()) ||
+                    appointment.getPatient().getLastName().toLowerCase().trim().contains(query.toLowerCase().trim())){
+
+                wantedAppointments.add(appointment);
+
+            }
+        }
+        view.setAppointmentCollectionView(wantedAppointments);
     }
 
     /**

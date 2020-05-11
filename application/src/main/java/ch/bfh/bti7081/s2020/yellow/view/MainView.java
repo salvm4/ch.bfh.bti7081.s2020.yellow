@@ -21,9 +21,14 @@ public interface MainView {
         void onAttach();
 
         /**
-         * Method is called when search button is clicked
+         * Method is called when search button in patient section is clicked
          */
         void filterPatientCollection(String query);
+
+        /**
+         * Method is called when search button in patient section is clicked
+         */
+        void filterAppointmentCollection(String query);
     }
 
     /**
