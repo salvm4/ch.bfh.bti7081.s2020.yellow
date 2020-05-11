@@ -40,7 +40,7 @@ public class MainView extends VerticalLayout implements MainViewInterface {
     private final Grid<Patient> patientCollectionView;
     
     // Seach Field
-    private TextField searchField = new TextField();
+    private final TextField searchField = new TextField();
 
     // appointment section
     private final Grid<Appointment> appointmentCollectionView;
@@ -70,8 +70,9 @@ public class MainView extends VerticalLayout implements MainViewInterface {
         mainContent.add(appointmentSection);
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
-        appointmentCollectionView.addColumn(new LocalDateTimeRenderer<>(Appointment::getDate,
-                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.MEDIUM)))
+        appointmentCollectionView.addColumn(appointment ->
+                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.MEDIUM)
+                        .format(appointment.getDate().toLocalDateTime()))
                 .setComparator(Comparator.comparing(Appointment::getDate))
                 .setHeader("Date")
                 .setSortable(true);

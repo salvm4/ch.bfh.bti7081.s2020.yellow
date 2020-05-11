@@ -4,7 +4,6 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointment")
@@ -22,8 +21,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime date, Patient patient) {
-        this.date = Timestamp.valueOf(date);
+    public Appointment(Timestamp date, Patient patient) {
+        this.date = date;
         this.patient = patient;
     }
 
@@ -35,8 +34,8 @@ public class Appointment {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date.toLocalDateTime();
+    public Timestamp getDate() {
+        return date;
     }
 
     public void setDate(Timestamp date) {
