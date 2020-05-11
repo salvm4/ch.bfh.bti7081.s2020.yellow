@@ -99,6 +99,9 @@ public class MainViewImpl extends VerticalLayout implements MainView {
                 .getLastName())
                 .setHeader("Nachname")
                 .setSortable(true);
+        appointmentCollectionView.addItemDoubleClickListener(event ->
+            Notification.show("Not yet implemented: Route to AppointmentView (ID: " + event.getItem().getId() + ")")
+        );
         appointmentSection.add(appointmentCollectionView);
 
         //create and add patient section
@@ -129,6 +132,9 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientCollectionView.removeAllColumns();
         patientCollectionView.addColumn("firstName").setHeader("Vorname");
         patientCollectionView.addColumn("lastName").setHeader("Nachname");
+        patientCollectionView.addItemDoubleClickListener(event ->
+            Notification.show("Not yet implemented: Route to PatientView (ID: " + event.getItem().getId() + ")")
+        );
         patientSection.add(patientCollectionView);
         
         Button createPatientButton = new Button("Neuer Patient");
