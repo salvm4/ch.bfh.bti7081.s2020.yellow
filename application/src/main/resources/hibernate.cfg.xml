@@ -20,8 +20,10 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- Mappings -->
-        <mapping class="ch.bfh.bti7081.s2020.yellow.model.patient.Patient"/>
         <mapping class="ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.patient.Patient"/>
     </session-factory>
 </hibernate-configuration>
 

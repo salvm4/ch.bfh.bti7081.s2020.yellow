@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,14 +18,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class AppointmentIntegrationTest {
-    private AppointmentRepository appointmentRepository = new AppointmentRepository();
-    private PatientRepository patientRepository = new PatientRepository();
+    private final AppointmentRepository appointmentRepository = new AppointmentRepository();
+    private final PatientRepository patientRepository = new PatientRepository();
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository);
+
     private Patient patient;
 
     private static final String email = "email";
     private static final String firstName = "first";
     private static final String lastName = "last";
-    private static final Date birthday = new Date(1986, 1, 1);
+    private static final String birthday = "1986-1-1";
     private static final String dateFormat = "yyyy-MM-dd hh:mm";
 
     @Before
@@ -39,15 +42,14 @@ public class AppointmentIntegrationTest {
         }
 
         // Save new patient
-        patient = new Patient(firstName, lastName, birthday, email);
-        patientRepository.save(patient);
+        patient = testUtil.saveNewPatient(firstName, lastName, birthday, email);
     }
 
     @Test
     public void createAppointmentTest() {
         // Save appointments
-        saveNewAppointment("2020-05-10 15:00", patient);
-        saveNewAppointment("2020-05-12 08:00", patient);
+        testUtil.saveNewAppointment("2020-05-10 15:00", patient);
+        testUtil.saveNewAppointment("2020-05-12 08:00", patient);
 
         // Read saved appointments
         List<Appointment> savedAppointments = appointmentRepository.getAll().list();
@@ -66,10 +68,9 @@ public class AppointmentIntegrationTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
         // Create appointment
-        Patient secondPatient = new Patient("firstName2", "lastName2", birthday, "email2");
-        patientRepository.save(secondPatient);
+        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", birthday, "email2");
 
-        Appointment appointment = saveNewAppointment("2020-05-13 09:00", patient);
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00", patient);
 
         // Edit appointment
         Date date = simpleDateFormat.parse("2020-05-13 09:15");
@@ -97,27 +98,12 @@ public class AppointmentIntegrationTest {
 
     @Test
     public void deleteAppointmentTest() {
-        Appointment appointment = saveNewAppointment("2020-05-14 10:00", patient);
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00", patient);
 
         appointmentRepository.delete(appointment.getId());
 
         // Check if appointment was deleted
         int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
         assertEquals(0, numberOfAppointmentsAfter);
-    }
-
-    // Saves a new appointment to database and returns it.
-    private Appointment saveNewAppointment(String pattern, Patient patient) {
-        Appointment appointment;
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-            Date date = simpleDateFormat.parse(pattern);
-            appointment = new Appointment(new Timestamp(date.getTime()), patient);
-            appointmentRepository.save(appointment);
-            return appointment;
-        } catch (ParseException e) {
-            System.out.println("Error while parsing date." + e.getMessage());
-            return null;
-        }
     }
 }

@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2020.yellow.model.patient;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,6 +24,8 @@ public class Patient {
     private String email;
     @OneToMany(mappedBy="patient")
     private List<Appointment> appointments;
+    @OneToOne(mappedBy="patient")
+    private StationaryTreatment stationaryTreatment;
 
     public Patient() {
     }
@@ -80,6 +83,14 @@ public class Patient {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public StationaryTreatment getStationaryTreatment() {
+        return stationaryTreatment;
+    }
+
+    public void setStationaryTreatment(StationaryTreatment stationaryTreatment) {
+        this.stationaryTreatment = stationaryTreatment;
     }
 
     @Override
