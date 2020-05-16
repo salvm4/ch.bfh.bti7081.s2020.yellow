@@ -5,7 +5,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import java.util.List;
 
 /**
- * Interface of MainView
+ * Interface of main view
  * @author Markus Salvisberg
  * @author Alain Peytrignet
  */

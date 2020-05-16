@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * Presenter of MainView
+ * Presenter of main view
  * @author Markus Salvisberg
  * @author Alain Peytrignet
  */
