@@ -88,10 +88,16 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->
                 DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
-                        .format(appointment.getDate().toLocalDateTime()))
-                .setComparator(Comparator.comparing(Appointment::getDate))
-                .setHeader("Datum")
+                        .format(appointment.getStartDate().toLocalDateTime()))
+                .setComparator(Comparator.comparing(Appointment::getStartDate))
+                .setHeader("Start")
                 .setSortable(true);
+        appointmentCollectionView.addColumn(appointment ->
+	        DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
+	                .format(appointment.getEndDate().toLocalDateTime()))
+	        .setComparator(Comparator.comparing(Appointment::getEndDate))
+	        .setHeader("Ende")
+	        .setSortable(true);
         appointmentCollectionView.addColumn(appointment -> appointment.getPatient()
                 .getFirstName())
                 .setHeader("Vorname")

@@ -52,13 +52,21 @@ public class ImplementTestData {
             "1990-9-22",
             "2020-4-13"
     };
-    private static final String[] appointmentDate = {
+    private static final String[] appointmentStartDate = {
             "2020-05-13 15:00",
             "2020-05-14 08:00",
             "2020-05-13 08:30",
             "2020-05-13 09:00",
             "2020-05-13 13:00",
             "2020-05-13 13:30"
+    };
+    private static final String[] appointmentEndDate = {
+            "2020-05-13 16:00",
+            "2020-05-14 08:30",
+            "2020-05-13 09:00",
+            "2020-05-13 09:30",
+            "2020-05-13 13:30",
+            "2020-05-13 15:00"
     };
     @Before
     public void removeDataTest() {
@@ -76,13 +84,13 @@ public class ImplementTestData {
     public void InsertTestData() {
         for (int i=0; i < email.length; i++) {
             Patient patient = testUtil.saveNewPatient(firstName[i], lastName[i], birthday[i], email[i]);
-            testUtil.saveNewAppointment(appointmentDate[i], patient);
+            testUtil.saveNewAppointment(appointmentStartDate[i], appointmentEndDate[i], patient);
         }
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
         int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
 
         assertEquals(email.length, numberOfPatientsAfter);
-        assertEquals(appointmentDate.length, numberOfAppointmentsAfter);
+        assertEquals(appointmentStartDate.length, numberOfAppointmentsAfter);
     }
 }
