@@ -45,8 +45,8 @@ public class TestUtil {
         return patient;
     }
 
-    public Appointment saveNewAppointment(String datePattern, Patient patient) {
-        Appointment appointment = new Appointment(getTimestampFromPattern(datePattern, DateFormat.TIMESTAMP.getPattern()), patient);
+    public Appointment saveNewAppointment(String startDate, String endDate, Patient patient) {
+        Appointment appointment = new Appointment(getTimestampFromPattern(startDate, DateFormat.TIMESTAMP.getPattern()), getTimestampFromPattern(endDate, DateFormat.TIMESTAMP.getPattern()), patient);
         appointmentRepository.save(appointment);
         return appointment;
     }

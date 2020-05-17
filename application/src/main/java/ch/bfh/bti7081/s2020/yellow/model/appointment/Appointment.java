@@ -12,8 +12,10 @@ public class Appointment {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @Column(name = "date")
-    private Timestamp date;
+    @Column(name = "start_date")
+    private Timestamp start_date;
+    @Column(name = "end_date")
+    private Timestamp end_date;
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -21,8 +23,9 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Timestamp date, Patient patient) {
-        this.date = date;
+    public Appointment(Timestamp start_date, Timestamp end_date, Patient patient) {
+        this.start_date = start_date;
+        this.end_date = end_date;
         this.patient = patient;
     }
 
@@ -34,14 +37,22 @@ public class Appointment {
         this.id = id;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getStartDate() {
+        return start_date;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setStartDate(Timestamp start_date) {
+        this.start_date = start_date;
+    }
+    
+    public Timestamp getEndDate() {
+        return end_date;
     }
 
+    public void setEndDate(Timestamp end_date) {
+        this.end_date = end_date;
+    }
+    
     public Patient getPatient() {
         return patient;
     }
@@ -52,6 +63,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment [id=" + id + ", date=" + date + ", patient=" + patient + "]";
+        return "Appointment [id=" + id + ", start_date=" + start_date + ", end_date" + end_date + ", patient=" + patient + "]";
     }
 }

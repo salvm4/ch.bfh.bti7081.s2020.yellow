@@ -55,7 +55,7 @@ public class ImplementTestData {
             "1990-9-22",
             "2020-4-13"
     };
-    private final String[] appointmentDates = {
+    private static final String[] appointmentStartDates = {
             "2020-05-13 15:00",
             "2020-05-14 08:00",
             "2020-05-13 08:30",
@@ -63,8 +63,14 @@ public class ImplementTestData {
             "2020-05-13 13:00",
             "2020-05-13 13:30"
     };
-
-    // TODO Insert clinic/stationary treatment data here
+    private static final String[] appointmentEndDates = {
+            "2020-05-13 16:00",
+            "2020-05-14 08:30",
+            "2020-05-13 09:00",
+            "2020-05-13 09:30",
+            "2020-05-13 13:30",
+            "2020-05-13 15:00"
+    };
     @Before
     public void removeDataTest() {
         // Delete previously added appointments
@@ -99,7 +105,7 @@ public class ImplementTestData {
         // Insert patients and appointments
         for (int i = 0; i < emails.length; i++) {
             Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i]);
-            testUtil.saveNewAppointment(appointmentDates[i], patient);
+            testUtil.saveNewAppointment(appointmentStartDates[i], appointmentEndDates[i], patient);
         }
 
         List<Patient> allPatients = patientRepository.getAll().list();
@@ -117,7 +123,7 @@ public class ImplementTestData {
         int numberOfStationaryTreatmentsAfter = stationaryTreatmentRepository.getAll().list().size();
 
         assertEquals(emails.length, numberOfPatientsAfter);
-        assertEquals(appointmentDates.length, numberOfAppointmentsAfter);
+        assertEquals(appointmentStartDates.length, numberOfAppointmentsAfter);
         assertEquals(2, numberOfClinicsAfter);
         assertEquals(2, numberOfStationaryTreatmentsAfter);
     }
