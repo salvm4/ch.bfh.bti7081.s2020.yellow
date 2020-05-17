@@ -20,17 +20,6 @@ public class TestUtil {
     private StationaryTreatmentRepository stationaryTreatmentRepository = null;
     private ClinicRepository clinicRepository = null;
 
-    public TestUtil(PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
-        this.patientRepository = patientRepository;
-        this.appointmentRepository = appointmentRepository;
-    }
-
-    public TestUtil(PatientRepository patientRepository, StationaryTreatmentRepository stationaryTreatmentRepository, ClinicRepository clinicRepository) {
-        this.patientRepository = patientRepository;
-        this.stationaryTreatmentRepository = stationaryTreatmentRepository;
-        this.clinicRepository = clinicRepository;
-    }
-
     public TestUtil(PatientRepository patientRepository, AppointmentRepository appointmentRepository,
                     StationaryTreatmentRepository stationaryTreatmentRepository, ClinicRepository clinicRepository) {
         this.patientRepository = patientRepository;
@@ -72,6 +61,27 @@ public class TestUtil {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    public void deleteAllTestData() {
+        // Delete previously added stationary treatments
+        for (StationaryTreatment stationaryTreatment : stationaryTreatmentRepository.getAll().list()) {
+            stationaryTreatmentRepository.delete(stationaryTreatment.getId());
+        }
+        // Delete previously added appointments
+        for (Appointment appointment : appointmentRepository.getAll().list()) {
+            appointmentRepository.delete(appointment.getId());
+        }
+
+        // Delete previously added clinics
+        for (Clinic clinic : clinicRepository.getAll().list()) {
+            clinicRepository.delete(clinic.getId());
+        }
+
+        // Delete previously added patients
+        for (Patient patient : patientRepository.getAll().list()) {
+            patientRepository.delete(patient.getId());
         }
     }
 }

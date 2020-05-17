@@ -23,9 +23,10 @@ import static org.junit.Assert.assertNotEquals;
 
 public class StationaryTreatmentIntegrationTest {
     private final PatientRepository patientRepository = new PatientRepository();
+    private final AppointmentRepository appointmentRepository = new AppointmentRepository();
     private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
     private final ClinicRepository clinicRepository = new ClinicRepository();
-    private final TestUtil testUtil = new TestUtil(patientRepository, stationaryTreatmentRepository, clinicRepository);
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
 
 
     private Patient patient;
@@ -33,20 +34,7 @@ public class StationaryTreatmentIntegrationTest {
 
     @Before
     public void patientIntegrationTest() {
-        // Delete previously added stationary treatments
-        for (StationaryTreatment stationaryTreatment : stationaryTreatmentRepository.getAll().list()) {
-            stationaryTreatmentRepository.delete(stationaryTreatment.getId());
-        }
-
-        // Delete previously added clinics
-        for (Clinic clinic : clinicRepository.getAll().list()) {
-            clinicRepository.delete(clinic.getId());
-        }
-
-        // Delete previously added patients
-        for (Patient patient : patientRepository.getAll().list()) {
-            patientRepository.delete(patient.getId());
-        }
+       testUtil.deleteAllTestData();
 
         // Save new patient
         patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email");

@@ -73,25 +73,7 @@ public class ImplementTestData {
     };
     @Before
     public void removeDataTest() {
-        // Delete previously added appointments
-        for (Appointment appointment : appointmentRepository.getAll().list()) {
-            appointmentRepository.delete(appointment.getId());
-        }
-
-        // Delete previously added stationary treatments
-        for (StationaryTreatment stationaryTreatment : stationaryTreatmentRepository.getAll().list()) {
-            stationaryTreatmentRepository.delete(stationaryTreatment.getId());
-        }
-
-        // Delete previously added clinics
-        for (Clinic clinic : clinicRepository.getAll().list()) {
-            clinicRepository.delete(clinic.getId());
-        }
-
-        // Delete previously added patients
-        for (Patient patient : patientRepository.getAll().list()) {
-            patientRepository.delete(patient.getId());
-        }
+       testUtil.deleteAllTestData();
     }
 
     @Test

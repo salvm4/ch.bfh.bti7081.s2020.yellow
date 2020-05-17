@@ -2,8 +2,10 @@ package ch.bfh.bti7081.s2020.yellow.model;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
+import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +20,9 @@ import static org.junit.Assert.*;
 public class PatientIntegrationTest {
     private final PatientRepository patientRepository = new PatientRepository();
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
-    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository);
+    private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
+    private final ClinicRepository clinicRepository = new ClinicRepository();
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
 
     private static final String email = "email";
     private static final String firstName = "first";
@@ -27,14 +31,7 @@ public class PatientIntegrationTest {
 
     @Before
     public void patientIntegrationTest() {
-        // Delete previously added appointments
-        for (Appointment appointment : appointmentRepository.getAll().list()) {
-            appointmentRepository.delete(appointment.getId());
-        }
-        // Delete previously added patients
-        for (Patient patient : patientRepository.getAll().list()) {
-            patientRepository.delete(patient.getId());
-        }
+        testUtil.deleteAllTestData();
     }
 
     @Test
