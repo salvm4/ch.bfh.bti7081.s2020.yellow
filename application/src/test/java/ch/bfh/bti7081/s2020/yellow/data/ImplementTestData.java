@@ -2,25 +2,28 @@ package ch.bfh.bti7081.s2020.yellow.data;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
+import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
+import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
+import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class ImplementTestData {
     private final PatientRepository patientRepository = new PatientRepository();
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
-    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository);
+    private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
+    private final ClinicRepository clinicRepository = new ClinicRepository();
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
 
-    private static final String[] email = {
+    private final String[] emails = {
             "peter.muster@gmail.com",
             "marianne.hauser@gmail.com",
             "heinrich.schmid@gmail.com",
@@ -28,7 +31,7 @@ public class ImplementTestData {
             "anna.eschler@gmail.com",
             "kyle.musk@gmail.com"
     };
-    private static final String[] firstName = {
+    private final String[] firstNames = {
             "Peter",
             "Marianne",
             "Heinrich",
@@ -36,7 +39,7 @@ public class ImplementTestData {
             "Anna",
             "X AE A-12"
     };
-    private static final String[] lastName = {
+    private final String[] lastNames = {
             "Muster",
             "Hauser",
             "Schmid",
@@ -44,7 +47,7 @@ public class ImplementTestData {
             "Eschler",
             "Musk"
     };
-    private static final String[] birthday = {
+    private final String[] birthdays = {
             "1986-5-12",
             "1982-3-11",
             "1937-2-19",
@@ -52,7 +55,7 @@ public class ImplementTestData {
             "1990-9-22",
             "2020-4-13"
     };
-    private static final String[] appointmentDate = {
+    private final String[] appointmentDates = {
             "2020-05-13 15:00",
             "2020-05-14 08:00",
             "2020-05-13 08:30",
@@ -60,12 +63,25 @@ public class ImplementTestData {
             "2020-05-13 13:00",
             "2020-05-13 13:30"
     };
+
+    // TODO Insert clinic/stationary treatment data here
     @Before
     public void removeDataTest() {
         // Delete previously added appointments
         for (Appointment appointment : appointmentRepository.getAll().list()) {
             appointmentRepository.delete(appointment.getId());
         }
+
+        // Delete previously added stationary treatments
+        for (StationaryTreatment stationaryTreatment : stationaryTreatmentRepository.getAll().list()) {
+            stationaryTreatmentRepository.delete(stationaryTreatment.getId());
+        }
+
+        // Delete previously added clinics
+        for (Clinic clinic : clinicRepository.getAll().list()) {
+            clinicRepository.delete(clinic.getId());
+        }
+
         // Delete previously added patients
         for (Patient patient : patientRepository.getAll().list()) {
             patientRepository.delete(patient.getId());
@@ -73,16 +89,36 @@ public class ImplementTestData {
     }
 
     @Test
-    public void InsertTestData() {
-        for (int i=0; i < email.length; i++) {
-            Patient patient = testUtil.saveNewPatient(firstName[i], lastName[i], birthday[i], email[i]);
-            testUtil.saveNewAppointment(appointmentDate[i], patient);
+    public void insertTestData() {
+        // Insert clinic
+        testUtil.saveNewClinic("Psychiatrie ABC", "kontakt@psychatrie-abc.ch",
+                "0791111111", "Teststrasse 11", "0000 Testort");
+        testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
+                "0792222222", "Teststrasse 22", "9999 Behandlungsort");
+
+        // Insert patients and appointments
+        for (int i = 0; i < emails.length; i++) {
+            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i]);
+            testUtil.saveNewAppointment(appointmentDates[i], patient);
         }
 
-        int numberOfPatientsAfter = patientRepository.getAll().list().size();
-        int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
+        List<Patient> allPatients = patientRepository.getAll().list();
+        List<Clinic> allClinics = clinicRepository.getAll().list();
 
-        assertEquals(email.length, numberOfPatientsAfter);
-        assertEquals(appointmentDate.length, numberOfAppointmentsAfter);
+        // Save stationary treatments
+        testUtil.saveNewStationaryTreatment("2020-05-21", "2020-07-21",
+                "Braucht stationäre Behandlung.", allClinics.get(0), allPatients.get(1));
+        testUtil.saveNewStationaryTreatment("2020-05-22", "2020-07-22",
+                "Benötigt zusätzliche Unterstützung.", allClinics.get(1), allPatients.get(2));
+
+        int numberOfPatientsAfter = allPatients.size();
+        int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
+        int numberOfClinicsAfter = allClinics.size();
+        int numberOfStationaryTreatmentsAfter = stationaryTreatmentRepository.getAll().list().size();
+
+        assertEquals(emails.length, numberOfPatientsAfter);
+        assertEquals(appointmentDates.length, numberOfAppointmentsAfter);
+        assertEquals(2, numberOfClinicsAfter);
+        assertEquals(2, numberOfStationaryTreatmentsAfter);
     }
 }

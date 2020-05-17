@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.yellow.model;
 
+import ch.bfh.bti7081.s2020.yellow.util.DateFormat;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
@@ -24,12 +25,6 @@ public class AppointmentIntegrationTest {
 
     private Patient patient;
 
-    private static final String email = "email";
-    private static final String firstName = "first";
-    private static final String lastName = "last";
-    private static final String birthday = "1986-1-1";
-    private static final String dateFormat = "yyyy-MM-dd hh:mm";
-
     @Before
     public void appointmentIntegrationTest() {
         // Delete previously added appointments
@@ -42,7 +37,7 @@ public class AppointmentIntegrationTest {
         }
 
         // Save new patient
-        patient = testUtil.saveNewPatient(firstName, lastName, birthday, email);
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email");
     }
 
     @Test
@@ -65,17 +60,16 @@ public class AppointmentIntegrationTest {
 
     @Test
     public void editAppointmentTest() throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormat.TIMESTAMP.getPattern());
 
         // Create appointment
-        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", birthday, "email2");
+        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2");
 
         Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00", patient);
 
         // Edit appointment
         Date date = simpleDateFormat.parse("2020-05-13 09:15");
-        Timestamp ts = new Timestamp(date.getTime());
-        appointment.setDate(ts);
+        appointment.setDate(new Timestamp(date.getTime()));
         appointment.setPatient(secondPatient);
 
         appointmentRepository.save(appointment);
@@ -89,8 +83,7 @@ public class AppointmentIntegrationTest {
 
         // Check if date was updated
         Date previousDate = simpleDateFormat.parse("2020-05-13 09:00");
-        Timestamp previousTs = new Timestamp(previousDate.getTime());
-        assertNotEquals(editedAppointment.getDate(), previousTs);
+        assertNotEquals(editedAppointment.getDate(), new Timestamp(previousDate.getTime()));
 
         // Check if patient was updated
         assertNotEquals(editedAppointment.getPatient(), patient);

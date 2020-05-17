@@ -29,10 +29,12 @@ public class StationaryTreatment {
     public StationaryTreatment() {
     }
 
-    public StationaryTreatment(Timestamp startDate, Timestamp endDate, String notes) {
+    public StationaryTreatment(Timestamp startDate, Timestamp endDate, String notes, Clinic clinic, Patient patient) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.notes = notes;
+        this.clinic = clinic;
+        this.patient = patient;
     }
 
     public long getId() {
