@@ -39,7 +39,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 
     // Patient section
     private final Grid<Patient> patientCollectionView;
-    
+
     // appointment section
     private final Grid<Appointment> appointmentCollectionView;
 
@@ -93,11 +93,11 @@ public class MainViewImpl extends VerticalLayout implements MainView {
                 .setHeader("Start")
                 .setSortable(true);
         appointmentCollectionView.addColumn(appointment ->
-	        DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
-	                .format(appointment.getEndDate().toLocalDateTime()))
-	        .setComparator(Comparator.comparing(Appointment::getEndDate))
-	        .setHeader("Ende")
-	        .setSortable(true);
+                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
+                        .format(appointment.getEndDate().toLocalDateTime()))
+                .setComparator(Comparator.comparing(Appointment::getEndDate))
+                .setHeader("Ende")
+                .setSortable(true);
         appointmentCollectionView.addColumn(appointment -> appointment.getPatient()
                 .getFirstName())
                 .setHeader("Vorname")
@@ -122,7 +122,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         labelPatients.addClassName("styleTitle");
         patientSection.add(labelPatients);
         mainContent.add(patientSection);
-        
+
         //create search area in patient section
         HorizontalLayout patientSearchArea = new HorizontalLayout();
         TextField patientSearchField = new TextField(InputEvent -> {
@@ -138,7 +138,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         });
         patientSearchArea.add(patientSearchField, patientSearchButton);
         patientSection.add(patientSearchArea);
-        
+
         //create table for patients
         patientCollectionView = new Grid<>(Patient.class);
         patientCollectionView.removeAllColumns();
@@ -148,7 +148,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
                 patientCollectionView.getUI().ifPresent(ui -> ui.navigate(PatientViewImpl.class, event.getItem().getId()))
         );
         patientSection.add(patientCollectionView);
-        
+
         Button createPatientButton = new Button("Neuer Patient");
         patientSection.add(createPatientButton);
     }
@@ -180,7 +180,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
     public void setPatientCollectionView(List<Patient> patients) {
         patientCollectionView.setItems(patients);
     }
-    
+
 
     /**
      * set appointments which are shown in appointment view
