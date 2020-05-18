@@ -74,7 +74,7 @@ public class ImplementTestData {
 
     @Test
     public void InsertTestData() {
-        
+
         for (int i=0; i < email.length; i++) {
             Patient patient = saveNewPatient(firstName[i], lastName[i], birthday[i], email[i]);
             saveNewAppointment(appointmentDate[i], patient);
