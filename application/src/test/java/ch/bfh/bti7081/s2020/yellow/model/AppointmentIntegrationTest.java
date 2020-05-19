@@ -2,7 +2,6 @@ package ch.bfh.bti7081.s2020.yellow.model;
 
 import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
-import ch.bfh.bti7081.s2020.yellow.util.DateFormat;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
@@ -14,8 +13,6 @@ import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -59,15 +56,13 @@ public class AppointmentIntegrationTest {
 
     @Test
     public void editAppointmentTest() throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormat.TIMESTAMP.getPattern());
-
         // Create appointment
         Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "home",
                 "job", "firma", "1234", Gender.Male);
 
         String initialStartDate = "2020-05-13 09:00:00";
         String initialEndDate = "2020-05-13 10:00:00";
-        Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00:00", "2020-05-13 10:00:00", patient);
+        Appointment appointment = testUtil.saveNewAppointment(initialStartDate, initialEndDate, patient);
 
         // Edit appointment
         appointment.setStartTime(Timestamp.valueOf("2020-05-13 09:15:00"));
@@ -84,12 +79,10 @@ public class AppointmentIntegrationTest {
         Appointment editedAppointment = appointmentRepository.getById(appointment.getId());
 
         // Check if start date was updated
-        Date previousStartDate = simpleDateFormat.parse(initialStartDate);
-        assertNotEquals(editedAppointment.getStartTime(), new Timestamp(previousStartDate.getTime()));
+        assertNotEquals(editedAppointment.getStartTime(), Timestamp.valueOf(initialStartDate));
 
         // Check if end date was updated
-        Date previousEndDate = simpleDateFormat.parse(initialEndDate);
-        assertNotEquals(editedAppointment.getStartTime(), new Timestamp(previousEndDate.getTime()));
+        assertNotEquals(editedAppointment.getStartTime(), Timestamp.valueOf(initialEndDate));
 
         // Check if patient was updated
         assertNotEquals(editedAppointment.getPatient(), patient);
