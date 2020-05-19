@@ -5,7 +5,7 @@ import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment
 import ch.bfh.bti7081.s2020.yellow.util.Gender;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -19,6 +19,7 @@ public class Patient {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @Temporal(TemporalType.DATE)
     @Column(name="birthday")
     private Date birthday;
     @Column(name="email")

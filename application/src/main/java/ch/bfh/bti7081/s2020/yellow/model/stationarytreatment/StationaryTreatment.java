@@ -13,8 +13,10 @@ public class StationaryTreatment {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
+    @Temporal(TemporalType.DATE)
     @Column(name = "start_date")
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     @Column(name = "end_date")
     private Date endDate;
     @Column(name = "notes")

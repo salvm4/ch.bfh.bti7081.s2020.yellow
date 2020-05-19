@@ -42,8 +42,8 @@ public class AppointmentIntegrationTest {
     @Test
     public void createAppointmentTest() {
         // Save appointments
-        testUtil.saveNewAppointment("2020-05-10 15:00", "2020-05-10 16:00", patient);
-        testUtil.saveNewAppointment("2020-05-12 08:00", "2020-05-12 09:00", patient);
+        testUtil.saveNewAppointment("2020-05-10 15:00:00", "2020-05-10 16:00:00", patient);
+        testUtil.saveNewAppointment("2020-05-12 08:00:00", "2020-05-12 09:00:00", patient);
 
         // Read saved appointments
         List<Appointment> savedAppointments = appointmentRepository.getAll().list();
@@ -65,15 +65,13 @@ public class AppointmentIntegrationTest {
         Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "home",
                 "job", "firma", "1234", Gender.Male);
 
-        String initialStartDate = "2020-05-13 09:00";
-        String initialEndDate = "2020-05-13 10:00";
-        Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00", "2020-05-13 10:00", patient);
+        String initialStartDate = "2020-05-13 09:00:00";
+        String initialEndDate = "2020-05-13 10:00:00";
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00:00", "2020-05-13 10:00:00", patient);
 
         // Edit appointment
-        Date startDate = simpleDateFormat.parse("2020-05-13 09:15");
-        Date endDate = simpleDateFormat.parse("2020-05-13 10:15");
-        appointment.setStartDate(new Timestamp(startDate.getTime()));
-        appointment.setEndDate(new Timestamp(endDate.getTime()));
+        appointment.setStartTime(Timestamp.valueOf("2020-05-13 09:15:00"));
+        appointment.setEndTime(Timestamp.valueOf("2020-05-13 10:15:00"));
         appointment.setPatient(secondPatient);
 
         appointmentRepository.save(appointment);
@@ -87,11 +85,11 @@ public class AppointmentIntegrationTest {
 
         // Check if start date was updated
         Date previousStartDate = simpleDateFormat.parse(initialStartDate);
-        assertNotEquals(editedAppointment.getStartDate(), new Timestamp(previousStartDate.getTime()));
+        assertNotEquals(editedAppointment.getStartTime(), new Timestamp(previousStartDate.getTime()));
 
         // Check if end date was updated
         Date previousEndDate = simpleDateFormat.parse(initialEndDate);
-        assertNotEquals(editedAppointment.getEndDate(), new Timestamp(previousEndDate.getTime()));
+        assertNotEquals(editedAppointment.getStartTime(), new Timestamp(previousEndDate.getTime()));
 
         // Check if patient was updated
         assertNotEquals(editedAppointment.getPatient(), patient);
@@ -99,7 +97,7 @@ public class AppointmentIntegrationTest {
 
     @Test
     public void deleteAppointmentTest() {
-        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00", "2020-05-14 11:00", patient);
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00:00", "2020-05-14 11:00:00", patient);
 
         appointmentRepository.delete(appointment.getId());
 

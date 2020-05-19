@@ -12,10 +12,12 @@ public class Appointment {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @Column(name = "start_date")
-    private Timestamp startDate;
-    @Column(name = "end_date")
-    private Timestamp endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_time")
+    private Timestamp startTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_time")
+    private Timestamp endTime;
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -23,9 +25,9 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Timestamp startDate, Timestamp endDate, Patient patient) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Appointment(Timestamp startTime, Timestamp endTime, Patient patient) {
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.patient = patient;
     }
 
@@ -37,20 +39,20 @@ public class Appointment {
         this.id = id;
     }
 
-    public Timestamp getStartDate() {
-        return startDate;
+    public Timestamp getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
     
-    public Timestamp getEndDate() {
-        return endDate;
+    public Timestamp getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
     
     public Patient getPatient() {
@@ -63,6 +65,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment [id=" + id + ", startDate=" + startDate + ", endDate" + endDate + ", patient=" + patient + "]";
+        return "Appointment [id=" + id + ", startTime=" + startTime + ", endTime" + endTime + ", patient=" + patient + "]";
     }
 }

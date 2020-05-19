@@ -1,12 +1,10 @@
 package ch.bfh.bti7081.s2020.yellow.data;
 
-import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
-import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
@@ -97,20 +95,20 @@ public class ImplementTestData {
             Gender.Other
     };
     private static final String[] appointmentStartDates = {
-            "2020-05-13 15:00",
-            "2020-05-14 08:00",
-            "2020-05-13 08:30",
-            "2020-05-13 09:00",
-            "2020-05-13 13:00",
-            "2020-05-13 13:30"
+            "2020-05-13 15:00:00",
+            "2020-05-14 08:00:00",
+            "2020-05-13 08:30:00",
+            "2020-05-13 09:00:00",
+            "2020-05-13 13:00:00",
+            "2020-05-13 13:30:00"
     };
     private static final String[] appointmentEndDates = {
-            "2020-05-13 16:00",
-            "2020-05-14 08:30",
-            "2020-05-13 09:00",
-            "2020-05-13 09:30",
-            "2020-05-13 13:30",
-            "2020-05-13 15:00"
+            "2020-05-13 16:00:00",
+            "2020-05-14 08:30:00",
+            "2020-05-13 09:00:00",
+            "2020-05-13 09:30:00",
+            "2020-05-13 13:30:00",
+            "2020-05-13 15:00:00"
     };
     @Before
     public void removeDataTest() {

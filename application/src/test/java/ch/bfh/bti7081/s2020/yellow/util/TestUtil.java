@@ -9,10 +9,11 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 public class TestUtil {
     private PatientRepository patientRepository;
@@ -29,20 +30,19 @@ public class TestUtil {
     }
 
     public Patient saveNewPatient(String firstName, String lastName, String birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
-        Patient patient = new Patient(firstName, lastName, getDateFromPattern(birthday, DateFormat.DATE.getPattern()), email, domicil, job, employer, ahv, sex);
+        Patient patient = new Patient(firstName, lastName, Date.valueOf(birthday), email, domicil, job, employer, ahv, sex);
         patientRepository.save(patient);
         return patient;
     }
 
     public Appointment saveNewAppointment(String startDate, String endDate, Patient patient) {
-        Appointment appointment = new Appointment(getTimestampFromPattern(startDate, DateFormat.TIMESTAMP.getPattern()), getTimestampFromPattern(endDate, DateFormat.TIMESTAMP.getPattern()), patient);
+        Appointment appointment = new Appointment(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), patient);
         appointmentRepository.save(appointment);
         return appointment;
     }
 
     public StationaryTreatment saveNewStationaryTreatment(String startDate, String endDate, String notes, Clinic clinic, Patient patient) {
-        StationaryTreatment stationaryTreatment = new StationaryTreatment(getDateFromPattern(startDate, DateFormat.DATE.getPattern()),
-                getDateFromPattern(endDate, DateFormat.DATE.getPattern()), notes, clinic, patient);
+        StationaryTreatment stationaryTreatment = new StationaryTreatment(Date.valueOf(startDate), Date.valueOf(endDate), notes, clinic, patient);
         stationaryTreatmentRepository.save(stationaryTreatment);
         return stationaryTreatment;
     }
@@ -51,28 +51,6 @@ public class TestUtil {
         Clinic clinic = new Clinic(name, email, phoneNumber, street, zipCity);
         clinicRepository.save(clinic);
         return clinic;
-    }
-
-    private Timestamp getTimestampFromPattern(String pattern, String dateFormat) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-            Date parsedDate = simpleDateFormat.parse(pattern);
-            return new Timestamp(parsedDate.getTime());
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-    private Date getDateFromPattern(String pattern, String dateFormat) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-            Date parsedDate = simpleDateFormat.parse(pattern);
-            return new Date(parsedDate.getTime());
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
     }
 
     public void deleteAllTestData() {
