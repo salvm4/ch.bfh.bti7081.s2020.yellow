@@ -1,13 +1,14 @@
-package ch.bfh.bti7081.s2020.yellow.model.appointment;
+package ch.bfh.bti7081.s2020.yellow.model.stationarytreatment;
 
+import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "appointment")
-public class Appointment {
+@Table(name = "stationary_treatment")
+public class StationaryTreatment {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -16,16 +17,23 @@ public class Appointment {
     private Timestamp startDate;
     @Column(name = "end_date")
     private Timestamp endDate;
+    @Column(name = "notes")
+    private String notes;
     @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinic;
+    @OneToOne()
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    public Appointment() {
+    public StationaryTreatment() {
     }
 
-    public Appointment(Timestamp startDate, Timestamp endDate, Patient patient) {
+    public StationaryTreatment(Timestamp startDate, Timestamp endDate, String notes, Clinic clinic, Patient patient) {
         this.startDate = startDate;
         this.endDate = endDate;
+        this.notes = notes;
+        this.clinic = clinic;
         this.patient = patient;
     }
 
@@ -44,7 +52,7 @@ public class Appointment {
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
-    
+
     public Timestamp getEndDate() {
         return endDate;
     }
@@ -52,7 +60,23 @@ public class Appointment {
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
-    
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
     public Patient getPatient() {
         return patient;
     }
@@ -63,6 +87,6 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment [id=" + id + ", startDate=" + startDate + ", endDate" + endDate + ", patient=" + patient + "]";
+        return "Patient [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", notes=" + notes + "]";
     }
 }

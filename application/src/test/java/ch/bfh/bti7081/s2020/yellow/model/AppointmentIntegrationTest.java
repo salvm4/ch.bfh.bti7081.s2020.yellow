@@ -1,112 +1,107 @@
-package ch.bfh.bti7081.s2020.yellow.data;
+package ch.bfh.bti7081.s2020.yellow.model;
 
+import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
+import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
+import ch.bfh.bti7081.s2020.yellow.util.DateFormat;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
-import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
-import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
-import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
-import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-public class ImplementTestData {
+public class AppointmentIntegrationTest {
     private final PatientRepository patientRepository = new PatientRepository();
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
     private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
     private final ClinicRepository clinicRepository = new ClinicRepository();
     private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
 
-    private final String[] emails = {
-            "peter.muster@gmail.com",
-            "marianne.hauser@gmail.com",
-            "heinrich.schmid@gmail.com",
-            "john.doe@gmail.com",
-            "anna.eschler@gmail.com",
-            "kyle.musk@gmail.com"
-    };
-    private final String[] firstNames = {
-            "Peter",
-            "Marianne",
-            "Heinrich",
-            "John",
-            "Anna",
-            "X AE A-12"
-    };
-    private final String[] lastNames = {
-            "Muster",
-            "Hauser",
-            "Schmid",
-            "Doe",
-            "Eschler",
-            "Musk"
-    };
-    private final String[] birthdays = {
-            "1986-5-12",
-            "1982-3-11",
-            "1937-2-19",
-            "1975-7-1",
-            "1990-9-22",
-            "2020-4-13"
-    };
-    private static final String[] appointmentStartDates = {
-            "2020-05-13 15:00",
-            "2020-05-14 08:00",
-            "2020-05-13 08:30",
-            "2020-05-13 09:00",
-            "2020-05-13 13:00",
-            "2020-05-13 13:30"
-    };
-    private static final String[] appointmentEndDates = {
-            "2020-05-13 16:00",
-            "2020-05-14 08:30",
-            "2020-05-13 09:00",
-            "2020-05-13 09:30",
-            "2020-05-13 13:30",
-            "2020-05-13 15:00"
-    };
+    private Patient patient;
+
     @Before
-    public void removeDataTest() {
+    public void appointmentIntegrationTest() {
         testUtil.deleteAllTestData();
+
+        // Save new patient
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email");
     }
 
     @Test
-    public void insertTestData() {
-        // Insert clinic
-        testUtil.saveNewClinic("Psychiatrie ABC", "kontakt@psychatrie-abc.ch",
-                "0791111111", "Teststrasse 11", "0000 Testort");
-        testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
-                "0792222222", "Teststrasse 22", "9999 Behandlungsort");
+    public void createAppointmentTest() {
+        // Save appointments
+        testUtil.saveNewAppointment("2020-05-10 15:00", "2020-05-10 16:00", patient);
+        testUtil.saveNewAppointment("2020-05-12 08:00", "2020-05-12 09:00", patient);
 
-        // Insert patients and appointments
-        for (int i = 0; i < emails.length; i++) {
-            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i]);
-            testUtil.saveNewAppointment(appointmentStartDates[i], appointmentEndDates[i], patient);
+        // Read saved appointments
+        List<Appointment> savedAppointments = appointmentRepository.getAll().list();
+
+        // Check if both appointments were saved
+        assertEquals(2, savedAppointments.size());
+
+        // Check if both appointments reference the correct patient.
+        for (Appointment appointment : savedAppointments) {
+            assertEquals(appointment.getPatient().getId(), patient.getId());
         }
+    }
 
-        List<Patient> allPatients = patientRepository.getAll().list();
-        List<Clinic> allClinics = clinicRepository.getAll().list();
+    @Test
+    public void editAppointmentTest() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormat.TIMESTAMP.getPattern());
 
-        // Save stationary treatments
-        testUtil.saveNewStationaryTreatment("2020-05-21", "2020-07-21",
-                "Braucht stationäre Behandlung.", allClinics.get(0), allPatients.get(1));
-        testUtil.saveNewStationaryTreatment("2020-05-22", "2020-07-22",
-                "Benötigt zusätzliche Unterstützung.", allClinics.get(1), allPatients.get(2));
+        // Create appointment
+        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2");
 
-        int numberOfPatientsAfter = allPatients.size();
+        String initialStartDate = "2020-05-13 09:00";
+        String initialEndDate = "2020-05-13 10:00";
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-13 09:00", "2020-05-13 10:00", patient);
+
+        // Edit appointment
+        Date startDate = simpleDateFormat.parse("2020-05-13 09:15");
+        Date endDate = simpleDateFormat.parse("2020-05-13 10:15");
+        appointment.setStartDate(new Timestamp(startDate.getTime()));
+        appointment.setEndDate(new Timestamp(endDate.getTime()));
+        appointment.setPatient(secondPatient);
+
+        appointmentRepository.save(appointment);
+
+        // Check number of appointments
         int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
-        int numberOfClinicsAfter = allClinics.size();
-        int numberOfStationaryTreatmentsAfter = stationaryTreatmentRepository.getAll().list().size();
+        assertEquals(1, numberOfAppointmentsAfter);
 
-        assertEquals(emails.length, numberOfPatientsAfter);
-        assertEquals(appointmentStartDates.length, numberOfAppointmentsAfter);
-        assertEquals(2, numberOfClinicsAfter);
-        assertEquals(2, numberOfStationaryTreatmentsAfter);
+        // Get edited appointment
+        Appointment editedAppointment = appointmentRepository.getById(appointment.getId());
+
+        // Check if start date was updated
+        Date previousStartDate = simpleDateFormat.parse(initialStartDate);
+        assertNotEquals(editedAppointment.getStartDate(), new Timestamp(previousStartDate.getTime()));
+
+        // Check if end date was updated
+        Date previousEndDate = simpleDateFormat.parse(initialEndDate);
+        assertNotEquals(editedAppointment.getEndDate(), new Timestamp(previousEndDate.getTime()));
+
+        // Check if patient was updated
+        assertNotEquals(editedAppointment.getPatient(), patient);
+    }
+
+    @Test
+    public void deleteAppointmentTest() {
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00", "2020-05-14 11:00", patient);
+
+        appointmentRepository.delete(appointment.getId());
+
+        // Check if appointment was deleted
+        int numberOfAppointmentsAfter = appointmentRepository.getAll().list().size();
+        assertEquals(0, numberOfAppointmentsAfter);
     }
 }

@@ -15,6 +15,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 
 import java.time.format.DateTimeFormatter;
@@ -87,10 +88,16 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->
                 DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
-                        .format(appointment.getDate().toLocalDateTime()))
-                .setComparator(Comparator.comparing(Appointment::getDate))
-                .setHeader("Datum")
+                        .format(appointment.getStartDate().toLocalDateTime()))
+                .setComparator(Comparator.comparing(Appointment::getStartDate))
+                .setHeader("Start")
                 .setSortable(true);
+        appointmentCollectionView.addColumn(appointment ->
+	        DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
+	                .format(appointment.getEndDate().toLocalDateTime()))
+	        .setComparator(Comparator.comparing(Appointment::getEndDate))
+	        .setHeader("Ende")
+	        .setSortable(true);
         appointmentCollectionView.addColumn(appointment -> appointment.getPatient()
                 .getFirstName())
                 .setHeader("Vorname")
@@ -100,9 +107,14 @@ public class MainViewImpl extends VerticalLayout implements MainView {
                 .setHeader("Nachname")
                 .setSortable(true);
         appointmentCollectionView.addItemDoubleClickListener(event ->
-            Notification.show("Not yet implemented: Route to AppointmentView (ID: " + event.getItem().getId() + ")")
+                appointmentCollectionView.getUI().ifPresent(ui -> ui.navigate(AppointmentViewImpl.class, event.getItem().getId()))
         );
         appointmentSection.add(appointmentCollectionView);
+
+        // create appointment button
+        RouterLink createAppointmentLink = new RouterLink("", CreateAppointmentViewImpl.class);
+        createAppointmentLink.getElement().appendChild(new Button("Neuer Termin").getElement());
+        appointmentSection.add(createAppointmentLink);
 
         //create and add patient section
         VerticalLayout patientSection = new VerticalLayout();
@@ -133,13 +145,12 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientCollectionView.addColumn("firstName").setHeader("Vorname");
         patientCollectionView.addColumn("lastName").setHeader("Nachname");
         patientCollectionView.addItemDoubleClickListener(event ->
-            Notification.show("Not yet implemented: Route to PatientView (ID: " + event.getItem().getId() + ")")
+                patientCollectionView.getUI().ifPresent(ui -> ui.navigate(PatientViewImpl.class, event.getItem().getId()))
         );
         patientSection.add(patientCollectionView);
         
         Button createPatientButton = new Button("Neuer Patient");
         patientSection.add(createPatientButton);
-        
     }
 
     /**
