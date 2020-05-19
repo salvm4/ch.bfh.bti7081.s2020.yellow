@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
+import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,46 @@ public class ImplementTestData {
             "1990-9-22",
             "2020-4-13"
     };
+    private final String[] domicils = {
+            "Musteren",
+            "Zürich",
+            "Thun",
+            "Stettlen",
+            "Wichtrach",
+            "Mars"
+    };
+    private final String[] jobs = {
+            "Musterer",
+            "Metzgerin",
+            "Supervisor",
+            "Kassierer",
+            "Kassiererin",
+            "Boss"
+    };
+    private final String[] employers = {
+            "Muster AG",
+            "Metzger GmbH",
+            "Google Inc.",
+            "Migros",
+            "Landi",
+            "The Boring Company"
+    };
+    private final String[] ahv = {
+            "123.4567.8901.23",
+            "373.8474.3690.16",
+            "875.8467.3514.74",
+            "913.5476.1235.72",
+            "867.4862.1685.35",
+            "111.1111.1111.11"
+    };
+    private final Gender[] sexes = {
+            Gender.Male,
+            Gender.Female,
+            Gender.Male,
+            Gender.Male,
+            Gender.Female,
+            Gender.Other
+    };
     private static final String[] appointmentStartDates = {
             "2020-05-13 15:00",
             "2020-05-14 08:00",
@@ -86,7 +127,7 @@ testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
 
         // Insert patients and appointments
         for (int i = 0; i < emails.length; i++) {
-            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i]);
+            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i], domicils[i], jobs[i], employers[i], ahv[i], sexes[i]);
             testUtil.saveNewAppointment(appointmentStartDates[i], appointmentEndDates[i], patient);
         }
 

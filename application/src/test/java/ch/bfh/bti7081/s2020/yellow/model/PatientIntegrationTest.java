@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
+import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,11 @@ public class PatientIntegrationTest {
     private static final String firstName = "first";
     private static final String lastName = "last";
     private static final String birthday = "1986-1-1";
+    private static final String domicil = "place";
+    private static final String job = "job";
+    private static final String employer = "Work Ltd.";
+    private static final String ahv = "111.1111.1111.11";
+    private static final Gender sex = Gender.Other;
 
     @Before
     public void patientIntegrationTest() {
@@ -36,7 +42,7 @@ public class PatientIntegrationTest {
 
     @Test
     public void createPatientTest() {
-        testUtil.saveNewPatient(firstName, lastName, birthday, email);
+        testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
 
@@ -46,7 +52,7 @@ public class PatientIntegrationTest {
     @Test
     public void editPatientTest() {
         // Create Patient
-        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email);
+        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
 
         // Edit Patient
         patient.setEmail(email + " edited");
@@ -67,7 +73,7 @@ public class PatientIntegrationTest {
     @Test
     public void deletePatientTest() {
         // Create Patient
-        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email);
+        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
 
         // Delete Patient
         patientRepository.delete(patient.getId());

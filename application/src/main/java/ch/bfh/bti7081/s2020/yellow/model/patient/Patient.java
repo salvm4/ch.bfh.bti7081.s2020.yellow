@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.yellow.model.patient;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
+import ch.bfh.bti7081.s2020.yellow.util.Gender;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +23,16 @@ public class Patient {
     private Date birthday;
     @Column(name="email")
     private String email;
+    @Column(name="domicil")
+    private String domicil;
+    @Column(name="job")
+    private String job;
+    @Column(name="employer")
+    private String employer;
+    @Column(name="ahv")
+    private String ahv;
+    @Column(name="sex")
+    private Gender sex;
     @OneToMany(mappedBy="patient")
     private List<Appointment> appointments;
     @OneToOne(mappedBy="patient")
@@ -30,11 +41,16 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, Date birthday, String email) {
+    public Patient(String firstName, String lastName, Date birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.email = email;
+        this.domicil = domicil;
+        this.job = job;
+        this.employer = employer;
+        this.ahv = ahv;
+        this.sex = sex;
     }
 
     public long getId() {
@@ -81,6 +97,46 @@ public class Patient {
         this.email = email;
     }
 
+    public String getDomicil()  {
+        return domicil;
+    }
+
+    public void setDomicil(String domicil) {
+        this.domicil = domicil;
+    }
+
+    public String getJob()  {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getEmployer()  {
+        return employer;
+    }
+
+    public void setEmployer(String employer) {
+        this.employer = employer;
+    }
+
+    public String getAhv()  {
+        return ahv;
+    }
+
+    public void setAhv(String ahv) {
+        this.ahv = ahv;
+    }
+
+    public Gender getSex()  {
+        return sex;
+    }
+
+    public void setSex(Gender sex) {
+        this.sex = sex;
+    }
+
     public List<Appointment> getAppointments() {
         return appointments;
     }
@@ -118,7 +174,12 @@ public class Patient {
                 && p.email.equals(email)
                 && p.firstName.equals(firstName)
                 && p.birthday.equals(birthday)
-                && p.lastName.equals(lastName);
+                && p.lastName.equals(lastName)
+                && p.domicil.equals(domicil)
+                && p.job.equals(job)
+                && p.employer.equals(employer)
+                && p.ahv.equals(ahv)
+                && p.sex.equals(sex);
     }
 
     @Override
@@ -129,11 +190,18 @@ public class Patient {
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
         result = 31 * result + birthday.hashCode();
+        result = 31 * result + domicil.hashCode();
+        result = 31 * result + job.hashCode();
+        result = 31 * result + employer.hashCode();
+        result = 31 * result + ahv.hashCode();
+        result = 31 * result + sex.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday + ", email=" + email + "]";
+        return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday +
+                ", email=" + email + ", domicil=" + domicil + ", job=" + job + ", employer=" + employer + ", ahv=" + ahv +
+                ", sex=" + sex + "]";
     }
 }

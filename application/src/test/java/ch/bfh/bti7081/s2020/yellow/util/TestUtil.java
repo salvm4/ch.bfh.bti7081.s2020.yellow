@@ -28,8 +28,8 @@ public class TestUtil {
         this.clinicRepository = clinicRepository;
     }
 
-    public Patient saveNewPatient(String firstName, String lastName, String birthday, String email) {
-        Patient patient = new Patient(firstName, lastName, getTimestampFromPattern(birthday, DateFormat.DATE.getPattern()), email);
+    public Patient saveNewPatient(String firstName, String lastName, String birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
+        Patient patient = new Patient(firstName, lastName, getTimestampFromPattern(birthday, DateFormat.DATE.getPattern()), email, domicil, job, employer, ahv, sex);
         patientRepository.save(patient);
         return patient;
     }
