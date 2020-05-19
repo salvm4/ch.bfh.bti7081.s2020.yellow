@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,8 @@ public class AppointmentIntegrationTest {
         testUtil.deleteAllTestData();
 
         // Save new patient
-        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email");
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "home",
+                "job", "firma", "1234", Gender.Male);
     }
 
     @Test
@@ -60,7 +62,8 @@ public class AppointmentIntegrationTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormat.TIMESTAMP.getPattern());
 
         // Create appointment
-        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2");
+        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "home",
+                "job", "firma", "1234", Gender.Male);
 
         String initialStartDate = "2020-05-13 09:00";
         String initialEndDate = "2020-05-13 10:00";

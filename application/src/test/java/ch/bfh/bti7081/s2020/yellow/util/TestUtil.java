@@ -29,7 +29,7 @@ public class TestUtil {
     }
 
     public Patient saveNewPatient(String firstName, String lastName, String birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
-        Patient patient = new Patient(firstName, lastName, getTimestampFromPattern(birthday, DateFormat.DATE.getPattern()), email, domicil, job, employer, ahv, sex);
+        Patient patient = new Patient(firstName, lastName, getDateFromPattern(birthday, DateFormat.DATE.getPattern()), email, domicil, job, employer, ahv, sex);
         patientRepository.save(patient);
         return patient;
     }
@@ -41,8 +41,8 @@ public class TestUtil {
     }
 
     public StationaryTreatment saveNewStationaryTreatment(String startDate, String endDate, String notes, Clinic clinic, Patient patient) {
-        StationaryTreatment stationaryTreatment = new StationaryTreatment(getTimestampFromPattern(startDate, DateFormat.DATE.getPattern()),
-                getTimestampFromPattern(endDate, DateFormat.DATE.getPattern()), notes, clinic, patient);
+        StationaryTreatment stationaryTreatment = new StationaryTreatment(getDateFromPattern(startDate, DateFormat.DATE.getPattern()),
+                getDateFromPattern(endDate, DateFormat.DATE.getPattern()), notes, clinic, patient);
         stationaryTreatmentRepository.save(stationaryTreatment);
         return stationaryTreatment;
     }
@@ -58,6 +58,17 @@ public class TestUtil {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
             Date parsedDate = simpleDateFormat.parse(pattern);
             return new Timestamp(parsedDate.getTime());
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    private Date getDateFromPattern(String pattern, String dateFormat) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+            Date parsedDate = simpleDateFormat.parse(pattern);
+            return new Date(parsedDate.getTime());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             return null;

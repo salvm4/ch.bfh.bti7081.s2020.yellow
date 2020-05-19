@@ -4,7 +4,7 @@ import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "stationary_treatment")
@@ -14,9 +14,9 @@ public class StationaryTreatment {
     @Column(name = "id")
     private Long id;
     @Column(name = "start_date")
-    private Timestamp startDate;
+    private Date startDate;
     @Column(name = "end_date")
-    private Timestamp endDate;
+    private Date endDate;
     @Column(name = "notes")
     private String notes;
     @ManyToOne
@@ -29,7 +29,7 @@ public class StationaryTreatment {
     public StationaryTreatment() {
     }
 
-    public StationaryTreatment(Timestamp startDate, Timestamp endDate, String notes, Clinic clinic, Patient patient) {
+    public StationaryTreatment(Date startDate, Date endDate, String notes, Clinic clinic, Patient patient) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.notes = notes;
@@ -45,19 +45,19 @@ public class StationaryTreatment {
         this.id = id;
     }
 
-    public Timestamp getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

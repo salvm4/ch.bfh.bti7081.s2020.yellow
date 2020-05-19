@@ -86,7 +86,7 @@ public class Patient {
     }
 
     public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+        this.birthday = new Date(birthday.getTime());
     }
 
     public String getEmail() {

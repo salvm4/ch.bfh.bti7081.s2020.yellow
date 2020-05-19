@@ -9,6 +9,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.util.DateFormat;
+import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,8 @@ public class StationaryTreatmentIntegrationTest {
        testUtil.deleteAllTestData();
 
         // Save new patient
-        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email");
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "home",
+                "job", "firma", "1234", Gender.Male);
         // Save new clinic
         clinic = testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
                 "0791234455", "Teststrasse 11", "9999 Testort");
