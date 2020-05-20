@@ -2,7 +2,7 @@ package ch.bfh.bti7081.s2020.yellow.model.patient;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
-import ch.bfh.bti7081.s2020.yellow.util.Gender;
+import ch.bfh.bti7081.s2020.yellow.model.Gender;
 
 import javax.persistence.*;
 import java.sql.Date;

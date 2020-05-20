@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.yellow.util;
 
+import ch.bfh.bti7081.s2020.yellow.model.Gender;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;

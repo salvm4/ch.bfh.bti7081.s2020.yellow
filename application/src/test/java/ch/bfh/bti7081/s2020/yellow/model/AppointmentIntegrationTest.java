@@ -6,13 +6,11 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
-import ch.bfh.bti7081.s2020.yellow.util.Gender;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -55,7 +53,7 @@ public class AppointmentIntegrationTest {
     }
 
     @Test
-    public void editAppointmentTest() throws ParseException {
+    public void editAppointmentTest() {
         // Create appointment
         Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "home",
                 "job", "firma", "1234", Gender.Male);

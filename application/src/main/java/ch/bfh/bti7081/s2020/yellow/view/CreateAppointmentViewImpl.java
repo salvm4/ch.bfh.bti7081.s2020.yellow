@@ -9,9 +9,10 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.*;
 
-import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,10 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     private final List<CreateAppointmentViewListener> listeners = new ArrayList<>();
     private final Label tabelLabel = new Label("Termin erstellen");
     private final Select<Patient> patientSelect = new Select<>();
-    private final DatePicker appointmentEndDatePicker = new DatePicker();
-    private final DatePicker appointmentStartDatePicker = new DatePicker();
+    private final DatePicker appointmentDatePicker = new DatePicker();
+    private final TimePicker appointmentStartTimePicker = new TimePicker();
+    private final TimePicker appointmentEndTimePicker = new TimePicker();
+
     CreateAppointmentPresenter createAppointmentPresenter;
 
     /**
@@ -53,15 +56,18 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         patientSelect.setLabel("Patient");
         patientSelect.setItemLabelGenerator(Patient::getFullName);
         createAppointmentContent.add(patientSelect);
+        appointmentDatePicker.setLabel("Datum");
+        appointmentDatePicker.setValue(LocalDate.now());
+        createAppointmentContent.add(appointmentDatePicker);
 
         // Appointment
-        appointmentStartDatePicker.setLabel("Startzeit");
-        appointmentStartDatePicker.setValue(LocalDate.now());
-        createAppointmentContent.add(appointmentStartDatePicker);
+        appointmentStartTimePicker.setLabel("Startzeit");
+        appointmentStartTimePicker.setStep(Duration.ofMinutes(30));
+        createAppointmentContent.add(appointmentStartTimePicker);
 
-        appointmentEndDatePicker.setLabel("Endzeit");
-        appointmentEndDatePicker.setValue(LocalDate.now());
-        createAppointmentContent.add(appointmentEndDatePicker);
+        appointmentEndTimePicker.setLabel("Endzeit");
+        appointmentStartTimePicker.setStep(Duration.ofMinutes(30));
+        createAppointmentContent.add(appointmentEndTimePicker);
 
         // Save
         Button saveButton = new Button("Speichern", event -> save());
@@ -123,8 +129,9 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
      * save appointment
      */
     private void save() {
-        for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
-            listener.onSave(Timestamp.valueOf(appointmentStartDatePicker.getValue().atStartOfDay()), Timestamp.valueOf(appointmentEndDatePicker.getValue().atStartOfDay()), patientSelect.getValue());
-        }
+        // TODO @Simon
+//        for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+//            listener.onSave(Timestamp.valueOf(appointmentStartTimePicker.getValue().atStartOfDay()), Timestamp.valueOf(appointmentEndDatePicker.getValue().atStartOfDay()), patientSelect.getValue());
+//        }
     }
 }

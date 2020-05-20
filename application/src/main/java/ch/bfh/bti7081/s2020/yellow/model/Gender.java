@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.util;
+package ch.bfh.bti7081.s2020.yellow.model;
 
 public enum Gender {
     Male,
