@@ -53,4 +53,11 @@ public class CreateAppointmentPresenter implements CreateAppointmentView.CreateA
     public Patient getPatientById(Long patientId) {
         return patientRepository.getById(patientId);
     }
+
+
+    public List<Appointment> getAppointmentsOnDate(String date) {
+        // TODO @Küsä getAll() als Platzhalter. Hier Funktion implementieren, die alle Appointments am Datum zurückliefert.
+        // Evtl. ist param date als String nicht optimal.
+        return appointmentRepository.getAll().list();
+    }
 }
