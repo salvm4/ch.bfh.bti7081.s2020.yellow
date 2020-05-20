@@ -2,7 +2,9 @@ package ch.bfh.bti7081.s2020.yellow.presenter;
 
 import ch.bfh.bti7081.s2020.yellow.model.Repository;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
+import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.view.MainView;
 
 import java.util.ArrayList;
@@ -18,8 +20,8 @@ import java.util.List;
 public class MainPresenter implements MainView.MainViewListener {
 
     private final MainView view;
-    private final Repository<Patient> patientRepository;
-    private final Repository<Appointment> appointmentRepository;
+    private final PatientRepository patientRepository;
+    private final AppointmentRepository appointmentRepository;
 
     private List<Patient> patients = new ArrayList<>();
     private List<Appointment> appointments = new ArrayList<>();
@@ -30,7 +32,7 @@ public class MainPresenter implements MainView.MainViewListener {
      * @param patientRepository Patient model
      * @param appointmentRepository Appointment model
      */
-    public MainPresenter(MainView view, Repository<Patient> patientRepository, Repository<Appointment> appointmentRepository) {
+    public MainPresenter(MainView view, PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
         this.view = view;
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
@@ -94,6 +96,6 @@ public class MainPresenter implements MainView.MainViewListener {
      * load appointments form db
      */
     protected void loadAppointmentList() {
-        appointments = appointmentRepository.getAll().getResultList();
+        appointments = appointmentRepository.getAllFuture().getResultList();
     }
 }

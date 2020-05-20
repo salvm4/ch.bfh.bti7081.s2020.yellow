@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class CreateAppointmentPresenter implements CreateAppointmentView.CreateAppointmentViewListener {
     private final CreateAppointmentView view;
-    private final Repository<Patient> patientRepository;
-    private final Repository<Appointment> appointmentRepository;
+    private final PatientRepository patientRepository;
+    private final AppointmentRepository appointmentRepository;
 
     /**
      * Constructor of createAppointment presenter

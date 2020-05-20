@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.yellow.model.Repository;
 import ch.bfh.bti7081.s2020.yellow.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import java.sql.Timestamp;
 
 public class AppointmentRepository implements Repository<Appointment> {
     Session session;
@@ -34,5 +35,9 @@ public class AppointmentRepository implements Repository<Appointment> {
         session.beginTransaction();
         session.save(entity);
         session.getTransaction().commit();
+    }
+
+    public Query<Appointment> getAllFuture() {
+        return session.createQuery("From Appointment where startTime > '" + new Timestamp(System.currentTimeMillis()) + "'");
     }
 }

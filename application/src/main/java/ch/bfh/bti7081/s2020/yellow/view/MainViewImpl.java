@@ -30,7 +30,6 @@ import java.util.List;
  * @author Alain Peytrignet
  */
 @Route("")
-@PWA(name = "Project Base for Vaadin", shortName = "Project Base")
 @CssImport(value = "./styles/stylez.css")
 public class MainViewImpl extends VerticalLayout implements MainView {
 
@@ -83,6 +82,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         appointmentSearchArea.add(appointmentSearchField, appointmentSearchButton);
         appointmentSection.add(appointmentSearchArea);
 
+        // TODO Sort initially by startDate
         // create and add table for appointments
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
@@ -139,6 +139,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientSearchArea.add(patientSearchField, patientSearchButton);
         patientSection.add(patientSearchArea);
 
+        // TODO Sort initially by lastName
         //create table for patients
         patientCollectionView = new Grid<>(Patient.class);
         patientCollectionView.removeAllColumns();
