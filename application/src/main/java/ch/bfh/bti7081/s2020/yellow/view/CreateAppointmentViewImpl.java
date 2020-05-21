@@ -9,16 +9,23 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.*;
+import org.vaadin.stefan.fullcalendar.CalendarViewImpl;
+import org.vaadin.stefan.fullcalendar.Entry;
+import org.vaadin.stefan.fullcalendar.FullCalendar;
+import org.vaadin.stefan.fullcalendar.FullCalendarBuilder;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The create appointment view of our application.
@@ -33,6 +40,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     private final DatePicker appointmentDatePicker = new DatePicker();
     private final TimePicker appointmentStartTimePicker = new TimePicker();
     private final TimePicker appointmentEndTimePicker = new TimePicker();
+    private FullCalendar appointmentCalendar = new FullCalendar();
 
     CreateAppointmentPresenter createAppointmentPresenter;
     List<Appointment> appointments;
@@ -47,23 +55,32 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         // add listeners
         this.addListener(createAppointmentPresenter);
 
+        // Title
+        tabelLabel.addClassName("styleTitle");
+        add(tabelLabel);
+
         // create and add the vertical layout
-        VerticalLayout createAppointmentContent = new VerticalLayout();
+        HorizontalLayout createAppointmentContent = new HorizontalLayout();
         createAppointmentContent.setSizeFull();
         add(createAppointmentContent);
 
-        // Title
-        tabelLabel.addClassName("styleTitle");
-        createAppointmentContent.add(tabelLabel);
-
+        // Selection region
+        VerticalLayout selectionRegion = new VerticalLayout();
+        selectionRegion.setSizeFull();
+        createAppointmentContent.add(selectionRegion);
         // Patient select
         patientSelect.setLabel("Patient");
         patientSelect.setItemLabelGenerator(Patient::getFullName);
-        createAppointmentContent.add(patientSelect);
+        selectionRegion.add(patientSelect);
         appointmentDatePicker.setLabel("Datum");
         appointmentDatePicker.setValue(LocalDate.now());
-        appointmentDatePicker.addValueChangeListener(this::loadAppointmentsOnDate);
-        createAppointmentContent.add(appointmentDatePicker);
+        appointmentDatePicker.addValueChangeListener(event -> {
+            for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+                listener.onDatePick(event.getValue());
+            }
+            appointmentCalendar.gotoDate(event.getValue());
+        });
+        selectionRegion.add(appointmentDatePicker);
 
         // Appointment
         appointmentStartTimePicker.setLabel("Startzeit");
@@ -71,23 +88,38 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         appointmentStartTimePicker.setMin("08:00");
         appointmentStartTimePicker.setMax("18:00");
         appointmentStartTimePicker.addValueChangeListener(this::validateTimeRange);
-        createAppointmentContent.add(appointmentStartTimePicker);
+        selectionRegion.add(appointmentStartTimePicker);
 
         appointmentEndTimePicker.setLabel("Endzeit");
         appointmentEndTimePicker.setStep(Duration.ofMinutes(30));
         appointmentEndTimePicker.setMin("08:00");
         appointmentEndTimePicker.setMax("18:00");
         appointmentEndTimePicker.addValueChangeListener(this::validateTimeRange);
-        createAppointmentContent.add(appointmentEndTimePicker);
+        selectionRegion.add(appointmentEndTimePicker);
 
-        // Save
-        Button saveButton = new Button("Speichern", event -> save());
-        createAppointmentContent.add(saveButton);
+        // Buttons
+        HorizontalLayout buttonsRow = new HorizontalLayout();
+        selectionRegion.add(buttonsRow);
 
         // Back to main view RouterLink button
         RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
         mainViewLink.getElement().appendChild(new Button("Zurück").getElement());
-        createAppointmentContent.add(mainViewLink);
+        buttonsRow.add(mainViewLink);
+
+        // Save
+        Button saveButton = new Button("Speichern", event -> save());
+        buttonsRow.add(saveButton);
+
+        // Add calendar
+        appointmentCalendar = FullCalendarBuilder.create().build();
+        appointmentCalendar.setLocale(Locale.getDefault());
+        appointmentCalendar.setFirstDay(DayOfWeek.MONDAY);
+        appointmentCalendar.changeView(CalendarViewImpl.TIME_GRID_WEEK);
+        appointmentCalendar.setMinTime(LocalTime.of(7,0,0));
+        appointmentCalendar.setMaxTime(LocalTime.of(18,0,0));
+        appointmentCalendar.setHeightFull();
+        createAppointmentContent.add(appointmentCalendar);
+
     }
 
     // TODO @Simon: Implement this
@@ -97,11 +129,6 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         System.out.println(appointmentEndTimePicker.getValue());
         System.out.println(appointments);
         return true;
-    }
-
-    // On datepicker change, load all appointments on that day
-    private void loadAppointmentsOnDate(AbstractField.ComponentValueChangeEvent<DatePicker, LocalDate> valueChangeEvent) {
-       appointments = createAppointmentPresenter.getAppointmentsOnDate(valueChangeEvent.getValue().toString());
     }
 
     /**
@@ -122,6 +149,15 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         Patient defaultPatient = patientSelect.getValue();
         patientSelect.setItems(patients);
         patientSelect.setValue(defaultPatient);
+    }
+
+    /**
+     * set appointment entries to calendar
+     * @param appointmentEntries entry of appointment
+     */
+    @Override
+    public void setAppointmentsToCalendar(List<Entry> appointmentEntries) {
+        appointmentCalendar.addEntries(appointmentEntries);
     }
 
     /**

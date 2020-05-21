@@ -2,8 +2,10 @@ package ch.bfh.bti7081.s2020.yellow.view;
 
 
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
+import org.vaadin.stefan.fullcalendar.Entry;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -27,6 +29,13 @@ public interface CreateAppointmentView {
     void setPatients(List<Patient> patients);
 
     /**
+     * set appointment entries to calendar
+     * @param appointmentEntries entry of appointment
+     */
+    void setAppointmentsToCalendar(List<Entry> appointmentEntries);
+
+
+    /**
      * Interface to call to listeners
      */
     interface CreateAppointmentViewListener {
@@ -44,5 +53,11 @@ public interface CreateAppointmentView {
          * @param patient          Patient
          */
         void onSave(Timestamp appointmentStart, Timestamp appointmentEnd, Patient patient);
+
+        /**
+         * Method is called on date pick
+         * @param newDate new picked date
+         */
+        void onDatePick(LocalDate newDate);
     }
 }
