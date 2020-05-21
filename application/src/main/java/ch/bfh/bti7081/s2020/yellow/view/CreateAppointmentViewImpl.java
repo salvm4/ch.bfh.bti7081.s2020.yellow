@@ -41,6 +41,8 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     private final TimePicker appointmentStartTimePicker = new TimePicker();
     private final TimePicker appointmentEndTimePicker = new TimePicker();
     private FullCalendar appointmentCalendar = new FullCalendar();
+    private final LocalTime workdayStartTime = LocalTime.of(8,0);
+    private final LocalTime workdayEndTime = LocalTime.of(18,0);
 
     CreateAppointmentPresenter createAppointmentPresenter;
     List<Appointment> appointments;
@@ -85,15 +87,15 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         // Appointment
         appointmentStartTimePicker.setLabel("Startzeit");
         appointmentStartTimePicker.setStep(Duration.ofMinutes(30));
-        appointmentStartTimePicker.setMin("08:00");
-        appointmentStartTimePicker.setMax("18:00");
+        appointmentStartTimePicker.setMin(workdayStartTime.toString());
+        appointmentStartTimePicker.setMax(workdayEndTime.toString());
         appointmentStartTimePicker.addValueChangeListener(this::validateTimeRange);
         selectionRegion.add(appointmentStartTimePicker);
 
         appointmentEndTimePicker.setLabel("Endzeit");
         appointmentEndTimePicker.setStep(Duration.ofMinutes(30));
-        appointmentEndTimePicker.setMin("08:00");
-        appointmentEndTimePicker.setMax("18:00");
+        appointmentEndTimePicker.setMin(workdayStartTime.toString());
+        appointmentEndTimePicker.setMax(workdayEndTime.toString());
         appointmentEndTimePicker.addValueChangeListener(this::validateTimeRange);
         selectionRegion.add(appointmentEndTimePicker);
 
@@ -119,8 +121,8 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         appointmentCalendar.setLocale(Locale.getDefault());
         appointmentCalendar.setFirstDay(DayOfWeek.MONDAY);
         appointmentCalendar.changeView(CalendarViewImpl.TIME_GRID_WEEK);
-        appointmentCalendar.setMinTime(LocalTime.of(7,0,0));
-        appointmentCalendar.setMaxTime(LocalTime.of(18,0,0));
+        appointmentCalendar.setMinTime(workdayStartTime);
+        appointmentCalendar.setMaxTime(workdayEndTime);
         appointmentCalendar.setHeightFull();
         // select time slot
         appointmentCalendar.addTimeslotsSelectedListener(e -> {
@@ -187,6 +189,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
      */
     @Override
     public void setAppointmentsToCalendar(List<Entry> appointmentEntries) {
+        appointmentEntries.forEach(e -> e.setEditable(false));
         appointmentCalendar.addEntries(appointmentEntries);
     }
 
