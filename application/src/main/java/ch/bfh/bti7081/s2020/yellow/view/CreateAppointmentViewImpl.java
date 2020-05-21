@@ -66,7 +66,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
 
         // Selection region
         VerticalLayout selectionRegion = new VerticalLayout();
-        selectionRegion.setSizeFull();
+        selectionRegion.setSizeUndefined();
         createAppointmentContent.add(selectionRegion);
         // Patient select
         patientSelect.setLabel("Patient");
@@ -110,7 +110,11 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         Button saveButton = new Button("Speichern", event -> save());
         buttonsRow.add(saveButton);
 
-        // Add calendar
+        // Add calendar with buttons
+        VerticalLayout calenderContent = new VerticalLayout();
+        calenderContent.setSizeFull();
+        createAppointmentContent.add(calenderContent);
+
         appointmentCalendar = FullCalendarBuilder.create().build();
         appointmentCalendar.setLocale(Locale.getDefault());
         appointmentCalendar.setFirstDay(DayOfWeek.MONDAY);
@@ -118,7 +122,33 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         appointmentCalendar.setMinTime(LocalTime.of(7,0,0));
         appointmentCalendar.setMaxTime(LocalTime.of(18,0,0));
         appointmentCalendar.setHeightFull();
-        createAppointmentContent.add(appointmentCalendar);
+        // select time slot
+        appointmentCalendar.addTimeslotsSelectedListener(e -> {
+            appointmentDatePicker.setValue(e.getStartDateTime().toLocalDate());
+            appointmentStartTimePicker.setValue(e.getStartDateTime().toLocalTime());
+            // do not allow multiday appointments
+            if(e.getEndDateTime().toLocalDate().isEqual(e.getStartDateTime().toLocalDate())) {
+                appointmentEndTimePicker.setValue(e.getEndDateTime().toLocalTime());
+            } else {
+                appointmentEndTimePicker.clear();
+            }
+        });
+        calenderContent.add(appointmentCalendar);
+
+        HorizontalLayout calenderButtonRow = new HorizontalLayout();
+        Button previousWeekButton = new Button("vorherige Woche", e -> {
+            appointmentCalendar.gotoDate(appointmentDatePicker.getValue().minusWeeks(1));
+            appointmentDatePicker.setValue(appointmentDatePicker.getValue().minusWeeks(1));
+        });
+        calenderButtonRow.add(previousWeekButton);
+        Button todayButton = new Button("aktuelle Woche", e -> appointmentDatePicker.setValue(LocalDate.now()));
+        calenderButtonRow.add(todayButton);
+        Button nextWeekButton = new Button("nächste Woche", e -> {
+            appointmentCalendar.gotoDate(appointmentDatePicker.getValue().plusWeeks(1));
+            appointmentDatePicker.setValue(appointmentDatePicker.getValue().plusWeeks(1));
+        });
+        calenderButtonRow.add(nextWeekButton);
+        calenderContent.add(calenderButtonRow);
 
     }
 
