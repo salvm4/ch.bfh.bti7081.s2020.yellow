@@ -44,7 +44,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         // Left side
         VerticalLayout appointmentDetailSection = new VerticalLayout();
         labelAppointment.addClassName("styleTitle");
-        textAreaNotes.setWidth("50%");
+        textAreaNotes.setWidth("100%");
         textAreaNotes.setHeight("600px");
         
         HorizontalLayout buttonSection = new HorizontalLayout();
@@ -66,6 +66,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         mainContent.add(appointmentDetailSection);
         
         // Right side
+        VerticalLayout appointmentPatientSection = new VerticalLayout();
+        Label labelPatient = new Label("Übersicht Patient");
+        labelPatient.addClassName("styleTitle");
+        appointmentPatientSection.add(labelPatient);
+        mainContent.add(appointmentPatientSection);
 
         // Back to main view RouterLink button
         RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
