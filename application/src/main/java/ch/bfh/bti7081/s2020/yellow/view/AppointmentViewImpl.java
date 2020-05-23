@@ -41,7 +41,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     	HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.setSizeFull();
         add(mainContent);
-        
+
         // Left side
         VerticalLayout appointmentDetailSection = new VerticalLayout();
         labelAppointment.addClassName("styleTitle");

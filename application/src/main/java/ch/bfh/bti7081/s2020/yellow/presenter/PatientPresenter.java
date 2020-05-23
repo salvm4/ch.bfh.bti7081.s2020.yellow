@@ -14,17 +14,20 @@ public class PatientPresenter implements PatientView.PatientViewListener {
 
     private final PatientView view;
     private final PatientRepository patientRepository;
+    private Patient patient;
 
     public PatientPresenter (PatientView view) {
         this.view = view;
         this.patientRepository = new PatientRepository();
     }
     @Override
-    public void onAttach() {
-        List<Patient> patients = patientRepository.getAll().getResultList();
+    public void onAttach(long patientId) {
+        this.patient = patientRepository.getById(patientId);
+        view.setText(this.patient);
+        view.setAppointmentCollectionView(this.patient.getAppointments());
     }
 
-    public Patient getPatientById(Long patientId) {
-        return patientRepository.getById(patientId);
+    public Patient getPatient() {
+        return this.patient;
     }
 }
