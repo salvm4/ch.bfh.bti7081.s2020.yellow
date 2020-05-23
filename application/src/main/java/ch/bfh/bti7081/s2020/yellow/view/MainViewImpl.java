@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
@@ -16,7 +17,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -30,7 +30,7 @@ import java.util.List;
  * @author Alain Peytrignet
  */
 @Route("")
-@CssImport(value = "./styles/stylez.css")
+@CssImport(value = "./styles/styles.css")
 public class MainViewImpl extends VerticalLayout implements MainView {
 
     // Listener
@@ -113,7 +113,9 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 
         // create appointment button
         RouterLink createAppointmentLink = new RouterLink("", CreateAppointmentViewImpl.class);
-        createAppointmentLink.getElement().appendChild(new Button("Neuer Termin").getElement());
+        Button createAppointmentButton = new Button("Neuer Termin");
+        createAppointmentButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        createAppointmentLink.getElement().appendChild(createAppointmentButton.getElement());
         appointmentSection.add(createAppointmentLink);
 
         //create and add patient section
@@ -151,7 +153,10 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientSection.add(patientCollectionView);
 
         Button createPatientButton = new Button("Neuer Patient");
-        patientSection.add(createPatientButton);
+        createPatientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        // TODO Uncomment this when create patient is implemented
+//        patientSection.add(createPatientButton);
     }
 
     /**

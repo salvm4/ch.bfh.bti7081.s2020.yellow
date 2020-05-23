@@ -7,7 +7,9 @@ import ch.bfh.bti7081.s2020.yellow.presenter.CreateAppointmentPresenter;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -33,16 +35,20 @@ import java.util.Locale;
  * @author Markus Salvisberg
  */
 @Route("create-appointment")
+@CssImport(value = "./styles/styles.css")
 public class CreateAppointmentViewImpl extends VerticalLayout implements CreateAppointmentView, HasUrlParameter<Long> {
     private final List<CreateAppointmentViewListener> listeners = new ArrayList<>();
-    private final Label tabelLabel = new Label("Termin erstellen");
+    private final Label pageTitle = new Label("Termin erstellen");
+    private final Label errorLabel = new Label();
     private final Select<Patient> patientSelect = new Select<>();
-    private final DatePicker appointmentDatePicker = new DatePicker();
-    private final TimePicker appointmentStartTimePicker = new TimePicker();
-    private final TimePicker appointmentEndTimePicker = new TimePicker();
+    private final DatePicker datePicker = new DatePicker();
+    private final TimePicker startTimePicker = new TimePicker();
+    private final TimePicker endTimePicker = new TimePicker();
     private FullCalendar appointmentCalendar = new FullCalendar();
-    private final LocalTime workdayStartTime = LocalTime.of(8,0);
-    private final LocalTime workdayEndTime = LocalTime.of(18,0);
+    private final LocalTime workdayStartTime = LocalTime.of(8, 0);
+    private final LocalTime workdayEndTime = LocalTime.of(18, 0);
+    Button saveButton = new Button("Speichern", event -> save());
+    Button backButton = new Button("Zurück");
 
     CreateAppointmentPresenter createAppointmentPresenter;
     List<Appointment> appointments;
@@ -58,8 +64,8 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         this.addListener(createAppointmentPresenter);
 
         // Title
-        tabelLabel.addClassName("styleTitle");
-        add(tabelLabel);
+        pageTitle.addClassName("styleTitle");
+        add(pageTitle);
 
         // create and add the vertical layout
         HorizontalLayout createAppointmentContent = new HorizontalLayout();
@@ -70,34 +76,66 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         VerticalLayout selectionRegion = new VerticalLayout();
         selectionRegion.setSizeUndefined();
         createAppointmentContent.add(selectionRegion);
+
+        // Error label
+        errorLabel.addClassName("error-label");
+        errorLabel.setVisible(false);
+        selectionRegion.add(errorLabel);
+
         // Patient select
         patientSelect.setLabel("Patient");
         patientSelect.setItemLabelGenerator(Patient::getFullName);
+        patientSelect.addValueChangeListener(event -> {
+            for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+                listener.validateForm(patientSelect.getValue(), datePicker.getValue(),
+                        startTimePicker.getValue(), endTimePicker.getValue());
+            }
+        });
         selectionRegion.add(patientSelect);
-        appointmentDatePicker.setLabel("Datum");
-        appointmentDatePicker.setValue(LocalDate.now());
-        appointmentDatePicker.addValueChangeListener(event -> {
+
+        // Datepicker
+        datePicker.setLabel("Datum");
+        datePicker.setValue(LocalDate.now());
+        datePicker.setRequired(true);
+        datePicker.addValueChangeListener(event -> {
             for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
                 listener.onDatePick(event.getValue());
+                listener.validateForm(patientSelect.getValue(), datePicker.getValue(),
+                        startTimePicker.getValue(), endTimePicker.getValue());
             }
             appointmentCalendar.gotoDate(event.getValue());
         });
-        selectionRegion.add(appointmentDatePicker);
+        selectionRegion.add(datePicker);
 
-        // Appointment
-        appointmentStartTimePicker.setLabel("Startzeit");
-        appointmentStartTimePicker.setStep(Duration.ofMinutes(30));
-        appointmentStartTimePicker.setMin(workdayStartTime.toString());
-        appointmentStartTimePicker.setMax(workdayEndTime.toString());
-        appointmentStartTimePicker.addValueChangeListener(this::validateTimeRange);
-        selectionRegion.add(appointmentStartTimePicker);
+        // Start time picker
+        startTimePicker.setLabel("Startzeit");
+        startTimePicker.setStep(Duration.ofMinutes(30));
+        startTimePicker.setMin(workdayStartTime.toString());
+        startTimePicker.setMax(workdayEndTime.toString());
+        startTimePicker.setRequired(true);
+        startTimePicker.addValueChangeListener(event -> {
+            for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+                startTimePicker.setRequiredIndicatorVisible(true);
+                listener.validateForm(patientSelect.getValue(), datePicker.getValue(),
+                        startTimePicker.getValue(), endTimePicker.getValue());
+            }
+        });
+        selectionRegion.add(startTimePicker);
 
-        appointmentEndTimePicker.setLabel("Endzeit");
-        appointmentEndTimePicker.setStep(Duration.ofMinutes(30));
-        appointmentEndTimePicker.setMin(workdayStartTime.toString());
-        appointmentEndTimePicker.setMax(workdayEndTime.toString());
-        appointmentEndTimePicker.addValueChangeListener(this::validateTimeRange);
-        selectionRegion.add(appointmentEndTimePicker);
+        // End time picker
+        endTimePicker.setLabel("Endzeit");
+        endTimePicker.setStep(Duration.ofMinutes(30));
+        endTimePicker.setMin(workdayStartTime.toString());
+        endTimePicker.setMax(workdayEndTime.toString());
+        endTimePicker.setRequired(true);
+        endTimePicker.addValueChangeListener(event -> {
+            for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+                endTimePicker.setRequiredIndicatorVisible(true);
+                listener.validateForm(patientSelect.getValue(), datePicker.getValue(),
+                        startTimePicker.getValue(), endTimePicker.getValue());
+            }
+        });
+        selectionRegion.add(endTimePicker);
 
         // Buttons
         HorizontalLayout buttonsRow = new HorizontalLayout();
@@ -105,11 +143,12 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
 
         // Back to main view RouterLink button
         RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
-        mainViewLink.getElement().appendChild(new Button("Zurück").getElement());
+        mainViewLink.getElement().appendChild(backButton.getElement());
         buttonsRow.add(mainViewLink);
 
         // Save
-        Button saveButton = new Button("Speichern", event -> save());
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        saveButton.setEnabled(false);
         buttonsRow.add(saveButton);
 
         // Add calendar with buttons
@@ -117,6 +156,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         calenderContent.setSizeFull();
         createAppointmentContent.add(calenderContent);
 
+        // Calendar
         appointmentCalendar = FullCalendarBuilder.create().build();
         appointmentCalendar.setLocale(Locale.getDefault());
         appointmentCalendar.setFirstDay(DayOfWeek.MONDAY);
@@ -126,41 +166,32 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         appointmentCalendar.setHeightFull();
         // select time slot
         appointmentCalendar.addTimeslotsSelectedListener(e -> {
-            appointmentDatePicker.setValue(e.getStartDateTime().toLocalDate());
-            appointmentStartTimePicker.setValue(e.getStartDateTime().toLocalTime());
+            datePicker.setValue(e.getStartDateTime().toLocalDate());
+            startTimePicker.setValue(e.getStartDateTime().toLocalTime());
             // do not allow multiday appointments
-            if(e.getEndDateTime().toLocalDate().isEqual(e.getStartDateTime().toLocalDate())) {
-                appointmentEndTimePicker.setValue(e.getEndDateTime().toLocalTime());
+            if (e.getEndDateTime().toLocalDate().isEqual(e.getStartDateTime().toLocalDate())) {
+                endTimePicker.setValue(e.getEndDateTime().toLocalTime());
             } else {
-                appointmentEndTimePicker.clear();
+                endTimePicker.clear();
             }
         });
         calenderContent.add(appointmentCalendar);
 
         HorizontalLayout calenderButtonRow = new HorizontalLayout();
         Button previousWeekButton = new Button("vorherige Woche", e -> {
-            appointmentCalendar.gotoDate(appointmentDatePicker.getValue().minusWeeks(1));
-            appointmentDatePicker.setValue(appointmentDatePicker.getValue().minusWeeks(1));
+            appointmentCalendar.gotoDate(datePicker.getValue().minusWeeks(1));
+            datePicker.setValue(datePicker.getValue().minusWeeks(1));
         });
         calenderButtonRow.add(previousWeekButton);
-        Button todayButton = new Button("aktuelle Woche", e -> appointmentDatePicker.setValue(LocalDate.now()));
+        Button todayButton = new Button("aktuelle Woche", e -> datePicker.setValue(LocalDate.now()));
         calenderButtonRow.add(todayButton);
         Button nextWeekButton = new Button("nächste Woche", e -> {
-            appointmentCalendar.gotoDate(appointmentDatePicker.getValue().plusWeeks(1));
-            appointmentDatePicker.setValue(appointmentDatePicker.getValue().plusWeeks(1));
+            appointmentCalendar.gotoDate(datePicker.getValue().plusWeeks(1));
+            datePicker.setValue(datePicker.getValue().plusWeeks(1));
         });
         calenderButtonRow.add(nextWeekButton);
         calenderContent.add(calenderButtonRow);
 
-    }
-
-    // TODO @Simon: Implement this
-    private boolean validateTimeRange(AbstractField.ComponentValueChangeEvent<TimePicker, LocalTime> valueChangeEvent) {
-        System.out.println(valueChangeEvent);
-        System.out.println(appointmentStartTimePicker.getValue());
-        System.out.println(appointmentEndTimePicker.getValue());
-        System.out.println(appointments);
-        return true;
     }
 
     /**
@@ -179,8 +210,18 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     public void setPatients(List<Patient> patients) {
         // Keep value
         Patient defaultPatient = patientSelect.getValue();
+        if (defaultPatient == null) {
+            defaultPatient = patients.get(0);
+        }
         patientSelect.setItems(patients);
         patientSelect.setValue(defaultPatient);
+    }
+
+    public void resetForm() {
+        startTimePicker.clear();
+        startTimePicker.setRequiredIndicatorVisible(false);
+        endTimePicker.clear();
+        endTimePicker.setRequiredIndicatorVisible(false);
     }
 
     /**
@@ -191,6 +232,23 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     public void setAppointmentsToCalendar(List<Entry> appointmentEntries) {
         appointmentEntries.forEach(e -> e.setEditable(false));
         appointmentCalendar.addEntries(appointmentEntries);
+    }
+
+    /**
+     * Set form validty and display error message
+     *
+     * @param isValid      Form validity
+     * @param errorMessage Message to display
+     */
+    @Override
+    public void setFormValidity(boolean isValid, String errorMessage) {
+        saveButton.setEnabled(isValid);
+        if (isValid) {
+            errorLabel.setVisible(false);
+        } else if (errorMessage != null) {
+            errorLabel.setVisible(true);
+            errorLabel.setText(errorMessage);
+        }
     }
 
     /**
@@ -223,9 +281,8 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
      * save appointment
      */
     private void save() {
-        // TODO @Simon
-//        for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
-//            listener.onSave(Timestamp.valueOf(appointmentStartTimePicker.getValue().atStartOfDay()), Timestamp.valueOf(appointmentEndDatePicker.getValue().atStartOfDay()), patientSelect.getValue());
-//        }
+        for (CreateAppointmentView.CreateAppointmentViewListener listener : listeners) {
+            listener.onSave(patientSelect.getValue(), datePicker.getValue(), startTimePicker.getValue(), endTimePicker.getValue());
+        }
     }
 }
