@@ -30,5 +30,8 @@ public interface AppointmentView {
     
     void setNotes(String text);
     
+    /**
+     * Method to set dynamic Titles
+     */
     void setTitle(String text);
 }
