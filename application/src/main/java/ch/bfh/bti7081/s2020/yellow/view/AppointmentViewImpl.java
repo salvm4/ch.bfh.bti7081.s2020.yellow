@@ -2,8 +2,8 @@ package ch.bfh.bti7081.s2020.yellow.view;
 
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -13,8 +13,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
-import ch.bfh.bti7081.s2020.yellow.view.MainView.MainViewListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +25,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 
     private final List<AppointmentView.AppointmentViewListener> listeners = new ArrayList<>();
     private Label labelAppointment = new Label();
+    private TextArea textAreaNotes = new TextArea("Notizen");
     
     /**
      * Default constructor
@@ -45,16 +44,24 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         // Left side
         VerticalLayout appointmentDetailSection = new VerticalLayout();
         labelAppointment.addClassName("styleTitle");
-        TextArea textAreaNotes = new TextArea("Notizen");
         textAreaNotes.setWidth("50%");
         textAreaNotes.setHeight("600px");
         
-        VerticalLayout buttonSection = new VerticalLayout();
-        Button saveButton = new Button("Speichern");
-        buttonSection.add(saveButton);
+        HorizontalLayout buttonSection = new HorizontalLayout();
+        Notification saveNotification = new Notification("Notizen gespeichert!");
+        Button saveButton = new Button("Speichern", event -> {
+            for (AppointmentViewListener listener : listeners) {
+                listener.onSave(this.textAreaNotes.getValue());
+            }
+            saveNotification.open();
+            });
+        
+        Button newStationaryTreatmentButton = new Button("Einweisen");
+        Button newTaskButton = new Button("Neue Aufgabe");
+        buttonSection.add(newStationaryTreatmentButton, newTaskButton, saveButton);
         
         appointmentDetailSection.add(this.labelAppointment);
-        appointmentDetailSection.add(textAreaNotes);
+        appointmentDetailSection.add(this.textAreaNotes);
         appointmentDetailSection.add(buttonSection);
         mainContent.add(appointmentDetailSection);
         
@@ -63,7 +70,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         // Back to main view RouterLink button
         RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
         mainViewLink.getElement().appendChild(new Button("Zurück").getElement());
-        add(mainViewLink);
+        appointmentDetailSection.add(mainViewLink);
 
     }
 
@@ -92,14 +99,17 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 		listeners.add(listener);
 	}
 
-
+	/**
+     * Method to set notes Textarea
+     */
 	@Override
 	public void setNotes(String text) {
-		// TODO Auto-generated method stub
-		
+		this.textAreaNotes.setValue(text);
 	}
 
-
+	/**
+     * Method to set dynamic Titles
+     */
 	@Override
 	public void setTitle(String text) {
 		this.labelAppointment.setText(text);

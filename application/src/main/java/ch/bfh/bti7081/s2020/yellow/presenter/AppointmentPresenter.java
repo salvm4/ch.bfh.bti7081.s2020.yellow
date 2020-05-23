@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
-import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.view.AppointmentView;
 
 /**
@@ -28,22 +27,31 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
         this.appointmentRepository = new AppointmentRepository();
     }
 	
-	
-
+	/**
+     * Method is called on page load
+     */
 	public void onAttach(long appointmentId) {
 		this.appointment = appointmentRepository.getById(appointmentId);
 		this.patient = this.appointment.getPatient();
 		
+		//Set data
 		SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 		String startTime = outputFormat.format(this.appointment.getStartTime());
 		String endTime = outputFormat.format(this.appointment.getEndTime());
 		
 		view.setTitle("Termin " + startTime + " - " + endTime + " " + this.appointment.getPatient().getFullName());
-	}
-
-	@Override
-	public void onSave() {
-		// TODO Auto-generated method stub
 		
+		if (this.appointment.getNotes() != null) {
+			view.setNotes(this.appointment.getNotes());
+		}
+		
+	}
+	
+	/**
+     * Method is called when Save button is clicked
+     */
+	public void onSave(String text) {
+		this.appointment.setNotes(text);
+		appointmentRepository.save(this.appointment);
 	}
 }

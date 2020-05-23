@@ -18,6 +18,8 @@ public class Appointment {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_time")
     private Timestamp endTime;
+    @Column(name="notes")
+    private String notes;
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -55,6 +57,14 @@ public class Appointment {
         this.endTime = endTime;
     }
     
+    public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+    
     public Patient getPatient() {
         return patient;
     }
@@ -67,4 +77,5 @@ public class Appointment {
     public String toString() {
         return "Appointment [id=" + id + ", startTime=" + startTime + ", endTime" + endTime + ", patient=" + patient + "]";
     }
+
 }

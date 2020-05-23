@@ -1,7 +1,5 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
-import ch.bfh.bti7081.s2020.yellow.view.MainView.MainViewListener;
-
 /**
  * Interface of appointment view
  * @author Alain Peytrignet
@@ -21,13 +19,19 @@ public interface AppointmentView {
         /**
          * Method is called when save button is clicked
          */
-        void onSave();
-
-
+    	void onSave(String text);
+    	
     }
     
+    /**
+     * add event listener
+     * @param listener listener
+     */
     void addListener(AppointmentViewListener listener);
     
+    /**
+     * Method to set notes Textarea
+     */
     void setNotes(String text);
     
     /**
