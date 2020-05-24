@@ -79,7 +79,7 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         treatmentSection.add(labelTreatment);
         patientContent.add(treatmentSection);
 
-        Label nextAppointments = new Label("Nächste Termine:");
+        Label nextAppointments = new Label("Termine:");
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->
