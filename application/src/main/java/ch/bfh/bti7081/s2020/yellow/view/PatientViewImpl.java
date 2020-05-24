@@ -30,10 +30,12 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
     private Label firstName = new Label();
     private Label gender = new Label();
     private Label email = new Label();
+    private Label phone = new Label();
     private Label address = new Label();
     private Label job = new Label();
     private Label employer = new Label();
     private Label ahvNumber = new Label();
+    private Label insurance = new Label();
 
     // Listener
     private final List<PatientView.PatientViewListener> listeners = new ArrayList<>();
@@ -56,9 +58,18 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
 
         // create and add personal details section
         VerticalLayout detailsSection = new VerticalLayout();
+        HorizontalLayout detailsSectionContainer = new HorizontalLayout();
+        VerticalLayout detailsSectionTitles = new VerticalLayout();
+        detailsSectionTitles.add(new Label("Nachname:"), new Label("Vorname:"), new Label("Geschlecht:"),
+                                 new Label("E-Mail Adresse:"), new Label("Telefonnummer:"), new Label("Domizil:"),
+                                 new Label("Beruf:"), new Label("Arbeitgeber:"), new Label("AHV-Nummer:"),
+                                 new Label("Krankenkasse:"));
+        VerticalLayout detailsSectionContent = new VerticalLayout();
         Label labelDetails = new Label("Personalien");
         labelDetails.addClassName("styleTitle");
-        detailsSection.add(labelDetails, lastName, firstName, gender, email, address, job, employer, ahvNumber);
+        detailsSectionContent.add(lastName, firstName, gender, email,phone, address, job, employer, ahvNumber, insurance);
+        detailsSectionContainer.add(detailsSectionTitles, detailsSectionContent);
+        detailsSection.add(labelDetails, detailsSectionContainer);
         patientContent.add(detailsSection);
 
         // create and add the treatment details section
@@ -111,14 +122,16 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
 
     @Override
     public void setText(Patient patient) {
-        lastName.setText("Name:         " + patient.getLastName());
-        firstName.setText("Vorname:     " + patient.getFirstName());
-        gender.setText("Geschlecht:     " + patient.getSex());
-        email.setText("E-Mail Adresse:  " + patient.getEmail());
-        address.setText("Domizil:       " + patient.getDomicil());
-        job.setText("Beruf:             " + patient.getJob());
-        employer.setText("Arbeitgeber:  " + patient.getEmployer());
-        ahvNumber.setText("AHV-Nummer:  " + patient.getAhv());
+        lastName.setText(patient.getLastName());
+        firstName.setText(patient.getFirstName());
+        gender.setText(patient.getSex().toString());
+        email.setText(patient.getEmail());
+        phone.setText(patient.getPhone());
+        address.setText(patient.getDomicil());
+        job.setText(patient.getJob());
+        employer.setText(patient.getEmployer());
+        ahvNumber.setText(patient.getAhv());
+        insurance.setText(patient.getInsurance());
     }
 
     @Override
