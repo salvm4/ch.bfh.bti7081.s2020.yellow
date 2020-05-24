@@ -24,6 +24,9 @@
         <mapping class="ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic"/>
         <mapping class="ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment"/>
         <mapping class="ch.bfh.bti7081.s2020.yellow.model.patient.Patient"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.drug.Drug"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.medication.Medication"/>
+        <mapping class="ch.bfh.bti7081.s2020.yellow.model.task.Task"/>
     </session-factory>
 </hibernate-configuration>
 

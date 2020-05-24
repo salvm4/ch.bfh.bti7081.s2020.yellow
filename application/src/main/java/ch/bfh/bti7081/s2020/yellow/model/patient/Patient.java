@@ -1,8 +1,10 @@
 package ch.bfh.bti7081.s2020.yellow.model.patient;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.Gender;
+import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -42,6 +44,10 @@ public class Patient {
     private List<Appointment> appointments;
     @OneToOne(mappedBy="patient")
     private StationaryTreatment stationaryTreatment;
+    @OneToMany(mappedBy="patient")
+    private List<Medication> medications;
+    @OneToMany(mappedBy="patient")
+    private List<Task> tasks;
 
     public Patient() {
     }
@@ -175,6 +181,30 @@ public class Patient {
 
     public void setStationaryTreatment(StationaryTreatment stationaryTreatment) {
         this.stationaryTreatment = stationaryTreatment;
+    }
+
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
+    public boolean addMedication(Medication medication) {
+        return medications.add(medication);
+    }
+
+    public boolean removeMedication(Medication medication) {
+        return medications.remove(medication);
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public boolean addTask(Task task) {
+        return tasks.add(task);
+    }
+
+    public boolean removeTask(Task task) {
+        return tasks.remove(task);
     }
 
     @Override

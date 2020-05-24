@@ -3,10 +3,13 @@ package ch.bfh.bti7081.s2020.yellow.model;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
+import ch.bfh.bti7081.s2020.yellow.model.drug.DrugRepository;
+import ch.bfh.bti7081.s2020.yellow.model.medication.MedicationRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
+import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +25,11 @@ public class StationaryTreatmentIntegrationTest {
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
     private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
     private final ClinicRepository clinicRepository = new ClinicRepository();
-    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
+    private final DrugRepository drugRepository = new DrugRepository();
+    private final MedicationRepository medicationRepository = new MedicationRepository();
+    private final TaskRepository taskRepository = new TaskRepository();
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository,
+            stationaryTreatmentRepository, clinicRepository, drugRepository, medicationRepository, taskRepository);
 
 
     private Patient patient;

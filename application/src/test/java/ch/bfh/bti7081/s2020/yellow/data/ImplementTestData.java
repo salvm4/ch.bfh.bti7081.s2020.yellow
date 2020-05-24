@@ -3,10 +3,17 @@ package ch.bfh.bti7081.s2020.yellow.data;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.Clinic;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
+import ch.bfh.bti7081.s2020.yellow.model.drug.Drug;
+import ch.bfh.bti7081.s2020.yellow.model.drug.DrugRepository;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
+import ch.bfh.bti7081.s2020.yellow.model.medication.MedicationRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.Gender;
+import ch.bfh.bti7081.s2020.yellow.model.task.Task;
+import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
+import ch.bfh.bti7081.s2020.yellow.model.task.TaskState;
 import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +27,11 @@ public class ImplementTestData {
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
     private final StationaryTreatmentRepository stationaryTreatmentRepository = new StationaryTreatmentRepository();
     private final ClinicRepository clinicRepository = new ClinicRepository();
-    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository, stationaryTreatmentRepository, clinicRepository);
+    private final DrugRepository drugRepository = new DrugRepository();
+    private final MedicationRepository medicationRepository = new MedicationRepository();
+    private final TaskRepository taskRepository = new TaskRepository();
+    private final TestUtil testUtil = new TestUtil(patientRepository, appointmentRepository,
+            stationaryTreatmentRepository, clinicRepository, drugRepository, medicationRepository, taskRepository);
 
     private final String[] emails = {
             "peter.muster@gmail.com",
@@ -136,7 +147,7 @@ public class ImplementTestData {
         // Insert clinic
         testUtil.saveNewClinic("Psychiatrie ABC", "kontakt@psychatrie-abc.ch",
                 "0791111111", "Teststrasse 11", "0000 Testort");
-testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
+        testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
                 "0792222222", "Teststrasse 22", "9999 Behandlungsort");
 
         // Insert patients and appointments
@@ -163,5 +174,34 @@ testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
         assertEquals(appointmentStartDates.length, numberOfAppointmentsAfter);
         assertEquals(2, numberOfClinicsAfter);
         assertEquals(2, numberOfStationaryTreatmentsAfter);
+
+
+        // Insert drugs
+        Drug drug1 = testUtil.saveNewDrug("Pervitin", "Temmler");
+        Drug drug2 = testUtil.saveNewDrug("Lysergsäurediethylamid", "Hofmann AG");
+
+
+        // add medication to patient
+        Patient patient1 = patientRepository.getAll().list().get(1);
+        Patient patient2 = patientRepository.getAll().list().get(2);
+
+        Medication medication1 = testUtil.saveNewMedication("2020-07-01", "2020-07-08",
+                "1 Tablette am Morgen einnehmen", drug1, patient1);
+        Medication medication2 = testUtil.saveNewMedication("2020-06-08", "2020-07-15",
+                "2 Tabletten am Mittag einnehmen", drug2, patient1);
+        Medication medication3 = testUtil.saveNewMedication("2020-06-20", "2020-08-01",
+                "1 Tablette am Abend einnehmen", drug2, patient2);
+
+
+        // Insert tasks
+        Task task1 = testUtil.saveNewTask("Nein sagen", "Blablabla...", "2020-06-01", "2020-06-08", patient1);
+        Task task2 = testUtil.saveNewTask("Saunieren", "Gehe in die Sauna", "2020-07-01", "2020-07-08", patient2);
+        Task task3 = testUtil.saveNewTask("Bierli nä", "Triff dich mit einem Bekannten", "2020-08-02", "2020-08-10", patient2);
+        task1.setState(TaskState.Done);
+        task2.setState(TaskState.InProgress);
+        taskRepository.save(task1);
+        taskRepository.save(task2);
+
+
     }
 }
