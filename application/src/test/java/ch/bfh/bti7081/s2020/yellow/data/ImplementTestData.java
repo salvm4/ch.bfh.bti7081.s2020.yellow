@@ -54,6 +54,14 @@ public class ImplementTestData {
             "1990-9-22",
             "2020-4-13"
     };
+    private final String[] phones = {
+            "078 465 75 23",
+            "079 532 56 72",
+            "079 412 45 75",
+            "076 123 67 89",
+            "077 653 75 23",
+            "012 345 67 89"
+    };
     private final String[] domicils = {
             "Musteren",
             "Zürich",
@@ -85,6 +93,14 @@ public class ImplementTestData {
             "913.5476.1235.72",
             "867.4862.1685.35",
             "111.1111.1111.11"
+    };
+    private final String[] insurances = {
+            "AXA",
+            "Assura",
+            "Insurance",
+            "Good Insurance Ltd.",
+            "Better Insurance Ltd.",
+            "Shady Insurance"
     };
     private final Gender[] sexes = {
             Gender.Male,
@@ -125,7 +141,7 @@ testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
 
         // Insert patients and appointments
         for (int i = 0; i < emails.length; i++) {
-            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i], domicils[i], jobs[i], employers[i], ahv[i], sexes[i]);
+            Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i], phones[i], domicils[i], jobs[i], employers[i], ahv[i], insurances[i], sexes[i]);
             testUtil.saveNewAppointment(appointmentStartDates[i], appointmentEndDates[i], patient);
         }
 

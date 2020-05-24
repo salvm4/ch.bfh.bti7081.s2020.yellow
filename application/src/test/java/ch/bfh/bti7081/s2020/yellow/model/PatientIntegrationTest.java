@@ -9,6 +9,8 @@ import ch.bfh.bti7081.s2020.yellow.util.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
+
 import static org.junit.Assert.*;
 
 public class PatientIntegrationTest {
@@ -22,10 +24,12 @@ public class PatientIntegrationTest {
     private static final String firstName = "first";
     private static final String lastName = "last";
     private static final String birthday = "1986-1-1";
+    private static final String phone = "079 564 23 75";
     private static final String domicil = "place";
     private static final String job = "job";
     private static final String employer = "Work Ltd.";
     private static final String ahv = "111.1111.1111.11";
+    private static final String insurance = "Assura SA";
     private static final Gender sex = Gender.Other;
 
     @Before
@@ -35,7 +39,7 @@ public class PatientIntegrationTest {
 
     @Test
     public void createPatientTest() {
-        testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
+        testUtil.saveNewPatient(firstName, lastName, birthday, email, phone, domicil, job, employer, ahv, insurance, sex);
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
 
@@ -45,12 +49,21 @@ public class PatientIntegrationTest {
     @Test
     public void editPatientTest() {
         // Create Patient
-        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
+        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, phone, domicil, job, employer, ahv, insurance, sex);
 
         // Edit Patient
         patient.setEmail(email + " edited");
         patient.setFirstName(firstName + " edited");
         patient.setLastName(lastName + " edited");
+        patient.setBirthday(new Date(1986, 1, 13));
+        patient.setEmail(email + "edited");
+        patient.setPhone(phone + "-edited");
+        patient.setDomicil(domicil + "edited");
+        patient.setJob(job + "edited");
+        patient.setEmployer(employer + "edited");
+        patient.setAhv(ahv + "edited");
+        patient.setInsurance(insurance + "edited");
+        patient.setSex(Gender.Male);
         patientRepository.save(patient);
 
         int numberOfPatientsAfter = patientRepository.getAll().list().size();
@@ -66,7 +79,7 @@ public class PatientIntegrationTest {
     @Test
     public void deletePatientTest() {
         // Create Patient
-        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, domicil, job, employer, ahv, sex);
+        Patient patient = testUtil.saveNewPatient(firstName, lastName, birthday, email, phone, domicil, job, employer, ahv, insurance, sex);
 
         // Delete Patient
         patientRepository.delete(patient.getId());

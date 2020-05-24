@@ -27,8 +27,8 @@ public class TestUtil {
         this.clinicRepository = clinicRepository;
     }
 
-    public Patient saveNewPatient(String firstName, String lastName, String birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
-        Patient patient = new Patient(firstName, lastName, Date.valueOf(birthday), email, domicil, job, employer, ahv, sex);
+    public Patient saveNewPatient(String firstName, String lastName, String birthday, String email,String phone, String domicil, String job, String employer, String ahv, String insurance, Gender sex) {
+        Patient patient = new Patient(firstName, lastName, Date.valueOf(birthday), email, phone, domicil, job, employer, ahv, insurance, sex);
         patientRepository.save(patient);
         return patient;
     }

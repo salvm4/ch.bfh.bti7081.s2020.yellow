@@ -147,6 +147,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientCollectionView.removeAllColumns();
         patientCollectionView.addColumn("firstName").setHeader("Vorname");
         patientCollectionView.addColumn("lastName").setHeader("Nachname");
+        patientCollectionView.addColumn("phone").setHeader("Telefonnummer");
         patientCollectionView.addItemDoubleClickListener(event ->
                 patientCollectionView.getUI().ifPresent(ui -> ui.navigate(PatientViewImpl.class, event.getItem().getId()))
         );

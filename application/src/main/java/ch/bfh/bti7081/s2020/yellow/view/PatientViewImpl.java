@@ -3,7 +3,6 @@ package ch.bfh.bti7081.s2020.yellow.view;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.PatientPresenter;
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
@@ -14,7 +13,6 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
-import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;

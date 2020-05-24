@@ -33,8 +33,8 @@ public class StationaryTreatmentIntegrationTest {
        testUtil.deleteAllTestData();
 
         // Save new patient
-        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "home",
-                "job", "firma", "1234", Gender.Male);
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "phone", "home",
+                "job", "firma", "insurance", "1234", Gender.Male);
         // Save new clinic
         clinic = testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
                 "0791234455", "Teststrasse 11", "9999 Testort");

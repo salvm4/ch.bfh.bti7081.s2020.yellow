@@ -30,8 +30,8 @@ public class AppointmentIntegrationTest {
         testUtil.deleteAllTestData();
 
         // Save new patient
-        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "home",
-                "job", "firma", "1234", Gender.Male);
+        patient = testUtil.saveNewPatient("first", "last", "1986-1-1", "email", "phone", "home",
+                "job", "firma", "1234", "insurance", Gender.Male);
     }
 
     @Test
@@ -55,8 +55,8 @@ public class AppointmentIntegrationTest {
     @Test
     public void editAppointmentTest() {
         // Create appointment
-        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "home",
-                "job", "firma", "1234", Gender.Male);
+        Patient secondPatient = testUtil.saveNewPatient("firstName2", "lastName2", "1986-1-2", "email2", "phone2", "home",
+                "job", "firma", "1234", "insurance2", Gender.Male);
 
         String initialStartDate = "2020-05-13 09:00:00";
         String initialEndDate = "2020-05-13 10:00:00";

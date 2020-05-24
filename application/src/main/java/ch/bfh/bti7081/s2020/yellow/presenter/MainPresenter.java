@@ -58,7 +58,8 @@ public class MainPresenter implements MainView.MainViewListener {
     	for (Patient patient : patients) {
     		
     		if (patient.getFirstName().toLowerCase().trim().contains(query.toLowerCase().trim()) ||
-    			patient.getLastName().toLowerCase().trim().contains(query.toLowerCase().trim())){
+    			patient.getLastName().toLowerCase().trim().contains(query.toLowerCase().trim()) ||
+                patient.getPhone().toLowerCase().trim().contains(query.toLowerCase().trim())){
     			
     			wantedPatients.add(patient);
     			

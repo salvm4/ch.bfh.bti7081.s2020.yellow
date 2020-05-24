@@ -24,6 +24,8 @@ public class Patient {
     private Date birthday;
     @Column(name="email")
     private String email;
+    @Column(name="phone")
+    private String phone;
     @Column(name="domicil")
     private String domicil;
     @Column(name="job")
@@ -32,6 +34,8 @@ public class Patient {
     private String employer;
     @Column(name="ahv")
     private String ahv;
+    @Column(name="insurance")
+    private String insurance;
     @Column(name="sex")
     private Gender sex;
     @OneToMany(mappedBy="patient")
@@ -42,15 +46,18 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, Date birthday, String email, String domicil, String job, String employer, String ahv, Gender sex) {
+    public Patient(String firstName, String lastName, Date birthday, String email,String phone, String domicil,
+                   String job, String employer, String ahv,String insurance, Gender sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.email = email;
+        this.phone = phone;
         this.domicil = domicil;
         this.job = job;
         this.employer = employer;
         this.ahv = ahv;
+        this.insurance = insurance;
         this.sex = sex;
     }
 
@@ -98,6 +105,14 @@ public class Patient {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getDomicil()  {
         return domicil;
     }
@@ -128,6 +143,14 @@ public class Patient {
 
     public void setAhv(String ahv) {
         this.ahv = ahv;
+    }
+
+    public String getInsurance()  {
+        return insurance;
+    }
+
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
     }
 
     public Gender getSex()  {
@@ -176,10 +199,12 @@ public class Patient {
                 && p.firstName.equals(firstName)
                 && p.birthday.equals(birthday)
                 && p.lastName.equals(lastName)
+                && p.phone.equals(phone)
                 && p.domicil.equals(domicil)
                 && p.job.equals(job)
                 && p.employer.equals(employer)
                 && p.ahv.equals(ahv)
+                && p.insurance.equals(insurance)
                 && p.sex.equals(sex);
     }
 
@@ -188,6 +213,7 @@ public class Patient {
         int result = 17;
         result = 31 * result + id.hashCode();
         result = 31 * result + email.hashCode();
+        result = 31 * result + phone.hashCode();
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
         result = 31 * result + birthday.hashCode();
@@ -195,6 +221,7 @@ public class Patient {
         result = 31 * result + job.hashCode();
         result = 31 * result + employer.hashCode();
         result = 31 * result + ahv.hashCode();
+        result = 31 * result + insurance.hashCode();
         result = 31 * result + sex.hashCode();
         return result;
     }
@@ -202,7 +229,7 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday +
-                ", email=" + email + ", domicil=" + domicil + ", job=" + job + ", employer=" + employer + ", ahv=" + ahv +
-                ", sex=" + sex + "]";
+                ", email=" + email + ", phone=" + phone + ", domicil=" + domicil + ", job=" + job + ", employer=" + employer +
+                ", ahv=" + ahv + ", insurance=" + insurance + ", sex=" + sex + "]";
     }
 }
