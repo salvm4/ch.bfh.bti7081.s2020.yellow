@@ -40,4 +40,8 @@ public class AppointmentRepository implements Repository<Appointment> {
     public Query<Appointment> getAllFuture() {
         return session.createQuery("From Appointment where startTime > '" + new Timestamp(System.currentTimeMillis()) + "'");
     }
+    
+    public Query<Appointment> getAllPast() {
+        return session.createQuery("From Appointment where startTime < '" + new Timestamp(System.currentTimeMillis()) + "'");
+    }
 }
