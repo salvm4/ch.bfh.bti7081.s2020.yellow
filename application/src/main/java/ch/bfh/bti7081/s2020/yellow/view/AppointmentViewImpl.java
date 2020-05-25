@@ -1,12 +1,14 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
@@ -131,9 +133,9 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
      
 
         // Back to main view RouterLink button
-        RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
-        mainViewLink.getElement().appendChild(new Button("Zurück").getElement());
-        appointmentDetailSection.add(mainViewLink);
+        Button backButton = new Button("Zurück");
+        backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
+        appointmentDetailSection.add(backButton);
 
     }
 

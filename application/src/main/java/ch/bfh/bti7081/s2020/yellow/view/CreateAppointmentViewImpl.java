@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.CreateAppointmentPresenter;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -13,6 +14,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.router.*;
@@ -142,9 +144,8 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         selectionRegion.add(buttonsRow);
 
         // Back to main view RouterLink button
-        RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
-        mainViewLink.getElement().appendChild(backButton.getElement());
-        buttonsRow.add(mainViewLink);
+        backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
+        buttonsRow.add(backButton);
 
         // Save
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);

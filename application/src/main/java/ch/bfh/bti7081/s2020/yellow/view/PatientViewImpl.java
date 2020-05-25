@@ -3,11 +3,13 @@ package ch.bfh.bti7081.s2020.yellow.view;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.PatientPresenter;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -100,15 +102,15 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         treatmentSection.add(nextAppointments, appointmentCollectionView);
 
         // Back to main view RouterLink button
-        RouterLink mainViewLink = new RouterLink("", MainViewImpl.class);
-        mainViewLink.getElement().appendChild(new Button("Zurück").getElement());
-        add(mainViewLink);
+        Button backButton = new Button("Zurück");
+        backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
+        add(backButton);
     }
 
     /**
      * Get patient id from parameter
      * @param beforeEvent Event
-     * @param l Patient ID
+     * @param patientId Patient ID
      */
     @Override
     public void setParameter(BeforeEvent beforeEvent, Long patientId) {
