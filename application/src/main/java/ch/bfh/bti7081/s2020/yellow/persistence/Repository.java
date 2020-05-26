@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2020.yellow.model;
+package ch.bfh.bti7081.s2020.yellow.persistence;
 
 import org.hibernate.query.Query;
 

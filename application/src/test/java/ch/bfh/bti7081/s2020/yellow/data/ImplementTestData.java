@@ -10,7 +10,7 @@ import ch.bfh.bti7081.s2020.yellow.model.medication.MedicationRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
-import ch.bfh.bti7081.s2020.yellow.model.Gender;
+import ch.bfh.bti7081.s2020.yellow.model.patient.Gender;
 import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
 import ch.bfh.bti7081.s2020.yellow.model.task.TaskState;
@@ -198,10 +198,8 @@ public class ImplementTestData {
         Task task2 = testUtil.saveNewTask("Saunieren", "Gehe in die Sauna", "2020-07-01", "2020-07-08", patient2);
         Task task3 = testUtil.saveNewTask("Bierli nä", "Triff dich mit einem Bekannten", "2020-08-02", "2020-08-10", patient2);
         task1.setState(TaskState.Done);
-        task2.setState(TaskState.InProgress);
+        task2.setState(TaskState.Open);
         taskRepository.save(task1);
         taskRepository.save(task2);
-
-
     }
 }

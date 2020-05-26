@@ -3,7 +3,6 @@ package ch.bfh.bti7081.s2020.yellow.model.patient;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
-import ch.bfh.bti7081.s2020.yellow.model.Gender;
 import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 
 import javax.persistence.*;

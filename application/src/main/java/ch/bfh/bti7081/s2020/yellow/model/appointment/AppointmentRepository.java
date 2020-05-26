@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.yellow.model.appointment;
 
-import ch.bfh.bti7081.s2020.yellow.model.Repository;
-import ch.bfh.bti7081.s2020.yellow.util.HibernateUtil;
+import ch.bfh.bti7081.s2020.yellow.persistence.Repository;
+import ch.bfh.bti7081.s2020.yellow.persistence.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import java.sql.Timestamp;

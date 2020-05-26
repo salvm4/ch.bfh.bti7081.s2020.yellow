@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.yellow.presenter;
 
-import ch.bfh.bti7081.s2020.yellow.model.Repository;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;

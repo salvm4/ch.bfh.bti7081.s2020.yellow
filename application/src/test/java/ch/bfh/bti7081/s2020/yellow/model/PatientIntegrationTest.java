@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.clinic.ClinicRepository;
 import ch.bfh.bti7081.s2020.yellow.model.drug.DrugRepository;
 import ch.bfh.bti7081.s2020.yellow.model.medication.MedicationRepository;
+import ch.bfh.bti7081.s2020.yellow.model.patient.Gender;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatmentRepository;
