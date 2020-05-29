@@ -55,9 +55,9 @@ public interface AppointmentView {
 	void setPatientDetailTarget(long id);
 	
 	/**
-     * Method to set patient info labels
+     * Method to set patient
      */
-	void setText(Patient patient);
+	void setPatient(Patient patient);
 	
 	
 }

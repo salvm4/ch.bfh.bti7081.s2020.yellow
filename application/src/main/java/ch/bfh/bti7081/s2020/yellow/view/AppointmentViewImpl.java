@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -8,12 +7,10 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
@@ -40,6 +37,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private Label lastName = new Label();
     private Label firstName = new Label();
     private Label gender = new Label();
+    private Patient patient = new Patient();
     
     /**
      * Default constructor
@@ -63,16 +61,15 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
-        Button saveButton = new Button("Speichern", event -> {
-            for (AppointmentViewListener listener : listeners) {
-                listener.onSave(this.textAreaNotes.getValue());
-            }
-            saveNotification.open();
-            });
-        
+
         Button newStationaryTreatmentButton = new Button("Einweisen");
         Button newTaskButton = new Button("Neue Aufgabe");
-        buttonSection.add(newStationaryTreatmentButton, newTaskButton, saveButton);
+        Button newMedicationButton = new Button("Medikament verschreiben", e -> {
+            // Medication dialog
+            MedicationViewImpl medicationView = new MedicationViewImpl(patient);
+            medicationView.open();
+        });
+        buttonSection.add(newStationaryTreatmentButton, newTaskButton, newMedicationButton);
         
         appointmentDetailSection.add(this.labelAppointment);
         appointmentDetailSection.add(this.textAreaNotes);
@@ -132,11 +129,21 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         mainContent.add(appointmentPatientSection);
      
 
-        // Back to main view RouterLink button
+        // Confirmation / Navigation buttons
+        HorizontalLayout confNavButtons = new HorizontalLayout();
+        appointmentDetailSection.add(confNavButtons);
+
         Button backButton = new Button("Zurück");
         backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
-        appointmentDetailSection.add(backButton);
+        confNavButtons.add(backButton);
 
+        Button saveButton = new Button("Speichern", event -> {
+            for (AppointmentViewListener listener : listeners) {
+                listener.onSave(this.textAreaNotes.getValue());
+            }
+            saveNotification.open();
+        });
+        confNavButtons.add(saveButton);
     }
 
 
@@ -205,10 +212,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
      * Method to set patient info labels
      */
 	@Override
-	public void setText(Patient patient) {
+	public void setPatient(Patient patient) {
 		this.lastName.setText("Nachname: " + patient.getLastName());
 		this.firstName.setText("Vorname: " + patient.getFirstName());
 		this.gender.setText("Geschlecht: " + patient.getSex().toString());
+		this.patient = patient;
 	}
 
 }

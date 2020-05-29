@@ -51,7 +51,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		
 		view.setAppointmentHistory(appointments);
 		view.setPatientDetailTarget(this.patient.getId());
-		view.setText(this.patient);
+		view.setPatient(this.patient);
 		
 	}
 	
