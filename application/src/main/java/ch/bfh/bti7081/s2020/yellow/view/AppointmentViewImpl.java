@@ -64,7 +64,13 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
-        Button newTaskButton = new Button("Neue Aufgabe");
+
+        Button newTaskButton = new Button("Neue Aufgabe", e -> {
+            // Task dialog
+            TaskView taskView = new TaskViewImpl(patient);
+            taskView.open();
+        });
+
         Button newMedicationButton = new Button("Medikament verschreiben", e -> {
             // Medication dialog
             MedicationViewImpl medicationView = new MedicationViewImpl(patient);
