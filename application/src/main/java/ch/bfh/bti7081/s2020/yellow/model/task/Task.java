@@ -94,4 +94,34 @@ public class Task {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Task)) {
+            return false;
+        }
+        Task t = (Task) obj;
+        return id.equals(t.getId()) &&
+                name.equals(t.name) &&
+                description.equals(t.description) &&
+                startDate.equals(t.startDate) &&
+                endDate.equals(t.endDate) &&
+                state.equals(t.state) &&
+                patient.equals(t.patient);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int f = 31;
+        result = result + id.hashCode() * f;
+        result = result + name.hashCode() * f;
+        result = result + description.hashCode() * f;
+        result = result + startDate.hashCode() * f;
+        result = result + endDate.hashCode() * f;
+        result = result + state.hashCode() * f;
+        result = result + patient.hashCode() * f;
+
+        return result;
+    }
 }

@@ -1,10 +1,8 @@
 package ch.bfh.bti7081.s2020.yellow.model.clinic;
 
-import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.stationarytreatment.StationaryTreatment;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -97,5 +95,34 @@ public class Clinic {
     @Override
     public String toString() {
         return "Clinic [id=" + id + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + ", street=" + street + ", zipCity=" + zipCity + "]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Clinic)) {
+            return false;
+        }
+        Clinic c = (Clinic) obj;
+        return id.equals(c.getId()) &&
+                name.equals(c.name) &&
+                email.equals(c.email) &&
+                phoneNumber.equals(c.phoneNumber) &&
+                street.equals(c.street) &&
+                zipCity.equals(c.zipCity);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int f = 31;
+        result = result + id.hashCode() * f;
+        result = result + name.hashCode() * f;
+        result = result + email.hashCode() * f;
+        result = result + phoneNumber.hashCode() * f;
+        result = result + street.hashCode() * f;
+        result = result + zipCity.hashCode() * f;
+
+        return result;
     }
 }

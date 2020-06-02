@@ -3,7 +3,6 @@ package ch.bfh.bti7081.s2020.yellow.presenter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 		String startTime = outputFormat.format(this.appointment.getStartTime());
 		String endTime = outputFormat.format(this.appointment.getEndTime());
-		view.setTitle("Termin " + startTime + " - " + endTime + " " + this.appointment.getPatient().getFullName());	
+		view.setTitle("Termin " + startTime + " - " + endTime + " " + this.appointment.getPatient().getFullName());
 		view.setAppointmentHistory(appointments);
 		view.setPatientDetailTarget(this.patient.getId());
 		view.setPatient(this.patient);
@@ -80,6 +79,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 	private void loadAppointments() {
 		
 		List<Appointment> allPastAppointments = appointmentRepository.getAllPast().getResultList();
+		this.appointments.clear();
 		for (Appointment appointment : allPastAppointments) {
 			if (appointment.getPatient() == this.patient) {
 				if (appointment != this.appointment) {
@@ -97,7 +97,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 	private void loadMedication() {
 		 List<Medication> medications = this.patient.getMedications();
 		 Date currentDate = new Date(System.currentTimeMillis());
-		 
+		 currentMedications.clear();
 		 for (Medication medication : medications) {
 			 if (currentDate.after(medication.getStartDate()) && currentDate.before(medication.getEndDate())) {
 				 currentMedications.add(medication);

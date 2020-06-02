@@ -9,6 +9,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MedicationPresenter;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -19,7 +20,6 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 
 import java.sql.Date;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +39,9 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     private final DatePicker startDatePicker = new DatePicker("Startdatum");
     private final DatePicker endDatePicker = new DatePicker("Enddatum");
     private final TextArea applicationDescription = new TextArea("Anwendung");
+    private final Button cancelButton;
+    private final Button saveButton;
+    private final Label dialogTitle;
 
 
     /**
@@ -56,7 +59,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         setCloseOnEsc(false);
 
         // Main layout
-        Label dialogTitle = new Label("Medikament verschreiben");
+        dialogTitle = new Label("Medikament verschreiben");
         dialogTitle.addClassName("styleTitle");
         add(dialogTitle);
         VerticalLayout mainContent = new VerticalLayout();
@@ -64,30 +67,38 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
 
         // Section to specify medication
         HorizontalLayout medicationSection = new HorizontalLayout();
+        medicationSection.setMinWidth("700px");
+        medicationSection.setSizeFull();
         mainContent.add(medicationSection);
 
         // Grouped pickers
         VerticalLayout medicationFieldPickers = new VerticalLayout();
+        medicationFieldPickers.setWidth("50%");
         medicationFieldPickers.setMargin(false);
         medicationSection.add(medicationFieldPickers);
 
         // Patient picker
         patientSelect.setLabel("Patient");
         patientSelect.setItemLabelGenerator(Patient::getFullName);
+        patientSelect.setSizeFull();
         medicationFieldPickers.add(patientSelect);
 
         // drug picker
         drugSelect.setLabel("Medikament");
         drugSelect.setItemLabelGenerator(Drug::toString);
+        drugSelect.setSizeFull();
         medicationFieldPickers.add(drugSelect);
 
         // Start date picker
+        startDatePicker.setSizeFull();
         medicationFieldPickers.add(startDatePicker);
 
         // End date picker
+        endDatePicker.setSizeFull();
         medicationFieldPickers.add(endDatePicker);
 
         // Field to describe application
+        applicationDescription.setSizeFull();
         medicationSection.add(applicationDescription);
 
 
@@ -95,16 +106,17 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         HorizontalLayout confirmationButtons = new HorizontalLayout();
         mainContent.add(confirmationButtons);
 
-        Button cancelButton = new Button("Abbrechen", e -> this.close());
+        cancelButton = new Button("Abbrechen", e -> this.close());
         confirmationButtons.add(cancelButton);
 
-        Button saveButton = new Button("Speichern", e -> {
+        saveButton = new Button("Speichern", e -> {
             for (MedicationView.MedicationViewListener listener : listeners) {
                 listener.onSave(Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()),
                         applicationDescription.getValue(), drugSelect.getValue(), patientSelect.getValue());
             }
             this.close();
         });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confirmationButtons.add(saveButton);
     }
 
@@ -125,19 +137,27 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     public MedicationViewImpl(Medication shownMedication) {
         this();
 
+        dialogTitle.setText("Verschriebenes Medikament");
+
         patientSelect.setValue(shownMedication.getPatient());
         patientSelect.setReadOnly(true);
 
         drugSelect.setValue(shownMedication.getDrug());
         drugSelect.setReadOnly(true);
 
-        startDatePicker.setValue(shownMedication.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        startDatePicker.setValue(new Date(shownMedication.getStartDate().getTime()).toLocalDate());
         startDatePicker.setReadOnly(true);
         
-        endDatePicker.setValue(shownMedication.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        endDatePicker.setValue(new Date(shownMedication.getEndDate().getTime()).toLocalDate());
         endDatePicker.setReadOnly(true);
 
+        applicationDescription.setValue(shownMedication.getApplication());
         applicationDescription.setReadOnly(true);
+
+        saveButton.setVisible(false);
+
+        cancelButton.setText("Zurück");
+        cancelButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
     }
 
@@ -175,7 +195,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         // Keep value if already set by constructor
         Drug defaultDrug = drugSelect.getValue();
         drugSelect.setItems(drugs);
-        if (defaultDrug!=null) {
+        if (defaultDrug != null) {
             drugSelect.setValue(defaultDrug);
         }
     }

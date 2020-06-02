@@ -117,13 +117,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
                 .setComparator(Comparator.comparing(Appointment::getStartTime))
                 .setHeader("Start")
                 .setSortable(true);
-        appointmentCollectionView.addColumn(appointment ->
-                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
-                        .format(appointment.getEndTime().toLocalDateTime()))
-                .setComparator(Comparator.comparing(Appointment::getEndTime))
-                .setHeader("Ende")
-                .setSortable(true);
-        
+        appointmentCollectionView.addItemDoubleClickListener(event ->
+                appointmentCollectionView.getUI().ifPresent(ui -> {
+                    ui.navigate(AppointmentViewImpl.class, event.getItem().getId());
+                })
+        );
         appointmentCollectionView.setWidth("100%");
         appointmentCollectionView.setHeightFull();
         
@@ -132,8 +130,8 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         VerticalLayout appointmentMedicationContainer = new VerticalLayout();
         appointmentMedicationContainer.setWidth("50%");
         appointmentMedicationContainer.setHeight("385px");
-        Label medicationLabel = new Label("Behandlung:");
-        
+        Label medicationLabel = new Label("Aktuell verschriebene Medikamente:");
+
         medicationCollectionView = new Grid<>(Medication.class);
         medicationCollectionView.removeAllColumns();
         medicationCollectionView.addColumn(medication -> medication.getDrug()
@@ -143,6 +141,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         medicationCollectionView.addColumn(medication -> medication.getApplication())
         		.setHeader("Anwendung")
         		.setSortable(true);
+        medicationCollectionView.addItemDoubleClickListener(e -> {
+            // Medication dialog
+            MedicationViewImpl medicationView = new MedicationViewImpl(e.getItem());
+            medicationView.open();
+        });
         	   
         appointmentMedicationContainer.add(medicationLabel, medicationCollectionView);
         appointmnentHistorySection.add(appointmentHistoryContainer, appointmentMedicationContainer);

@@ -55,4 +55,26 @@ public class Drug {
     public String toString() {
         return name + " (" + manufacturer + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Drug)) {
+            return false;
+        }
+        Drug d = (Drug) obj;
+        return id.equals(d.getId())
+                && name.equals(d.getName())
+                && manufacturer.equals((d.getManufacturer()));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int f = 31;
+        result = result + id.hashCode() * f;
+        result = result + name.hashCode() * f;
+        result = result + manufacturer.hashCode() * f;
+
+        return result;
+    }
 }
