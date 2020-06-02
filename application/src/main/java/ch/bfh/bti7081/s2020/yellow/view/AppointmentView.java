@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.yellow.view;
 import java.util.List;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 
 /**
@@ -45,9 +46,14 @@ public interface AppointmentView {
     void setTitle(String text);
     
     /**
-     * Method to set appointments which are shown in appointment views
+     * Method to set appointments in appointment history view
      */
     void setAppointmentHistory(List<Appointment> appointments);
+    
+    /**
+     * Method to set medications in medication grid
+     */
+    void setMedication(List<Medication> medications);
     
     /**
      * Method to set patient detail button target
@@ -58,6 +64,5 @@ public interface AppointmentView {
      * Method to set patient
      */
 	void setPatient(Patient patient);
-	
-	
+		
 }

@@ -4,10 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.view.AppointmentView;
 
@@ -21,6 +23,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 	private final AppointmentRepository appointmentRepository;
 	private Appointment appointment;
     private List<Appointment> appointments = new ArrayList<>();
+    private List<Medication> currentMedications = new ArrayList<>();
 	private Patient patient;
 	
 	/**
@@ -39,6 +42,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		this.appointment = appointmentRepository.getById(appointmentId);
 		this.patient = this.appointment.getPatient();
 		loadAppointments();
+		loadMedication();
 		
 		//Set data
 		SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
@@ -85,6 +89,21 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		}
 
 		view.setAppointmentHistory(appointments);
+	}
+	
+	/**
+     * Method to set current medications
+     */
+	private void loadMedication() {
+		 List<Medication> medications = this.patient.getMedications();
+		 Date currentDate = new Date(System.currentTimeMillis());
+		 
+		 for (Medication medication : medications) {
+			 if (currentDate.after(medication.getStartDate()) && currentDate.before(medication.getEndDate())) {
+				 currentMedications.add(medication);
+			 }
+		 }
+		view.setMedication(currentMedications);
 	}
 
 	/**

@@ -13,6 +13,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
 
@@ -34,6 +35,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private TextArea textAreaNotes = new TextArea("Notizen");
     private TextArea diagnosisTextArea = new TextArea("Diagnose");
     private final Grid<Appointment> appointmentCollectionView;
+    private final Grid<Medication> medicationCollectionView;
     Button patientDetailButon = new Button("Patientendetails");
     private Label lastName = new Label();
     private Label firstName = new Label();
@@ -82,21 +84,23 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         appointmentPatientSection.add(labelPatient);
         
         HorizontalLayout medicationSection = new HorizontalLayout();
+        
         diagnosisTextArea.setWidth("100%");
         diagnosisTextArea.setHeight("200px");
-        TextArea stationaryTreatmentTextArea = new TextArea("Stationäre Behandlung");
-        stationaryTreatmentTextArea.setWidth("100%");
-        stationaryTreatmentTextArea.setHeight("200px");
-        medicationSection.add(diagnosisTextArea, stationaryTreatmentTextArea);
+             
+        VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
+        Label patientInfo = new Label("Patienteninfos:");
+        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender);
+        
+        medicationSection.add(diagnosisTextArea, appointmentPatientinfoContainer);	// HIer einfach patientinfo anstatt patientinfo
         medicationSection.setWidthFull();
         appointmentPatientSection.add(medicationSection);
         
-        //Appointment HIstory
+        //Appointment History
         HorizontalLayout appointmnentHistorySection = new HorizontalLayout();
         appointmnentHistorySection.setWidthFull();
         VerticalLayout appointmentHistoryContainer = new VerticalLayout();
-        VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
-        appointmentHistoryContainer.setWidth("100%");
+        appointmentHistoryContainer.setWidth("50%");
         appointmentHistoryContainer.setHeight("385px");
         Label lastAppointments = new Label("Vergangene Termine:");
         appointmentCollectionView = new Grid<>(Appointment.class);
@@ -113,14 +117,29 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
                 .setComparator(Comparator.comparing(Appointment::getEndTime))
                 .setHeader("Ende")
                 .setSortable(true);
-        Label patientInfo = new Label("Patienteninfos:");
-        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender);
         
         appointmentCollectionView.setWidth("100%");
         appointmentCollectionView.setHeightFull();
         
         appointmentHistoryContainer.add(lastAppointments, appointmentCollectionView);
-        appointmnentHistorySection.add(appointmentHistoryContainer, appointmentPatientinfoContainer);
+        
+        VerticalLayout appointmentMedicationContainer = new VerticalLayout();
+        appointmentMedicationContainer.setWidth("50%");
+        appointmentMedicationContainer.setHeight("385px");
+        Label medicationLabel = new Label("Behandlung:");
+        
+        medicationCollectionView = new Grid<>(Medication.class);
+        medicationCollectionView.removeAllColumns();
+        medicationCollectionView.addColumn(medication -> medication.getDrug()
+        		.getName())
+        		.setHeader("Medikament")
+        		.setSortable(true);
+        medicationCollectionView.addColumn(medication -> medication.getApplication())
+        		.setHeader("Anwendung")
+        		.setSortable(true);
+        	   
+        appointmentMedicationContainer.add(medicationLabel, medicationCollectionView);
+        appointmnentHistorySection.add(appointmentHistoryContainer, appointmentMedicationContainer);
         
         appointmentPatientSection.add(appointmnentHistorySection, patientDetailButon);
         
@@ -221,6 +240,15 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 		this.firstName.setText("Vorname: " + patient.getFirstName());
 		this.gender.setText("Geschlecht: " + patient.getSex().toString());
 		this.patient = patient;
+	}
+
+	
+	/**
+     * Method to set medications in medication grid
+     */
+	@Override
+	public void setMedication(List<Medication> medications) {
+		medicationCollectionView.setItems(medications);
 	}
 
 }
