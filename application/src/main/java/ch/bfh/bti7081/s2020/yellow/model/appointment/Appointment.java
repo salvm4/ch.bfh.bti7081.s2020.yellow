@@ -20,6 +20,8 @@ public class Appointment {
     private Timestamp endTime;
     @Column(name="notes")
     private String notes;
+    @Column(name="diagnosis")
+    private String diagnosis;
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
@@ -64,6 +66,14 @@ public class Appointment {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	public String getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
+	}
     
     public Patient getPatient() {
         return patient;
@@ -77,5 +87,5 @@ public class Appointment {
     public String toString() {
         return "Appointment [id=" + id + ", startTime=" + startTime + ", endTime" + endTime + ", patient=" + patient + "]";
     }
-
+    
 }

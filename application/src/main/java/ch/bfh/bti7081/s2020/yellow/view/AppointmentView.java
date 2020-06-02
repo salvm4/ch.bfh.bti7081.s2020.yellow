@@ -24,7 +24,7 @@ public interface AppointmentView {
         /**
          * Method is called when save button is clicked
          */
-    	void onSave(String text);
+    	void onSave(String notesText, String diagnosisText);
     	
     }
     
@@ -35,9 +35,9 @@ public interface AppointmentView {
     void addListener(AppointmentViewListener listener);
     
     /**
-     * Method to set notes Textarea
+     * Method to set notes and diagnosis
      */
-    void setNotes(String text);
+    void setText(String notesText, String diagnosisText);
     
     /**
      * Method to set dynamic Titles

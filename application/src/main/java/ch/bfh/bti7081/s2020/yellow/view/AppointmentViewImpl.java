@@ -32,6 +32,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private final List<AppointmentView.AppointmentViewListener> listeners = new ArrayList<>();
     private Label labelAppointment = new Label();
     private TextArea textAreaNotes = new TextArea("Notizen");
+    private TextArea diagnosisTextArea = new TextArea("Diagnose");
     private final Grid<Appointment> appointmentCollectionView;
     Button patientDetailButon = new Button("Patientendetails");
     private Label lastName = new Label();
@@ -61,15 +62,13 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
-
-        Button newStationaryTreatmentButton = new Button("Einweisen");
         Button newTaskButton = new Button("Neue Aufgabe");
         Button newMedicationButton = new Button("Medikament verschreiben", e -> {
             // Medication dialog
             MedicationViewImpl medicationView = new MedicationViewImpl(patient);
             medicationView.open();
         });
-        buttonSection.add(newStationaryTreatmentButton, newTaskButton, newMedicationButton);
+        buttonSection.add(newTaskButton, newMedicationButton);
         
         appointmentDetailSection.add(this.labelAppointment);
         appointmentDetailSection.add(this.textAreaNotes);
@@ -83,17 +82,16 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         appointmentPatientSection.add(labelPatient);
         
         HorizontalLayout medicationSection = new HorizontalLayout();
-        TextArea medicationTextArea = new TextArea("Diagnose");
-        medicationTextArea.setWidth("100%");
-        medicationTextArea.setHeight("200px");
+        diagnosisTextArea.setWidth("100%");
+        diagnosisTextArea.setHeight("200px");
         TextArea stationaryTreatmentTextArea = new TextArea("Stationäre Behandlung");
         stationaryTreatmentTextArea.setWidth("100%");
         stationaryTreatmentTextArea.setHeight("200px");
-        medicationSection.add(medicationTextArea, stationaryTreatmentTextArea);
+        medicationSection.add(diagnosisTextArea, stationaryTreatmentTextArea);
         medicationSection.setWidthFull();
         appointmentPatientSection.add(medicationSection);
         
-        //Calendar
+        //Appointment HIstory
         HorizontalLayout appointmnentHistorySection = new HorizontalLayout();
         appointmnentHistorySection.setWidthFull();
         VerticalLayout appointmentHistoryContainer = new VerticalLayout();
@@ -139,7 +137,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 
         Button saveButton = new Button("Speichern", event -> {
             for (AppointmentViewListener listener : listeners) {
-                listener.onSave(this.textAreaNotes.getValue());
+                listener.onSave(this.textAreaNotes.getValue(), diagnosisTextArea.getValue());
             }
             saveNotification.open();
         });
@@ -172,11 +170,17 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 	}
 
 	/**
-     * Method to set notes Textarea
+     * Method to set notes and diagnosis
      */
 	@Override
-	public void setNotes(String text) {
-		this.textAreaNotes.setValue(text);
+	public void setText(String notesText, String diagnosisText) {
+		if (notesText != null) {
+			this.textAreaNotes.setValue(notesText);
+		}
+		
+		if (diagnosisText != null) {
+			this.diagnosisTextArea.setValue(diagnosisText);
+		}	
 	}
 
 	/**
