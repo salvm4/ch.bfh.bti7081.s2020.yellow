@@ -91,4 +91,32 @@ public class StationaryTreatment {
     public String toString() {
         return "Patient [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", notes=" + notes + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof StationaryTreatment)) {
+            return false;
+        }
+        StationaryTreatment s = (StationaryTreatment) obj;
+        return id.equals(s.getId()) &&
+                startDate.equals(s.startDate) &&
+                endDate.equals(s.endDate) &&
+                notes.equals(s.notes) &&
+                clinic.equals(s.clinic) &&
+                patient.equals(s.patient);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int f = 31;
+        result = result + id.hashCode() * f;
+        result = result + startDate.hashCode() * f;
+        result = result + endDate.hashCode() * f;
+        result = result + notes.hashCode() * f;
+        result = result + clinic.hashCode() * f;
+        result = result + patient.hashCode() * f;
+
+        return result;
+    }
 }

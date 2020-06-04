@@ -87,4 +87,34 @@ public class Medication {
     public String toString() {
         return startDate.toString() + "-" + endDate.toString() + ": " + drug.toString() + " [" + application + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Medication)) {
+            return false;
+        }
+
+        Medication m = (Medication)obj;
+        return id.equals(m.id)
+                && startDate.equals(m.startDate)
+                && endDate.equals(m.endDate)
+                && application.equals(m.application)
+                && drug.equals(m.drug)
+                && patient.equals(m.patient);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int f = 31;
+
+        result = result + id.hashCode() * f;
+        result = result + startDate.hashCode() * f;
+        result = result + endDate.hashCode() * f;
+        result = result + application.hashCode() * f;
+        result = result + drug.hashCode() * f;
+        result = result + patient.hashCode() * f;
+
+        return result;
+    }
 }

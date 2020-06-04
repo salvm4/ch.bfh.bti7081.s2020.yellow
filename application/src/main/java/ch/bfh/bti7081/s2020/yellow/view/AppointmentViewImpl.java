@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -8,14 +7,13 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
 
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
+import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
 
@@ -35,11 +33,14 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private final List<AppointmentView.AppointmentViewListener> listeners = new ArrayList<>();
     private Label labelAppointment = new Label();
     private TextArea textAreaNotes = new TextArea("Notizen");
+    private TextArea diagnosisTextArea = new TextArea("Diagnose");
     private final Grid<Appointment> appointmentCollectionView;
+    private final Grid<Medication> medicationCollectionView;
     Button patientDetailButon = new Button("Patientendetails");
     private Label lastName = new Label();
     private Label firstName = new Label();
     private Label gender = new Label();
+    private Patient patient = new Patient();
     
     /**
      * Default constructor
@@ -63,16 +64,19 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
-        Button saveButton = new Button("Speichern", event -> {
-            for (AppointmentViewListener listener : listeners) {
-                listener.onSave(this.textAreaNotes.getValue());
-            }
-            saveNotification.open();
-            });
-        
-        Button newStationaryTreatmentButton = new Button("Einweisen");
-        Button newTaskButton = new Button("Neue Aufgabe");
-        buttonSection.add(newStationaryTreatmentButton, newTaskButton, saveButton);
+
+        Button newTaskButton = new Button("Neue Aufgabe", e -> {
+            // Task dialog
+            TaskView taskView = new TaskViewImpl(patient);
+            taskView.open();
+        });
+
+        Button newMedicationButton = new Button("Medikament verschreiben", e -> {
+            // Medication dialog
+            MedicationViewImpl medicationView = new MedicationViewImpl(patient);
+            medicationView.open();
+        });
+        buttonSection.add(newTaskButton, newMedicationButton);
         
         appointmentDetailSection.add(this.labelAppointment);
         appointmentDetailSection.add(this.textAreaNotes);
@@ -86,22 +90,23 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         appointmentPatientSection.add(labelPatient);
         
         HorizontalLayout medicationSection = new HorizontalLayout();
-        TextArea medicationTextArea = new TextArea("Diagnose");
-        medicationTextArea.setWidth("100%");
-        medicationTextArea.setHeight("200px");
-        TextArea stationaryTreatmentTextArea = new TextArea("Stationäre Behandlung");
-        stationaryTreatmentTextArea.setWidth("100%");
-        stationaryTreatmentTextArea.setHeight("200px");
-        medicationSection.add(medicationTextArea, stationaryTreatmentTextArea);
+        
+        diagnosisTextArea.setWidth("100%");
+        diagnosisTextArea.setHeight("200px");
+             
+        VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
+        Label patientInfo = new Label("Patienteninfos:");
+        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender);
+        
+        medicationSection.add(diagnosisTextArea, appointmentPatientinfoContainer);	// HIer einfach patientinfo anstatt patientinfo
         medicationSection.setWidthFull();
         appointmentPatientSection.add(medicationSection);
         
-        //Calendar
+        //Appointment History
         HorizontalLayout appointmnentHistorySection = new HorizontalLayout();
         appointmnentHistorySection.setWidthFull();
         VerticalLayout appointmentHistoryContainer = new VerticalLayout();
-        VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
-        appointmentHistoryContainer.setWidth("100%");
+        appointmentHistoryContainer.setWidth("50%");
         appointmentHistoryContainer.setHeight("385px");
         Label lastAppointments = new Label("Vergangene Termine:");
         appointmentCollectionView = new Grid<>(Appointment.class);
@@ -112,31 +117,59 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
                 .setComparator(Comparator.comparing(Appointment::getStartTime))
                 .setHeader("Start")
                 .setSortable(true);
-        appointmentCollectionView.addColumn(appointment ->
-                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
-                        .format(appointment.getEndTime().toLocalDateTime()))
-                .setComparator(Comparator.comparing(Appointment::getEndTime))
-                .setHeader("Ende")
-                .setSortable(true);
-        Label patientInfo = new Label("Patienteninfos:");
-        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender);
-        
+        appointmentCollectionView.addItemDoubleClickListener(event ->
+                appointmentCollectionView.getUI().ifPresent(ui -> {
+                    ui.navigate(AppointmentViewImpl.class, event.getItem().getId());
+                })
+        );
         appointmentCollectionView.setWidth("100%");
         appointmentCollectionView.setHeightFull();
         
         appointmentHistoryContainer.add(lastAppointments, appointmentCollectionView);
-        appointmnentHistorySection.add(appointmentHistoryContainer, appointmentPatientinfoContainer);
+        
+        VerticalLayout appointmentMedicationContainer = new VerticalLayout();
+        appointmentMedicationContainer.setWidth("50%");
+        appointmentMedicationContainer.setHeight("385px");
+        Label medicationLabel = new Label("Aktuell verschriebene Medikamente:");
+
+        medicationCollectionView = new Grid<>(Medication.class);
+        medicationCollectionView.removeAllColumns();
+        medicationCollectionView.addColumn(medication -> medication.getDrug()
+        		.getName())
+        		.setHeader("Medikament")
+        		.setSortable(true);
+        medicationCollectionView.addColumn(medication -> medication.getApplication())
+        		.setHeader("Anwendung")
+        		.setSortable(true);
+        medicationCollectionView.addItemDoubleClickListener(e -> {
+            // Medication dialog
+            MedicationViewImpl medicationView = new MedicationViewImpl(e.getItem());
+            medicationView.open();
+        });
+        	   
+        appointmentMedicationContainer.add(medicationLabel, medicationCollectionView);
+        appointmnentHistorySection.add(appointmentHistoryContainer, appointmentMedicationContainer);
         
         appointmentPatientSection.add(appointmnentHistorySection, patientDetailButon);
         
         mainContent.add(appointmentPatientSection);
      
 
-        // Back to main view RouterLink button
+        // Confirmation / Navigation buttons
+        HorizontalLayout confNavButtons = new HorizontalLayout();
+        appointmentDetailSection.add(confNavButtons);
+
         Button backButton = new Button("Zurück");
         backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
-        appointmentDetailSection.add(backButton);
+        confNavButtons.add(backButton);
 
+        Button saveButton = new Button("Speichern", event -> {
+            for (AppointmentViewListener listener : listeners) {
+                listener.onSave(this.textAreaNotes.getValue(), diagnosisTextArea.getValue());
+            }
+            saveNotification.open();
+        });
+        confNavButtons.add(saveButton);
     }
 
 
@@ -165,11 +198,17 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 	}
 
 	/**
-     * Method to set notes Textarea
+     * Method to set notes and diagnosis
      */
 	@Override
-	public void setNotes(String text) {
-		this.textAreaNotes.setValue(text);
+	public void setText(String notesText, String diagnosisText) {
+		if (notesText != null) {
+			this.textAreaNotes.setValue(notesText);
+		}
+		
+		if (diagnosisText != null) {
+			this.diagnosisTextArea.setValue(diagnosisText);
+		}	
 	}
 
 	/**
@@ -205,10 +244,20 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
      * Method to set patient info labels
      */
 	@Override
-	public void setText(Patient patient) {
+	public void setPatient(Patient patient) {
 		this.lastName.setText("Nachname: " + patient.getLastName());
 		this.firstName.setText("Vorname: " + patient.getFirstName());
 		this.gender.setText("Geschlecht: " + patient.getSex().toString());
+		this.patient = patient;
+	}
+
+	
+	/**
+     * Method to set medications in medication grid
+     */
+	@Override
+	public void setMedication(List<Medication> medications) {
+		medicationCollectionView.setItems(medications);
 	}
 
 }
