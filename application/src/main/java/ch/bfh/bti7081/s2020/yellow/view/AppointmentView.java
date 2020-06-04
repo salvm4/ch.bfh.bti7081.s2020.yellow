@@ -5,6 +5,8 @@ import java.util.List;
 import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
+import ch.bfh.bti7081.s2020.yellow.model.task.Task;
+import ch.bfh.bti7081.s2020.yellow.model.task.TaskState;
 
 /**
  * Interface of appointment view
@@ -26,6 +28,11 @@ public interface AppointmentView {
          * Method is called when save button is clicked
          */
     	void onSave(String notesText, String diagnosisText);
+
+        /**
+         * Method is called when state of a task is changed
+         */
+        void onTaskStateChange(Task task, TaskState taskState);
     	
     }
     
@@ -54,6 +61,11 @@ public interface AppointmentView {
      * Method to set medications in medication grid
      */
     void setMedication(List<Medication> medications);
+
+    /**
+     * Method to set tasks in task grid
+     */
+    void setTasks(List<Task> tasks);
     
     /**
      * Method to set patient detail button target

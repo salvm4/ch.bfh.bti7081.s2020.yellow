@@ -29,7 +29,7 @@ public class Task {
     private TaskState state;
 
     @ManyToOne
-    @JoinColumn(name = "patient")
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Task() {};

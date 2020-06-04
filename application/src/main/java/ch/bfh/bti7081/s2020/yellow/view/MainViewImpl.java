@@ -141,7 +141,6 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         patientSearchArea.add(patientSearchField, patientSearchButton);
         patientSection.add(patientSearchArea);
 
-        // TODO Sort initially by lastName
         //create table for patients
         patientCollectionView = new Grid<>(Patient.class);
         patientCollectionView.removeAllColumns();
@@ -155,9 +154,6 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 
         Button createPatientButton = new Button("Neuer Patient");
         createPatientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-        // TODO Uncomment this when create patient is implemented
-//        patientSection.add(createPatientButton);
     }
 
     /**

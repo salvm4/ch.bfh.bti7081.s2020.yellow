@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.yellow.view;
 
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
+import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.TaskPresenter;
 import com.vaadin.flow.component.AttachEvent;
@@ -112,6 +113,15 @@ public class TaskViewImpl extends Dialog implements TaskView {
         this();
         patientSelect.setValue(selectedPatient);
         patientSelect.setReadOnly(true);
+    }
+
+    /**
+     * Constructor to show a task (read only)
+     *
+     * @param shownTask shownTask
+     */
+    public TaskViewImpl(Task shownTask) {
+        // TODO @Jonas
     }
 
     @Override
