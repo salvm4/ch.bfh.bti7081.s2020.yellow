@@ -18,6 +18,8 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class TaskViewImpl extends Dialog implements TaskView {
     private final DatePicker endDatePicker = new DatePicker("Enddatum");
     private final TextField taskName = new TextField("Aufgabe");
     private final TextArea taskDescription = new TextArea("Beschreibung");
+
+    // Buttons
+    private Button cancelButton = new Button("Abbrechen");
+    private Button saveButton = new Button("Speichern");
 
     public TaskViewImpl() {
         // Create models and presenter
@@ -91,10 +97,10 @@ public class TaskViewImpl extends Dialog implements TaskView {
         HorizontalLayout confirmationButtons = new HorizontalLayout();
         mainContent.add(confirmationButtons);
 
-        Button cancelButton = new Button("Abbrechen", e -> this.close());
+        cancelButton = new Button("Abbrechen", e -> this.close());
         confirmationButtons.add(cancelButton);
 
-        Button saveButton = new Button("Speichern", e -> {
+        saveButton = new Button("Speichern", e -> {
             for (TaskView.TaskViewListener listener : listeners) {
                 listener.onSave(Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()),
                         taskName.getValue(), taskDescription.getValue(), patientSelect.getValue());
@@ -121,7 +127,23 @@ public class TaskViewImpl extends Dialog implements TaskView {
      * @param shownTask shownTask
      */
     public TaskViewImpl(Task shownTask) {
-        // TODO @Jonas
+        this();
+        patientSelect.setValue(shownTask.getPatient());
+        patientSelect.setReadOnly(true);
+
+        startDatePicker.setValue(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(shownTask.getStartDate())));
+        startDatePicker.setReadOnly(true);
+
+        endDatePicker.setValue(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(shownTask.getEndDate())));
+        endDatePicker.setReadOnly(true);
+
+        taskName.setValue(shownTask.getName());
+        taskName.setReadOnly(true);
+
+        taskDescription.setValue(shownTask.getDescription());
+        taskDescription.setReadOnly(true);
+
+        saveButton.setVisible(false);
     }
 
     @Override
