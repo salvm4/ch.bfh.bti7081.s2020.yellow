@@ -42,7 +42,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private final Grid<Appointment> appointmentCollectionView;
     private final Grid<Medication> medicationCollectionView;
     private final Grid<Task> taskCollectionView;
-    Button patientDetailButon = new Button("Patientendetails");
+    Button patientDetailButton = new Button("Patientendetails");
     private Label lastName = new Label();
     private Label firstName = new Label();
     private Label gender = new Label();
@@ -102,7 +102,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 
         VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
         Label patientInfo = new Label("Patienteninfos:");
-        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender, patientDetailButon);
+        appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender, patientDetailButton);
 
         diagnosisSection.add(diagnosisTextArea, appointmentPatientinfoContainer);    // HIer einfach patientinfo anstatt patientinfo
         diagnosisSection.setWidthFull();
@@ -280,8 +280,8 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
      */
     @Override
     public void setPatientDetailTarget(long id) {
-        patientDetailButon.addClickListener(e ->
-                patientDetailButon.getUI().ifPresent(ui ->
+        patientDetailButton.addClickListener(e ->
+                patientDetailButton.getUI().ifPresent(ui ->
                         ui.navigate("patient/" + id))
         );
 

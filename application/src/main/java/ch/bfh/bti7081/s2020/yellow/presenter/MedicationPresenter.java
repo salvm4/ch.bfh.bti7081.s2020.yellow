@@ -41,7 +41,6 @@ public class MedicationPresenter implements MedicationView.MedicationViewListene
     @Override
     public void onAttach() {
         view.setDrugs(drugRepository.getAll().list());
-        view.setPatients(patientRepository.getAll().list());
     }
 
     /**

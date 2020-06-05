@@ -25,7 +25,6 @@ public class TaskPresenter implements TaskView.TaskViewListener {
      */
     @Override
     public void onAttach() {
-        view.setPatients(patientRepository.getAll().list());
     }
 
     /**

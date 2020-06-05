@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * The medication view of our application.
+ *
  * @author Markus Salvisberg
  */
 @CssImport(value = "./styles/styles.css")
@@ -34,14 +35,14 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     private final List<MedicationView.MedicationViewListener> listeners = new ArrayList<>();
 
     // Fields
-    private final Select<Patient> patientSelect = new Select<>();
     private final Select<Drug> drugSelect = new Select<>();
     private final DatePicker startDatePicker = new DatePicker("Startdatum");
     private final DatePicker endDatePicker = new DatePicker("Enddatum");
     private final TextArea applicationDescription = new TextArea("Anwendung");
     private final Button cancelButton;
     private final Button saveButton;
-    private final Label dialogTitle;
+    private final Label dialogTitle = new Label();
+    private Patient patient;
 
 
     /**
@@ -59,7 +60,6 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         setCloseOnEsc(false);
 
         // Main layout
-        dialogTitle = new Label("Medikament verschreiben");
         dialogTitle.addClassName("styleTitle");
         add(dialogTitle);
         VerticalLayout mainContent = new VerticalLayout();
@@ -76,12 +76,6 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         medicationFieldPickers.setWidth("50%");
         medicationFieldPickers.setMargin(false);
         medicationSection.add(medicationFieldPickers);
-
-        // Patient picker
-        patientSelect.setLabel("Patient");
-        patientSelect.setItemLabelGenerator(Patient::getFullName);
-        patientSelect.setSizeFull();
-        medicationFieldPickers.add(patientSelect);
 
         // drug picker
         drugSelect.setLabel("Medikament");
@@ -112,7 +106,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         saveButton = new Button("Speichern", e -> {
             for (MedicationView.MedicationViewListener listener : listeners) {
                 listener.onSave(Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()),
-                        applicationDescription.getValue(), drugSelect.getValue(), patientSelect.getValue());
+                        applicationDescription.getValue(), drugSelect.getValue(), patient);
             }
             this.close();
         });
@@ -122,32 +116,34 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
 
     /**
      * Constructor with selected patient
+     *
      * @param selectedPatient Selected patient
      */
     public MedicationViewImpl(Patient selectedPatient) {
         this();
-        patientSelect.setValue(selectedPatient);
-        patientSelect.setReadOnly(true);
+        patient = selectedPatient;
+        dialogTitle.setText("Medikament verschreiben für " + patient.getFullName());
     }
 
     /**
      * Constructor to show a medication (read only)
+     *
      * @param shownMedication Shown medication
      */
     public MedicationViewImpl(Medication shownMedication) {
         this();
 
-        dialogTitle.setText("Verschriebenes Medikament");
 
-        patientSelect.setValue(shownMedication.getPatient());
-        patientSelect.setReadOnly(true);
+        patient = shownMedication.getPatient();
+
+        dialogTitle.setText("Verschriebenes Medikament von " + patient.getFullName());
 
         drugSelect.setValue(shownMedication.getDrug());
         drugSelect.setReadOnly(true);
 
         startDatePicker.setValue(new Date(shownMedication.getStartDate().getTime()).toLocalDate());
         startDatePicker.setReadOnly(true);
-        
+
         endDatePicker.setValue(new Date(shownMedication.getEndDate().getTime()).toLocalDate());
         endDatePicker.setReadOnly(true);
 
@@ -162,6 +158,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
 
     /**
      * Add listener
+     *
      * @param listener MedicationViewListener
      */
     @Override
@@ -170,22 +167,8 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     }
 
     /**
-     * Set patients to view
-     * @param patients Patients
-     */
-    @Override
-    public void setPatients(List<Patient> patients) {
-
-        // Keep value if already set by constructor
-        Patient defaultPatient = patientSelect.getValue();
-        patientSelect.setItems(patients);
-        if (defaultPatient != null) {
-            patientSelect.setValue(defaultPatient);
-        }
-    }
-
-    /**
      * Set drugs to view
+     *
      * @param drugs Drugs
      */
     @Override

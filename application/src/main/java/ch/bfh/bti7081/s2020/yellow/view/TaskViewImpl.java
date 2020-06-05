@@ -7,13 +7,13 @@ import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.TaskPresenter;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 
@@ -34,14 +34,15 @@ public class TaskViewImpl extends Dialog implements TaskView {
     private final List<TaskView.TaskViewListener> listeners = new ArrayList<>();
 
     // Fields
-    private final Select<Patient> patientSelect = new Select<>();
     private final DatePicker startDatePicker = new DatePicker("Startdatum");
     private final DatePicker endDatePicker = new DatePicker("Enddatum");
     private final TextField taskName = new TextField("Aufgabe");
     private final TextArea taskDescription = new TextArea("Beschreibung");
+    private Patient patient;
+    private Label dialogTitle = new Label();
 
     // Buttons
-    private Button cancelButton = new Button("Abbrechen");
+    private Button cancelButton;
     private Button saveButton = new Button("Speichern");
 
     public TaskViewImpl() {
@@ -56,7 +57,6 @@ public class TaskViewImpl extends Dialog implements TaskView {
         setCloseOnEsc(false);
 
         // Main layout
-        Label dialogTitle = new Label("Task erstellen");
         dialogTitle.addClassName("styleTitle");
         add(dialogTitle);
         VerticalLayout mainContent = new VerticalLayout();
@@ -70,11 +70,6 @@ public class TaskViewImpl extends Dialog implements TaskView {
         VerticalLayout fieldPickers = new VerticalLayout();
         fieldPickers.setMargin(false);
         taskSection.add(fieldPickers);
-
-        // Patient picker
-        patientSelect.setLabel("Patient");
-        patientSelect.setItemLabelGenerator(Patient::getFullName);
-        fieldPickers.add(patientSelect);
 
         // Start date picker
         fieldPickers.add(startDatePicker);
@@ -103,10 +98,11 @@ public class TaskViewImpl extends Dialog implements TaskView {
         saveButton = new Button("Speichern", e -> {
             for (TaskView.TaskViewListener listener : listeners) {
                 listener.onSave(Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()),
-                        taskName.getValue(), taskDescription.getValue(), patientSelect.getValue());
+                        taskName.getValue(), taskDescription.getValue(), patient);
             }
             this.close();
         });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confirmationButtons.add(saveButton);
     }
 
@@ -117,8 +113,8 @@ public class TaskViewImpl extends Dialog implements TaskView {
      */
     public TaskViewImpl(Patient selectedPatient) {
         this();
-        patientSelect.setValue(selectedPatient);
-        patientSelect.setReadOnly(true);
+        patient = selectedPatient;
+        dialogTitle.setText("Neue Aufgabe für " + patient.getFullName());
     }
 
     /**
@@ -128,8 +124,8 @@ public class TaskViewImpl extends Dialog implements TaskView {
      */
     public TaskViewImpl(Task shownTask) {
         this();
-        patientSelect.setValue(shownTask.getPatient());
-        patientSelect.setReadOnly(true);
+        patient = shownTask.getPatient();
+        dialogTitle.setText("Aufgabe von " + patient.getFullName());
 
         startDatePicker.setValue(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(shownTask.getStartDate())));
         startDatePicker.setReadOnly(true);
@@ -149,22 +145,6 @@ public class TaskViewImpl extends Dialog implements TaskView {
     @Override
     public void addListener(TaskView.TaskViewListener listener) {
         listeners.add(listener);
-    }
-
-    /**
-     * Set patients to view
-     *
-     * @param patients Patients
-     */
-    @Override
-    public void setPatients(List<Patient> patients) {
-
-        // Keep value if already set by constructor
-        Patient defaultPatient = patientSelect.getValue();
-        patientSelect.setItems(patients);
-        if (defaultPatient != null) {
-            patientSelect.setValue(defaultPatient);
-        }
     }
 
     /**

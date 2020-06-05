@@ -18,12 +18,6 @@ public interface MedicationView {
     void addListener(MedicationView.MedicationViewListener listener);
 
     /**
-     * Set patients to view
-     * @param patients Patients
-     */
-    void setPatients(List<Patient> patients);
-
-    /**
      * Set drugs to view
      * @param drugs Drugs
      */

@@ -24,13 +24,6 @@ public interface TaskView {
     void open();
 
     /**
-     * Set patients to view
-     *
-     * @param patients Patients
-     */
-    void setPatients(List<Patient> patients);
-
-    /**
      * Interface to call to listeners
      */
     interface TaskViewListener {
