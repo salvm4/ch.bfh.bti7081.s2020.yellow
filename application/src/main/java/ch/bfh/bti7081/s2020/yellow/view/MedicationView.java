@@ -42,7 +42,5 @@ public interface MedicationView {
          * @param patient patient
          */
         void onSave(Date startDate, Date endDate, String application, Drug drug, Patient patient);
-
-
     }
 }

@@ -236,7 +236,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     }
 
     /**
-     * Set form validty and display error message
+     * Set form validity and display error message
      *
      * @param isValid      Form validity
      * @param errorMessage Message to display

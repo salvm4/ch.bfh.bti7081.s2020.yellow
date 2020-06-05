@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2020.yellow.model.task.TaskRepository;
 import ch.bfh.bti7081.s2020.yellow.view.TaskView;
 import ch.bfh.bti7081.s2020.yellow.view.TaskViewImpl;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TaskPresenter implements TaskView.TaskViewListener {
@@ -39,5 +40,23 @@ public class TaskPresenter implements TaskView.TaskViewListener {
     @Override
     public void onSave(Date startDate, Date endDate, String name, String description, Patient patient) {
         taskRepository.save(new Task(name, description, startDate, endDate, patient));
+    }
+
+    @Override
+    public void validateForm(LocalDate startDate, LocalDate endDate, String taskName, String taskDescription) {
+        // Not all fields present
+        if (startDate == null || endDate == null || taskName == null || taskName.equals("") || taskDescription == null || taskDescription.equals("")) {
+            view.setFormValidity(false, null);
+            return;
+        }
+
+        // Start date after end date
+        if (startDate.isAfter(endDate)) {
+            view.setFormValidity(false, "Startdatum muss vor Enddatum liegen.");
+            return;
+        }
+
+        // Input valid
+        view.setFormValidity(true, null);
     }
 }

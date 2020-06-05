@@ -151,4 +151,12 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		this.patient = patientRepository.getById(patient.getId());
 		loadTasks();
 	}
+
+	@Override
+	public void onTaskDialogClosed() {
+		// Reload patient
+		PatientRepository patientRepository = new PatientRepository();
+		this.patient = patientRepository.getById(patient.getId());
+		loadTasks();
+	}
 }

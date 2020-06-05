@@ -33,6 +33,11 @@ public interface AppointmentView {
          * Method is called when state of a task is changed
          */
         void onTaskStateChange(Task task, TaskState taskState);
+
+        /**
+         * Method is called when task dialog is closed
+         */
+        void onTaskDialogClosed();
     	
     }
     
