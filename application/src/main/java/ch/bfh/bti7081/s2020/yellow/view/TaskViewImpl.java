@@ -40,10 +40,11 @@ public class TaskViewImpl extends Dialog implements TaskView {
     private final TextArea taskDescription = new TextArea("Beschreibung");
     private Patient patient;
     private Label dialogTitle = new Label();
+    private Label errorLabel = new Label();
 
     // Buttons
     private Button cancelButton;
-    private Button saveButton = new Button("Speichern");
+    private Button saveButton;
 
     public TaskViewImpl() {
         // Create models and presenter
@@ -71,10 +72,30 @@ public class TaskViewImpl extends Dialog implements TaskView {
         fieldPickers.setMargin(false);
         taskSection.add(fieldPickers);
 
+        // Error label
+        errorLabel.addClassName("error-label");
+        errorLabel.setVisible(false);
+        fieldPickers.add(errorLabel);
+
         // Start date picker
+        startDatePicker.setRequired(true);
         fieldPickers.add(startDatePicker);
 
+        startDatePicker.addValueChangeListener(event -> {
+            for (TaskView.TaskViewListener listener: listeners) {
+                listener.validateForm(startDatePicker.getValue(), endDatePicker.getValue(),
+                        taskName.getValue(), taskDescription.getValue());
+            }
+        });
+
         // End date picker
+        endDatePicker.setRequired(true);
+        endDatePicker.addValueChangeListener(event -> {
+            for (TaskView.TaskViewListener listener: listeners) {
+                listener.validateForm(startDatePicker.getValue(), endDatePicker.getValue(),
+                        taskName.getValue(), taskDescription.getValue());
+            }
+        });
         fieldPickers.add(endDatePicker);
 
         // Grouped fields
@@ -83,9 +104,23 @@ public class TaskViewImpl extends Dialog implements TaskView {
         taskSection.add(taskFields);
 
         // Field to describe application
+        taskName.setRequired(true);
+        taskName.addValueChangeListener(event -> {
+            for (TaskView.TaskViewListener listener: listeners) {
+                listener.validateForm(startDatePicker.getValue(), endDatePicker.getValue(),
+                        taskName.getValue(), taskDescription.getValue());
+            }
+        });
         taskFields.add(taskName);
 
         // Field to describe application
+        taskDescription.setRequired(true);
+        taskDescription.addValueChangeListener(event -> {
+            for (TaskView.TaskViewListener listener: listeners) {
+                listener.validateForm(startDatePicker.getValue(), endDatePicker.getValue(),
+                        taskName.getValue(), taskDescription.getValue());
+            }
+        });
         taskFields.add(taskDescription);
 
         // ConfirmationButtons
@@ -102,6 +137,7 @@ public class TaskViewImpl extends Dialog implements TaskView {
             }
             this.close();
         });
+        saveButton.setEnabled(false);
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confirmationButtons.add(saveButton);
     }
@@ -154,6 +190,23 @@ public class TaskViewImpl extends Dialog implements TaskView {
     protected void onAttach(AttachEvent attachEvent) {
         for (TaskView.TaskViewListener listener : listeners) {
             listener.onAttach();
+        }
+    }
+
+    /**
+     * Set form validity and display error message
+     *
+     * @param isValid      Form validity
+     * @param errorMessage Message to display
+     */
+    @Override
+    public void setFormValidity(boolean isValid, String errorMessage) {
+        saveButton.setEnabled(isValid);
+        if (isValid) {
+            errorLabel.setVisible(false);
+        } else if (errorMessage != null) {
+            errorLabel.setVisible(true);
+            errorLabel.setText(errorMessage);
         }
     }
 }

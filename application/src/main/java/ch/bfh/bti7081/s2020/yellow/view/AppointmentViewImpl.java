@@ -77,13 +77,23 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
 
         Button newTaskButton = new Button("Neue Aufgabe", e -> {
             // Task dialog
-            TaskView taskView = new TaskViewImpl(patient);
+            TaskViewImpl taskView = new TaskViewImpl(patient);
+            taskView.addDetachListener(event -> {
+                for (AppointmentViewListener listener : listeners) {
+                    listener.onTaskDialogClosed();
+                }
+            });
             taskView.open();
         });
 
         Button newMedicationButton = new Button("Medikament verschreiben", e -> {
             // Medication dialog
             MedicationViewImpl medicationView = new MedicationViewImpl(patient);
+            medicationView.addDetachListener(event -> {
+                for (AppointmentViewListener listener : listeners) {
+                    listener.onMedicationDialogClosed();
+                }
+            });
             medicationView.open();
         });
         buttonSection.add(newTaskButton, newMedicationButton);

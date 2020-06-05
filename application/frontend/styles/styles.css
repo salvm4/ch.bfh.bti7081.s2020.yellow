@@ -5,8 +5,5 @@
 }
 
 .error-label {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #ff4238;
-    color: white;
+    color: #ff4238;
 }

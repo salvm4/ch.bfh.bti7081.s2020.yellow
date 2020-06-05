@@ -43,6 +43,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     private final Button saveButton;
     private final Label dialogTitle = new Label();
     private Patient patient;
+    private Label errorLabel = new Label();
 
 
     /**
@@ -77,22 +78,55 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         medicationFieldPickers.setMargin(false);
         medicationSection.add(medicationFieldPickers);
 
+        // Error label
+        errorLabel.addClassName("error-label");
+        errorLabel.setVisible(false);
+        medicationFieldPickers.add(errorLabel);
+
         // drug picker
         drugSelect.setLabel("Medikament");
         drugSelect.setItemLabelGenerator(Drug::toString);
         drugSelect.setSizeFull();
+        drugSelect.setRequiredIndicatorVisible(true);
+        drugSelect.addValueChangeListener(event -> {
+            for (MedicationView.MedicationViewListener listener: listeners) {
+                listener.validateForm(drugSelect.getValue(), startDatePicker.getValue(), endDatePicker.getValue(),
+                        applicationDescription.getValue());
+            }
+        });
         medicationFieldPickers.add(drugSelect);
 
         // Start date picker
         startDatePicker.setSizeFull();
+        startDatePicker.setRequired(true);
+        startDatePicker.addValueChangeListener(event -> {
+            for (MedicationView.MedicationViewListener listener: listeners) {
+                listener.validateForm(drugSelect.getValue(), startDatePicker.getValue(), endDatePicker.getValue(),
+                        applicationDescription.getValue());
+            }
+        });
         medicationFieldPickers.add(startDatePicker);
 
         // End date picker
         endDatePicker.setSizeFull();
+        endDatePicker.setRequired(true);
+        endDatePicker.addValueChangeListener(event -> {
+            for (MedicationView.MedicationViewListener listener: listeners) {
+                listener.validateForm(drugSelect.getValue(), startDatePicker.getValue(), endDatePicker.getValue(),
+                        applicationDescription.getValue());
+            }
+        });
         medicationFieldPickers.add(endDatePicker);
 
         // Field to describe application
         applicationDescription.setSizeFull();
+        applicationDescription.setRequired(true);
+        applicationDescription.addValueChangeListener(event -> {
+            for (MedicationView.MedicationViewListener listener: listeners) {
+                listener.validateForm(drugSelect.getValue(), startDatePicker.getValue(), endDatePicker.getValue(),
+                        applicationDescription.getValue());
+            }
+        });
         medicationSection.add(applicationDescription);
 
 
@@ -110,6 +144,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
             }
             this.close();
         });
+        saveButton.setEnabled(false);
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confirmationButtons.add(saveButton);
     }
@@ -189,6 +224,23 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
     protected void onAttach(AttachEvent attachEvent) {
         for (MedicationView.MedicationViewListener listener : listeners) {
             listener.onAttach();
+        }
+    }
+
+    /**
+     * Set form validity and display error message
+     *
+     * @param isValid      Form validity
+     * @param errorMessage Message to display
+     */
+    @Override
+    public void setFormValidity(boolean isValid, String errorMessage) {
+        saveButton.setEnabled(isValid);
+        if (isValid) {
+            errorLabel.setVisible(false);
+        } else if (errorMessage != null) {
+            errorLabel.setVisible(true);
+            errorLabel.setText(errorMessage);
         }
     }
 }

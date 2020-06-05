@@ -166,4 +166,22 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 	public void deleteAppointment() {
 		appointmentRepository.delete(this.appointment.getId());
 	}
+
+	@Override
+	public void onTaskDialogClosed() {
+		// Reload patient
+		PatientRepository patientRepository = new PatientRepository();
+		this.patient = patientRepository.getById(patient.getId());
+		// Reload tasks
+		loadTasks();
+	}
+
+	@Override
+	public void onMedicationDialogClosed() {
+		// Reload patient
+		PatientRepository patientRepository = new PatientRepository();
+		this.patient = patientRepository.getById(patient.getId());
+		// Reload medications
+		loadMedication();
+	}
 }
