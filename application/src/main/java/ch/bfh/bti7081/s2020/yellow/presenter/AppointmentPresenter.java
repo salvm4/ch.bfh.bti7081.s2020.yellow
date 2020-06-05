@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.yellow.presenter;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -150,5 +151,19 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		PatientRepository patientRepository = new PatientRepository();
 		this.patient = patientRepository.getById(patient.getId());
 		loadTasks();
+	}
+
+	/**
+	 * Method is called to return the current Appointment
+	 */
+	public boolean isLater() {
+		return appointment.getStartTime().after(new Timestamp(System.currentTimeMillis()));
+	}
+
+	/**
+	 * Method is called to delete the Appointment
+	 */
+	public void deleteAppointment() {
+		appointmentRepository.delete(this.appointment.getId());
 	}
 }

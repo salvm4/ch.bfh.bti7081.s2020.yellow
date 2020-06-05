@@ -1,9 +1,11 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
+import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 import ch.bfh.bti7081.s2020.yellow.model.task.TaskState;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -19,7 +21,9 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
+import org.apache.commons.io.filefilter.FalseFileFilter;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -42,7 +46,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private final Grid<Appointment> appointmentCollectionView;
     private final Grid<Medication> medicationCollectionView;
     private final Grid<Task> taskCollectionView;
-    Button patientDetailButton = new Button("Patientendetails");
+    private Button patientDetailButton = new Button("Patientendetails");
     private Label lastName = new Label();
     private Label firstName = new Label();
     private Label gender = new Label();
@@ -216,7 +220,15 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
             }
             saveNotification.open();
         });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confNavButtons.add(saveButton);
+
+        Button deleteButton = new Button("Termin Löschen", event -> {
+            appointmentPresenter.deleteAppointment();
+            UI.getCurrent().getPage().getHistory().back();
+        });
+        deleteButton.setEnabled(true);
+        confNavButtons.add(deleteButton);
     }
 
 
