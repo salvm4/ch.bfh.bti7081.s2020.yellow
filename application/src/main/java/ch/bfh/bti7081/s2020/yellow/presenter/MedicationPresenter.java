@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.view.MedicationView;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -54,5 +55,23 @@ public class MedicationPresenter implements MedicationView.MedicationViewListene
     @Override
     public void onSave(Date startDate, Date endDate, String application, Drug drug, Patient patient) {
         medicationRepository.save(new Medication(startDate, endDate, application, drug, patient));
+    }
+
+    @Override
+    public void validateForm(Drug drug, LocalDate startDate, LocalDate endDate, String applicationDescription) {
+        // Not all fields present
+        if (drug == null || startDate == null || endDate == null || applicationDescription == null || applicationDescription.equals("")) {
+            view.setFormValidity(false, null);
+            return;
+        }
+
+        // Start date after end date
+        if (startDate.isAfter(endDate)) {
+            view.setFormValidity(false, "Startdatum muss vor Enddatum liegen.");
+            return;
+        }
+
+        // Input valid
+        view.setFormValidity(true, null);
     }
 }

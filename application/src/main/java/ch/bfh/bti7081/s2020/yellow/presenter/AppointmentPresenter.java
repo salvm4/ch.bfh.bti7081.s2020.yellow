@@ -157,6 +157,16 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		// Reload patient
 		PatientRepository patientRepository = new PatientRepository();
 		this.patient = patientRepository.getById(patient.getId());
+		// Reload tasks
 		loadTasks();
+	}
+
+	@Override
+	public void onMedicationDialogClosed() {
+		// Reload patient
+		PatientRepository patientRepository = new PatientRepository();
+		this.patient = patientRepository.getById(patient.getId());
+		// Reload medications
+		loadMedication();
 	}
 }

@@ -86,7 +86,9 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
             // Medication dialog
             MedicationViewImpl medicationView = new MedicationViewImpl(patient);
             medicationView.addDetachListener(event -> {
-               // TODO Reload medications here...
+                for (AppointmentViewListener listener : listeners) {
+                    listener.onMedicationDialogClosed();
+                }
             });
             medicationView.open();
         });
