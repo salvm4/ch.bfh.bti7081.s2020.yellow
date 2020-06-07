@@ -80,6 +80,11 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 			view.setText(this.appointment.getNotes(), this.appointment.getDiagnosis());
 		}
 
+		//Set the state of the button for deleting future appointments
+		view.setDeleteButtonState(this.appointment.getStartTime().after(new Timestamp(System.currentTimeMillis())));
+
+
+
 	}
 
 	/**
@@ -157,7 +162,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 	 * Method is called to return the current Appointment
 	 */
 	public boolean isLater() {
-		return appointment.getStartTime().after(new Timestamp(System.currentTimeMillis()));
+		return this.appointment.getStartTime().after(new Timestamp(System.currentTimeMillis()));
 	}
 
 	/**

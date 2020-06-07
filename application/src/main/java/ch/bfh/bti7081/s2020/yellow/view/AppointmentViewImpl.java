@@ -51,6 +51,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     private Label firstName = new Label();
     private Label gender = new Label();
     private Patient patient = new Patient();
+    private Button deleteButton;
 
     /**
      * Default constructor
@@ -233,11 +234,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confNavButtons.add(saveButton);
 
-        Button deleteButton = new Button("Termin Löschen", event -> {
+        deleteButton = new Button("Termin Löschen", event -> {
             appointmentPresenter.deleteAppointment();
             UI.getCurrent().getPage().getHistory().back();
         });
-        deleteButton.setEnabled(true);
+
         confNavButtons.add(deleteButton);
     }
 
@@ -335,6 +336,11 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
     @Override
     public void setTasks(List<Task> tasks) {
         taskCollectionView.setItems(tasks);
+    }
+
+    @Override
+    public void setDeleteButtonState(boolean state) {
+        deleteButton.setEnabled(state);
     }
 
 }

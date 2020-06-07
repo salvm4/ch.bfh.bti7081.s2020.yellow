@@ -86,5 +86,7 @@ public interface AppointmentView {
      * Method to set patient
      */
 	void setPatient(Patient patient);
+
+	void setDeleteButtonState(boolean state);
 		
 }
