@@ -61,7 +61,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
         setCloseOnEsc(false);
 
         // Main layout
-        dialogTitle.addClassName("styleTitle");
+        dialogTitle.addClassName("styleTitle2");
         add(dialogTitle);
         VerticalLayout mainContent = new VerticalLayout();
         add(mainContent);

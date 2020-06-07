@@ -4,6 +4,17 @@
     font-size: 24px;
 }
 
+.styleTitle2 {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.styleText {
+    color: black;
+    font-size: 16px;
+}
+
 .error-label {
     color: #ff4238;
 }

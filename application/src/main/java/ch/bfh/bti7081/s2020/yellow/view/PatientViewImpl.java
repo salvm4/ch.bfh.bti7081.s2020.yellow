@@ -9,11 +9,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.History;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -54,9 +52,15 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         this.addListener(patientPresenter);
 
         // create and add the horizontal layout of patient content
+        VerticalLayout allContent = new VerticalLayout();
+        allContent.setSizeFull();
+        add(allContent);
+        Label pageTitle = new Label("Seitentitel");
+        pageTitle.addClassName("styleTitle");
+        allContent.add(pageTitle);
         HorizontalLayout patientContent = new HorizontalLayout();
         patientContent.setSizeFull();
-        add(patientContent);
+        allContent.add(patientContent);
 
         // create and add personal details section
         VerticalLayout detailsSection = new VerticalLayout();
@@ -68,7 +72,7 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
                                  new Label("Krankenkasse:"));
         VerticalLayout detailsSectionContent = new VerticalLayout();
         Label labelDetails = new Label("Personalien");
-        labelDetails.addClassName("styleTitle");
+        labelDetails.addClassName("styleTitle2");
         detailsSectionContent.add(lastName, firstName, gender, email,phone, address, job, employer, ahvNumber, insurance);
         detailsSectionContainer.add(detailsSectionTitles, detailsSectionContent);
         detailsSection.add(labelDetails, detailsSectionContainer);
@@ -77,11 +81,12 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         // create and add the treatment details section
         VerticalLayout treatmentSection = new VerticalLayout();
         Label labelTreatment = new Label("Behandlung");
-        labelTreatment.addClassName("styleTitle");
+        labelTreatment.addClassName("styleTitle2");
         treatmentSection.add(labelTreatment);
         patientContent.add(treatmentSection);
 
         Label nextAppointments = new Label("Termine:");
+        nextAppointments.addClassName("styleText");
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->

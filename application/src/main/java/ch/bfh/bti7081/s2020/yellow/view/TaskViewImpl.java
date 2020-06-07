@@ -58,7 +58,7 @@ public class TaskViewImpl extends Dialog implements TaskView {
         setCloseOnEsc(false);
 
         // Main layout
-        dialogTitle.addClassName("styleTitle");
+        dialogTitle.addClassName("styleTitle2");
         add(dialogTitle);
         VerticalLayout mainContent = new VerticalLayout();
         add(mainContent);

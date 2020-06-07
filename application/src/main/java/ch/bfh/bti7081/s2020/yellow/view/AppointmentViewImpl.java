@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.yellow.view;
 
-import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.task.Task;
 import ch.bfh.bti7081.s2020.yellow.model.task.TaskState;
 import com.vaadin.flow.component.UI;
@@ -21,9 +20,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
-import org.apache.commons.io.filefilter.FalseFileFilter;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -63,13 +60,19 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         this.addListener(appointmentPresenter);
 
         // Create main section
+        VerticalLayout allContent = new VerticalLayout();
+        allContent.setSizeFull();
+        add(allContent);
+        Label pageTitle = new Label("Seitentitel");
+        pageTitle.addClassName("styleTitle");
+        allContent.add(pageTitle);
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.setSizeFull();
-        add(mainContent);
+        allContent.add(mainContent);
 
         // Left side
         VerticalLayout appointmentDetailSection = new VerticalLayout();
-        labelAppointment.addClassName("styleTitle");
+        labelAppointment.addClassName("styleTitle2");
         textAreaNotes.setWidth("100%");
         textAreaNotes.setHeight("600px");
 
@@ -107,16 +110,18 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         // Right side
         VerticalLayout appointmentPatientSection = new VerticalLayout();
         Label labelPatient = new Label("Übersicht Patient");
-        labelPatient.addClassName("styleTitle");
+        labelPatient.addClassName("styleTitle2");
         appointmentPatientSection.add(labelPatient);
 
         HorizontalLayout diagnosisSection = new HorizontalLayout();
 
         diagnosisTextArea.setWidth("100%");
         diagnosisTextArea.setHeight("200px");
+        diagnosisTextArea.addClassName("styleText");
 
         VerticalLayout appointmentPatientinfoContainer = new VerticalLayout();
         Label patientInfo = new Label("Patienteninfos:");
+        patientInfo.addClassName("styleText");
         appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender, patientDetailButton);
 
         diagnosisSection.add(diagnosisTextArea, appointmentPatientinfoContainer);    // HIer einfach patientinfo anstatt patientinfo
@@ -130,6 +135,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         appointmentHistoryContainer.setWidth("50%");
         appointmentHistoryContainer.setHeight("385px");
         Label lastAppointments = new Label("Vergangene Termine:");
+        lastAppointments.addClassName("styleText");
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
         appointmentCollectionView.addColumn(appointment ->
@@ -152,6 +158,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         appointmentMedicationContainer.setWidth("50%");
         appointmentMedicationContainer.setHeight("385px");
         Label medicationLabel = new Label("Aktuell verschriebene Medikamente:");
+        medicationLabel.addClassName("styleText");
 
         medicationCollectionView = new Grid<>(Medication.class);
         medicationCollectionView.removeAllColumns();
@@ -174,6 +181,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         taskContainer.setWidthFull();
         taskContainer.setHeight("385px");
         Label taskLabel = new Label("Aktuelle Aufgaben:");
+        taskLabel.addClassName("styleText");
 
         taskCollectionView = new Grid<>(Task.class);
         taskCollectionView.removeAllColumns();

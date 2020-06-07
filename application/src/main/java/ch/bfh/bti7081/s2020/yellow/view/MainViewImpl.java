@@ -5,6 +5,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.AppointmentRepository;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.model.patient.PatientRepository;
 import ch.bfh.bti7081.s2020.yellow.presenter.MainPresenter;
+import com.ibm.icu.impl.CalendarAstronomer;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -55,14 +56,21 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         this.addListener(mainPresenter);
 
         // create and add the horizontal layout of main content
+        VerticalLayout allContent = new VerticalLayout();
+        allContent.setSizeFull();
+        add(allContent);
+        Label pageTitle = new Label("Seitentitel");
+        pageTitle.addClassName("styleTitle");
+        allContent.add(pageTitle);
+
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.setSizeFull();
-        add(mainContent);
+        allContent.add(mainContent);
 
         // create and add appointment section
         VerticalLayout appointmentSection = new VerticalLayout();
         Label labelAppointments = new Label("Termine");
-        labelAppointments.addClassName("styleTitle");
+        labelAppointments.addClassName("styleTitle2");
         appointmentSection.add(labelAppointments);
         mainContent.add(appointmentSection);
 
@@ -121,7 +129,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         //create and add patient section
         VerticalLayout patientSection = new VerticalLayout();
         Label labelPatients = new Label("Patienten");
-        labelPatients.addClassName("styleTitle");
+        labelPatients.addClassName("styleTitle2");
         patientSection.add(labelPatients);
         mainContent.add(patientSection);
 

@@ -66,7 +66,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         this.addListener(createAppointmentPresenter);
 
         // Title
-        pageTitle.addClassName("styleTitle");
+        pageTitle.addClassName("styleTitle2");
         add(pageTitle);
 
         // create and add the vertical layout
