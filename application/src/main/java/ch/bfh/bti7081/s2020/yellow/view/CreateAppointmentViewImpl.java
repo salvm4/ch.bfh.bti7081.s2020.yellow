@@ -12,6 +12,8 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.History;
@@ -40,7 +42,7 @@ import java.util.Locale;
 @CssImport(value = "./styles/styles.css")
 public class CreateAppointmentViewImpl extends VerticalLayout implements CreateAppointmentView, HasUrlParameter<Long> {
     private final List<CreateAppointmentViewListener> listeners = new ArrayList<>();
-    private final Label pageTitle = new Label("Termin erstellen");
+    private final Label createAppointment = new Label("Termin erstellen");
     private final Label errorLabel = new Label();
     private final Select<Patient> patientSelect = new Select<>();
     private final DatePicker datePicker = new DatePicker();
@@ -50,7 +52,7 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
     private final LocalTime workdayStartTime = LocalTime.of(8, 0);
     private final LocalTime workdayEndTime = LocalTime.of(18, 0);
     Button saveButton = new Button("Speichern", event -> save());
-    Button backButton = new Button("Zurück");
+    Button backButton = new Button("Zurück", new Icon(VaadinIcon.LEVEL_LEFT));
 
     CreateAppointmentPresenter createAppointmentPresenter;
     List<Appointment> appointments;
@@ -66,10 +68,21 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         this.addListener(createAppointmentPresenter);
 
         // Title
-        pageTitle.addClassName("styleTitle2");
-        add(pageTitle);
+        VerticalLayout allContent = new VerticalLayout();
+        allContent.setSizeFull();
+        add(allContent);
+        Label pageTitle = new Label("Burnout Yellow");
+        pageTitle.addClassName("styleTitle");
+        HorizontalLayout titleLayout = new HorizontalLayout();
+        titleLayout.add(pageTitle);
+        allContent.add(titleLayout);
+        titleLayout.addClickListener(event -> allContent.getUI().ifPresent(ui -> {
+            ui.navigate(MainViewImpl.class);
+        }));
+        createAppointment.addClassName("styleTitle2");
+        allContent.add(createAppointment);
 
-        // create and add the vertical layout
+        // create and add the horizontal layout
         HorizontalLayout createAppointmentContent = new HorizontalLayout();
         createAppointmentContent.setSizeFull();
         add(createAppointmentContent);
@@ -179,17 +192,18 @@ public class CreateAppointmentViewImpl extends VerticalLayout implements CreateA
         calenderContent.add(appointmentCalendar);
 
         HorizontalLayout calenderButtonRow = new HorizontalLayout();
-        Button previousWeekButton = new Button("vorherige Woche", e -> {
+        Button previousWeekButton = new Button("Vorherige Woche", new Icon(VaadinIcon.ARROW_BACKWARD), e -> {
             appointmentCalendar.gotoDate(datePicker.getValue().minusWeeks(1));
             datePicker.setValue(datePicker.getValue().minusWeeks(1));
         });
         calenderButtonRow.add(previousWeekButton);
-        Button todayButton = new Button("aktuelle Woche", e -> datePicker.setValue(LocalDate.now()));
+        Button todayButton = new Button("Aktuelle Woche", e -> datePicker.setValue(LocalDate.now()));
         calenderButtonRow.add(todayButton);
-        Button nextWeekButton = new Button("nächste Woche", e -> {
+        Button nextWeekButton = new Button("Nächste Woche", new Icon(VaadinIcon.ARROW_FORWARD), e -> {
             appointmentCalendar.gotoDate(datePicker.getValue().plusWeeks(1));
             datePicker.setValue(datePicker.getValue().plusWeeks(1));
         });
+        nextWeekButton.setIconAfterText(true);
         calenderButtonRow.add(nextWeekButton);
         calenderContent.add(calenderButtonRow);
 

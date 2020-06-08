@@ -7,6 +7,8 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
@@ -55,7 +57,7 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Burnout Treater 9000");
+        Label pageTitle = new Label("Burnout Yellow");
         pageTitle.addClassName("styleTitle");
         HorizontalLayout titleLayout = new HorizontalLayout();
         titleLayout.add(pageTitle);
@@ -112,7 +114,7 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         treatmentSection.add(nextAppointments, appointmentCollectionView);
 
         // Back to main view RouterLink button
-        Button backButton = new Button("Zurück");
+        Button backButton = new Button("Zurück", new Icon(VaadinIcon.LEVEL_LEFT));
         backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
         add(backButton);
     }

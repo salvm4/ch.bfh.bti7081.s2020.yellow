@@ -11,6 +11,8 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -58,7 +60,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Burnout Treater 9000");
+        Label pageTitle = new Label("Burnout Yellow");
         pageTitle.addClassName("styleTitle");
         allContent.add(pageTitle);
 
@@ -81,7 +83,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
             }
         });
         appointmentSearchField.setPlaceholder("Name eingeben");
-        Button appointmentSearchButton = new Button("Suchen!", event -> {
+        Button appointmentSearchButton = new Button(new Icon(VaadinIcon.SEARCH), event -> {
             for (MainViewListener listener : listeners) {
                 listener.filterAppointmentCollection(appointmentSearchField.getValue());
             }
@@ -120,7 +122,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 
         // create appointment button
         RouterLink createAppointmentLink = new RouterLink("", CreateAppointmentViewImpl.class);
-        Button createAppointmentButton = new Button("Neuer Termin");
+        Button createAppointmentButton = new Button("Neuer Termin", new Icon(VaadinIcon.PLUS));
         createAppointmentButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         createAppointmentLink.getElement().appendChild(createAppointmentButton.getElement());
         appointmentSection.add(createAppointmentLink);
@@ -140,7 +142,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
             }
         });
         patientSearchField.setPlaceholder("Name eingeben");
-        Button patientSearchButton = new Button("Suchen!", event -> {
+        Button patientSearchButton = new Button(new Icon(VaadinIcon.SEARCH), event -> {
             for (MainViewListener listener : listeners) {
                 listener.filterPatientCollection(patientSearchField.getValue());
             }

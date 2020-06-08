@@ -7,6 +7,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -63,7 +65,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Burnout Treater 9000");
+        Label pageTitle = new Label("Burnout Yellow");
         pageTitle.addClassName("styleTitle");
         HorizontalLayout titleLayout = new HorizontalLayout();
         titleLayout.add(pageTitle);
@@ -85,7 +87,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
 
-        Button newTaskButton = new Button("Neue Aufgabe", e -> {
+        Button newTaskButton = new Button("Aufgabe", new Icon(VaadinIcon.PLUS), e -> {
             // Task dialog
             TaskViewImpl taskView = new TaskViewImpl(patient);
             taskView.addDetachListener(event -> {
@@ -96,7 +98,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
             taskView.open();
         });
 
-        Button newMedicationButton = new Button("Medikament verschreiben", e -> {
+        Button newMedicationButton = new Button("Medikament", new Icon(VaadinIcon.PLUS), e -> {
             // Medication dialog
             MedicationViewImpl medicationView = new MedicationViewImpl(patient);
             medicationView.addDetachListener(event -> {
@@ -235,7 +237,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         HorizontalLayout confNavButtons = new HorizontalLayout();
         appointmentDetailSection.add(confNavButtons);
 
-        Button backButton = new Button("Zurück");
+        Button backButton = new Button("Zurück", new Icon(VaadinIcon.LEVEL_LEFT));
         backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
         confNavButtons.add(backButton);
 
@@ -248,12 +250,12 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         confNavButtons.add(saveButton);
 
-        deleteButton = new Button("Termin Löschen", event -> {
+        deleteButton = new Button("Termin Löschen", new Icon(VaadinIcon.BAN), event -> {
             appointmentPresenter.deleteAppointment();
             UI.getCurrent().getPage().getHistory().back();
         });
 
-        confNavButtons.add(deleteButton);
+        buttonSection.add(deleteButton);
     }
 
 
