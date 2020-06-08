@@ -55,9 +55,14 @@ public class PatientViewImpl extends VerticalLayout implements PatientView, HasU
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Seitentitel");
+        Label pageTitle = new Label("Burnout Treater 9000");
         pageTitle.addClassName("styleTitle");
-        allContent.add(pageTitle);
+        HorizontalLayout titleLayout = new HorizontalLayout();
+        titleLayout.add(pageTitle);
+        allContent.add(titleLayout);
+        titleLayout.addClickListener(event -> allContent.getUI().ifPresent(ui -> {
+            ui.navigate(MainViewImpl.class);
+        }));
         HorizontalLayout patientContent = new HorizontalLayout();
         patientContent.setSizeFull();
         allContent.add(patientContent);

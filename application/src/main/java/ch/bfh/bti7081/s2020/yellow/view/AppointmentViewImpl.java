@@ -20,6 +20,7 @@ import ch.bfh.bti7081.s2020.yellow.model.appointment.Appointment;
 import ch.bfh.bti7081.s2020.yellow.model.medication.Medication;
 import ch.bfh.bti7081.s2020.yellow.model.patient.Patient;
 import ch.bfh.bti7081.s2020.yellow.presenter.AppointmentPresenter;
+import sun.awt.image.ImageWatched;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -63,9 +64,14 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Seitentitel");
+        Label pageTitle = new Label("Burnout Treater 9000");
         pageTitle.addClassName("styleTitle");
-        allContent.add(pageTitle);
+        HorizontalLayout titleLayout = new HorizontalLayout();
+        titleLayout.add(pageTitle);
+        allContent.add(titleLayout);
+        titleLayout.addClickListener(event -> allContent.getUI().ifPresent(ui -> {
+            ui.navigate(MainViewImpl.class);
+        }));
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.setSizeFull();
         allContent.add(mainContent);
@@ -75,6 +81,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         labelAppointment.addClassName("styleTitle2");
         textAreaNotes.setWidth("100%");
         textAreaNotes.setHeight("600px");
+        textAreaNotes.addClassName("styleText");
 
         HorizontalLayout buttonSection = new HorizontalLayout();
         Notification saveNotification = new Notification("Notizen gespeichert!");
@@ -124,7 +131,7 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         patientInfo.addClassName("styleText");
         appointmentPatientinfoContainer.add(patientInfo, lastName, firstName, gender, patientDetailButton);
 
-        diagnosisSection.add(diagnosisTextArea, appointmentPatientinfoContainer);    // HIer einfach patientinfo anstatt patientinfo
+        diagnosisSection.add(diagnosisTextArea, appointmentPatientinfoContainer);    // Hier einfach patientinfo anstatt patientinfo
         diagnosisSection.setWidthFull();
         appointmentPatientSection.add(diagnosisSection);
 

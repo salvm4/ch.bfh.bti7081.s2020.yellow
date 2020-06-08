@@ -59,7 +59,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         VerticalLayout allContent = new VerticalLayout();
         allContent.setSizeFull();
         add(allContent);
-        Label pageTitle = new Label("Seitentitel");
+        Label pageTitle = new Label("Burnout Treater 9000");
         pageTitle.addClassName("styleTitle");
         allContent.add(pageTitle);
 
