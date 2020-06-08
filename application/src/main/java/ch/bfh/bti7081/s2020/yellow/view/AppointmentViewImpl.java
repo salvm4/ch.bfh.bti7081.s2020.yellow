@@ -108,7 +108,22 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
             });
             medicationView.open();
         });
-        buttonSection.add(newTaskButton, newMedicationButton);
+
+
+        Button saveButton = new Button("Speichern", event -> {
+            for (AppointmentViewListener listener : listeners) {
+                listener.onSave(this.textAreaNotes.getValue(), diagnosisTextArea.getValue());
+            }
+            saveNotification.open();
+        });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        deleteButton = new Button("Termin Löschen", new Icon(VaadinIcon.BAN), event -> {
+            appointmentPresenter.deleteAppointment();
+            UI.getCurrent().getPage().getHistory().back();
+        });
+
+        buttonSection.add(newTaskButton, newMedicationButton, deleteButton, saveButton);
 
         appointmentDetailSection.add(this.labelAppointment);
         appointmentDetailSection.add(this.textAreaNotes);
@@ -240,22 +255,6 @@ public class AppointmentViewImpl extends VerticalLayout implements AppointmentVi
         Button backButton = new Button("Zurück", new Icon(VaadinIcon.LEVEL_LEFT));
         backButton.addClickListener(e -> UI.getCurrent().getPage().getHistory().back());
         confNavButtons.add(backButton);
-
-        Button saveButton = new Button("Speichern", event -> {
-            for (AppointmentViewListener listener : listeners) {
-                listener.onSave(this.textAreaNotes.getValue(), diagnosisTextArea.getValue());
-            }
-            saveNotification.open();
-        });
-        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        confNavButtons.add(saveButton);
-
-        deleteButton = new Button("Termin Löschen", new Icon(VaadinIcon.BAN), event -> {
-            appointmentPresenter.deleteAppointment();
-            UI.getCurrent().getPage().getHistory().back();
-        });
-
-        buttonSection.add(deleteButton);
     }
 
 

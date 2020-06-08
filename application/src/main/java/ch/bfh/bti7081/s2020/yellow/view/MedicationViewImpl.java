@@ -187,7 +187,7 @@ public class MedicationViewImpl extends Dialog implements MedicationView {
 
         saveButton.setVisible(false);
 
-        cancelButton.setText("Zurück");
+        cancelButton.setText("Abbrechen");
 
     }
 
