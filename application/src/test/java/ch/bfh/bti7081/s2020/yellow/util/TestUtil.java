@@ -47,8 +47,14 @@ public class TestUtil {
         return patient;
     }
 
-    public Appointment saveNewAppointment(String startDate, String endDate, Patient patient) {
+    public Appointment saveNewAppointment(String startDate, String endDate, Patient patient, String notes, String diagnosis) {
         Appointment appointment = new Appointment(Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), patient);
+        if (!diagnosis.equals("")) {
+            appointment.setDiagnosis(diagnosis);
+        }
+        if (!notes.equals("")) {
+            appointment.setNotes(notes);
+        }
         appointmentRepository.save(appointment);
         return appointment;
     }

@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrderBuilder;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -91,11 +92,11 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         appointmentSearchArea.add(appointmentSearchField, appointmentSearchButton);
         appointmentSection.add(appointmentSearchArea);
 
-        // TODO Sort initially by startDate
         // create and add table for appointments
         appointmentCollectionView = new Grid<>(Appointment.class);
         appointmentCollectionView.removeAllColumns();
-        appointmentCollectionView.addColumn(appointment ->
+        // default sorted column
+        final Grid.Column<Appointment> initialSortCol = appointmentCollectionView.addColumn(appointment ->
                 DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
                         .format(appointment.getStartTime().toLocalDateTime()))
                 .setComparator(Comparator.comparing(Appointment::getStartTime))
@@ -118,6 +119,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
         appointmentCollectionView.addItemDoubleClickListener(event ->
                 appointmentCollectionView.getUI().ifPresent(ui -> ui.navigate(AppointmentViewImpl.class, event.getItem().getId()))
         );
+        appointmentCollectionView.sort(new GridSortOrderBuilder<Appointment>().thenAsc(initialSortCol).build());
         appointmentSection.add(appointmentCollectionView);
 
         // create appointment button

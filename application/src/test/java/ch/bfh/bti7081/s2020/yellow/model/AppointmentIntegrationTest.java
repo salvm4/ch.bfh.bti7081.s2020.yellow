@@ -45,8 +45,8 @@ public class AppointmentIntegrationTest {
     @Test
     public void createAppointmentTest() {
         // Save appointments
-        testUtil.saveNewAppointment("2020-05-10 15:00:00", "2020-05-10 16:00:00", patient);
-        testUtil.saveNewAppointment("2020-05-12 08:00:00", "2020-05-12 09:00:00", patient);
+        testUtil.saveNewAppointment("2020-05-10 15:00:00", "2020-05-10 16:00:00", patient, "", "");
+        testUtil.saveNewAppointment("2020-05-12 08:00:00", "2020-05-12 09:00:00", patient, "", "");
 
         // Read saved appointments
         List<Appointment> savedAppointments = appointmentRepository.getAll().list();
@@ -68,7 +68,7 @@ public class AppointmentIntegrationTest {
 
         String initialStartDate = "2020-05-13 09:00:00";
         String initialEndDate = "2020-05-13 10:00:00";
-        Appointment appointment = testUtil.saveNewAppointment(initialStartDate, initialEndDate, patient);
+        Appointment appointment = testUtil.saveNewAppointment(initialStartDate, initialEndDate, patient, "", "");
 
         // Edit appointment
         appointment.setStartTime(Timestamp.valueOf("2020-05-13 09:15:00"));
@@ -96,7 +96,7 @@ public class AppointmentIntegrationTest {
 
     @Test
     public void deleteAppointmentTest() {
-        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00:00", "2020-05-14 11:00:00", patient);
+        Appointment appointment = testUtil.saveNewAppointment("2020-05-14 10:00:00", "2020-05-14 11:00:00", patient, "", "");
 
         appointmentRepository.delete(appointment.getId());
 

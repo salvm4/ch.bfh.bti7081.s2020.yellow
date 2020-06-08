@@ -61,7 +61,7 @@ public class AppointmentPresenter implements AppointmentView.AppointmentViewList
 		view.setPatientDetailTarget(this.patient.getId());
 		view.setPatient(this.patient);
 
-		if (this.appointment.getDiagnosis() == null) {
+		if ((this.appointment.getDiagnosis() == null) || this.appointment.getDiagnosis().equals("")) {
 
 			// If empty diagnosis, get it from last appointment. Needs to be sorted chronologically first
 			List<Appointment> patientAppointments = this.patient.getAppointments();

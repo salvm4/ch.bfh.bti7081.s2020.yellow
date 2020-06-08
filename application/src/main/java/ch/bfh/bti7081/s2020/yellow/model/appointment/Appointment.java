@@ -19,9 +19,9 @@ public class Appointment {
     @Column(name = "end_time")
     private Timestamp endTime;
     @Column(name="notes")
-    private String notes;
+    private String notes = "";
     @Column(name="diagnosis")
-    private String diagnosis;
+    private String diagnosis = "";
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;

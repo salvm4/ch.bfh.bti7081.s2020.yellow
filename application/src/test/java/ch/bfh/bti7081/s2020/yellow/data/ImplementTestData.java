@@ -121,22 +121,6 @@ public class ImplementTestData {
             Gender.Female,
             Gender.Other
     };
-    private static final String[] appointmentStartDates = {
-            "2020-05-13 15:00:00",
-            "2020-05-14 08:00:00",
-            "2020-05-13 08:30:00",
-            "2020-07-13 09:00:00",
-            "2020-07-13 13:00:00",
-            "2020-07-13 13:30:00"
-    };
-    private static final String[] appointmentEndDates = {
-            "2020-05-13 16:00:00",
-            "2020-05-14 08:30:00",
-            "2020-05-13 09:00:00",
-            "2020-07-13 09:30:00",
-            "2020-07-13 13:30:00",
-            "2020-07-13 15:00:00"
-    };
     @Before
     public void removeDataTest() {
        testUtil.deleteAllTestData();
@@ -150,14 +134,66 @@ public class ImplementTestData {
         testUtil.saveNewClinic("Psychiatrie XYZ", "kontakt@psychatrie-xyz.ch",
                 "0792222222", "Teststrasse 22", "9999 Behandlungsort");
 
-        // Insert patients and appointments
+        // Insert patients
         for (int i = 0; i < emails.length; i++) {
             Patient patient = testUtil.saveNewPatient(firstNames[i], lastNames[i], birthdays[i], emails[i], phones[i], domicils[i], jobs[i], employers[i], ahv[i], insurances[i], sexes[i]);
-            testUtil.saveNewAppointment(appointmentStartDates[i], appointmentEndDates[i], patient);
         }
 
         List<Patient> allPatients = patientRepository.getAll().list();
         List<Clinic> allClinics = clinicRepository.getAll().list();
+
+        // Insert appointments of John Doe
+        Patient johnDoe = allPatients.get(3);
+        testUtil.saveNewAppointment("2020-05-13 15:00:00", "2020-05-13 16:00:00", johnDoe,
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-05-27 09:00:00", "2020-05-27 10:00:00", johnDoe,
+                "Der Patient hat immer noch Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Die Auszeit an der Familienfeier von letztem Wochenende hat ihm sichtlich gut getan.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-10 13:30:00", "2020-06-10 14:30:00", johnDoe,
+                "",
+                "");
+
+        // Insert appointments other patients
+        testUtil.saveNewAppointment("2020-06-12 10:00:00", "2020-06-12 12:00:00", allPatients.get(2),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-12 14:00:00", "2020-06-12 15:00:00", allPatients.get(4),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-11 15:00:00", "2020-06-11 16:30:00", allPatients.get(1),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-11 13:00:00", "2020-06-11 15:00:00", allPatients.get(2),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-10 09:00:00", "2020-06-10 10:30:00", allPatients.get(4),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-10 11:00:00", "2020-06-10 12:00:00", allPatients.get(5),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+
+        testUtil.saveNewAppointment("2020-06-15 08:00:00", "2020-06-15 09:30:00", allPatients.get(1),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-19 15:00:00", "2020-06-19 16:00:00", allPatients.get(2),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-18 10:00:00", "2020-06-18 12:00:00", allPatients.get(1),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-18 15:00:00", "2020-06-18 18:00:00", allPatients.get(4),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-17 14:00:00", "2020-06-17 16:30:00", allPatients.get(4),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+        testUtil.saveNewAppointment("2020-06-17 08:00:00", "2020-06-17 10:30:00", allPatients.get(5),
+                "Der Patient hat Schwierigkeiten nach der Arbeit die Freizeit zu geniessen. Schwierigkeiten bei der Arbeit beschäftigen ihn auch nach seinem Feierabend weiter.",
+                "Überlastung bei der Arbeit");
+
+
 
         // Save stationary treatments
         testUtil.saveNewStationaryTreatment("2020-05-21", "2020-07-21",
@@ -171,7 +207,7 @@ public class ImplementTestData {
         int numberOfStationaryTreatmentsAfter = stationaryTreatmentRepository.getAll().list().size();
 
         assertEquals(emails.length, numberOfPatientsAfter);
-        assertEquals(appointmentStartDates.length, numberOfAppointmentsAfter);
+        assertEquals(15, numberOfAppointmentsAfter);
         assertEquals(2, numberOfClinicsAfter);
         assertEquals(2, numberOfStationaryTreatmentsAfter);
 
@@ -188,7 +224,7 @@ public class ImplementTestData {
         Medication medication1 = testUtil.saveNewMedication("2020-07-01", "2020-07-08",
                 "1 Tablette am Morgen einnehmen", drug1, patient1);
         Medication medication2 = testUtil.saveNewMedication("2020-06-08", "2020-07-15",
-                "2 Tabletten am Mittag einnehmen", drug2, patient1);
+                "2 Tabletten am Mittag einnehmen", drug2, johnDoe);
         Medication medication3 = testUtil.saveNewMedication("2020-06-20", "2020-08-01",
                 "1 Tablette am Abend einnehmen", drug2, patient2);
 
@@ -196,10 +232,12 @@ public class ImplementTestData {
         // Insert tasks
         Task task1 = testUtil.saveNewTask("Nein sagen", "Blablabla...", "2020-06-01", "2020-06-08", patient1);
         Task task2 = testUtil.saveNewTask("Saunieren", "Gehe in die Sauna", "2020-07-01", "2020-07-08", patient2);
-        Task task3 = testUtil.saveNewTask("Bierli nä", "Triff dich mit einem Bekannten", "2020-08-02", "2020-08-10", patient2);
+        Task task3 = testUtil.saveNewTask("Bekannten treffen", "Triff dich mit einem Bekannten in einer Bar", "2020-06-02", "2020-06-15", johnDoe);
+        Task task4 = testUtil.saveNewTask("Gehe laufen", "Gehe 4x laufen","2020-06-01", "2020-06-30", johnDoe);
         task1.setState(TaskState.Done);
         task2.setState(TaskState.Open);
         taskRepository.save(task1);
         taskRepository.save(task2);
+        taskRepository.save(task3);
     }
 }
