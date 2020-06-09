@@ -221,11 +221,11 @@ public class ImplementTestData {
         Patient patient1 = patientRepository.getAll().list().get(1);
         Patient patient2 = patientRepository.getAll().list().get(2);
 
-        Medication medication1 = testUtil.saveNewMedication("2020-07-01", "2020-07-08",
+        testUtil.saveNewMedication("2020-07-01", "2020-07-08",
                 "1 Tablette am Morgen einnehmen", drug1, patient1);
-        Medication medication2 = testUtil.saveNewMedication("2020-06-08", "2020-07-15",
+        testUtil.saveNewMedication("2020-06-08", "2020-07-15",
                 "2 Tabletten am Mittag einnehmen", drug2, johnDoe);
-        Medication medication3 = testUtil.saveNewMedication("2020-06-20", "2020-08-01",
+         testUtil.saveNewMedication("2020-06-20", "2020-08-01",
                 "1 Tablette am Abend einnehmen", drug2, patient2);
 
 
@@ -239,5 +239,6 @@ public class ImplementTestData {
         taskRepository.save(task1);
         taskRepository.save(task2);
         taskRepository.save(task3);
+        taskRepository.save(task4);
     }
 }

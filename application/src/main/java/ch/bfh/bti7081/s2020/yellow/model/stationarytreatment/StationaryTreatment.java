@@ -32,8 +32,8 @@ public class StationaryTreatment {
     }
 
     public StationaryTreatment(Date startDate, Date endDate, String notes, Clinic clinic, Patient patient) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = (Date) startDate.clone();
+        this.endDate = (Date) endDate.clone();
         this.notes = notes;
         this.clinic = clinic;
         this.patient = patient;
@@ -48,19 +48,19 @@ public class StationaryTreatment {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return (Date) startDate.clone();
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = (Date) startDate.clone();
     }
 
     public Date getEndDate() {
-        return endDate;
+        return (Date) endDate.clone();
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.endDate = (Date) endDate.clone();
     }
 
     public String getNotes() {

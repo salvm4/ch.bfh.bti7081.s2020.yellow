@@ -30,8 +30,8 @@ public class Appointment {
     }
 
     public Appointment(Timestamp startTime, Timestamp endTime, Patient patient) {
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = (Timestamp) startTime.clone();
+        this.endTime = (Timestamp) endTime.clone();
         this.patient = patient;
     }
 
@@ -44,19 +44,19 @@ public class Appointment {
     }
 
     public Timestamp getStartTime() {
-        return startTime;
+        return (Timestamp) startTime.clone();
     }
 
     public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
+        this.startTime = (Timestamp) startTime.clone();
     }
     
     public Timestamp getEndTime() {
-        return endTime;
+        return (Timestamp) endTime.clone();
     }
 
     public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
+        this.endTime = (Timestamp) endTime.clone();
     }
     
     public String getNotes() {

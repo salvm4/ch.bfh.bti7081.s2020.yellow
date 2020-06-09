@@ -37,8 +37,8 @@ public class Task {
     public Task(String name, String description, Date startDate, Date endDate, Patient patient) {
         this.name = name;
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = (Date) startDate.clone();
+        this.endDate = (Date) endDate.clone();
         this.patient = patient;
         this.state = TaskState.Open;
     }
@@ -64,19 +64,19 @@ public class Task {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return (Date) startDate.clone();
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = (Date) startDate.clone();
     }
 
     public Date getEndDate() {
-        return endDate;
+        return (Date) endDate.clone();
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.endDate = (Date) endDate.clone();
     }
 
     public TaskState getState() {

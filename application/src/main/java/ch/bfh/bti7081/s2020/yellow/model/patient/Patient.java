@@ -55,7 +55,7 @@ public class Patient {
                    String job, String employer, String ahv,String insurance, Gender sex) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
+        this.birthday = (Date) birthday.clone();
         this.email = email;
         this.phone = phone;
         this.domicil = domicil;
@@ -95,7 +95,7 @@ public class Patient {
     }
 
     public Date getBirthDay() {
-        return birthday;
+        return (Date) birthday.clone();
     }
 
     public void setBirthday(Date birthday) {
@@ -223,7 +223,7 @@ public class Patient {
         Patient p = (Patient) o;
 
         // Compare the data members and return accordingly
-        return p.id == id
+        return p.id.equals(id)
                 && p.email.equals(email)
                 && p.firstName.equals(firstName)
                 && p.birthday.equals(birthday)
